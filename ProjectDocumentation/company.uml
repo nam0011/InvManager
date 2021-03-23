@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.company</OriginalElement>
+  <nodes>
+    <node x="361.5" y="618.0">com.company.InventoryManager</node>
+    <node x="730.0" y="1190.0">com.company.IngredientFactory</node>
+    <node x="3.5" y="-12.5">com.company.FileManager</node>
+    <node x="-38.0" y="1068.5">com.company.IngredientDictionary</node>
+    <node x="1133.0" y="1545.0">com.company.IngredientItem</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.company.InventoryManager" target="com.company.IngredientItem">
+      <point x="158.5" y="-0.0" />
+      <point x="1280.0" y="800.0" />
+      <point x="0.0" y="-215.0" />
+    </edge>
+    <edge source="com.company.IngredientDictionary" target="com.company.IngredientItem">
+      <point x="158.0" y="40.0" />
+      <point x="320.0" y="1280.0" />
+      <point x="320.0" y="1720.0" />
+      <point x="-147.0" y="-40.0" />
+    </edge>
+    <edge source="com.company.IngredientFactory" target="com.company.IngredientItem">
+      <point x="-150.0" y="-0.0" />
+      <point x="680.0" y="1240.0" />
+      <point x="680.0" y="1640.0" />
+      <point x="-147.0" y="-120.0" />
+    </edge>
+    <edge source="com.company.InventoryManager" target="com.company.FileManager">
+      <point x="-158.5" y="-0.0" />
+      <point x="160.0" y="800.0" />
+      <point x="0.0" y="292.5" />
+    </edge>
+    <edge source="com.company.InventoryManager" target="com.company.IngredientFactory">
+      <point x="158.5" y="40.0" />
+      <point x="1080.0" y="840.0" />
+      <point x="1080.0" y="1240.0" />
+      <point x="150.0" y="-0.0" />
+    </edge>
+    <edge source="com.company.InventoryManager" target="com.company.IngredientDictionary">
+      <point x="-40.0" y="182.0" />
+      <point x="480.0" y="1240.0" />
+      <point x="158.0" y="-0.0" />
+    </edge>
+  </edges>
+  <settings layout="Directed Orthogonal" zoom="0.2653721682847898" x="545.5878293602987" y="1144.6791022657585" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
