@@ -15,7 +15,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class IngrediantPanel extends JPanel implements ActionListener {
+public class IngredientPanelController extends JPanel implements ActionListener {
 
     private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
@@ -30,14 +30,23 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
     private DefaultTableModel DTM;
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
+    /*
+        Removed this because it defeats the purpose of the Singleton Class
+        By doing so, allows for this class to be Refactored to be considered the Controller Class.
+     */
     ArrayList<IngredientItem> IL;
-    public IngrediantPanel(){
+
+    public IngredientPanelController(){
 
         tablePane = new JScrollPane();
 
         buildIngrePanel();
         buildIngredientTable();
 
+    }
+
+    public DefaultTableModel getDTM() {
+        return DTM;
     }
 
     private void filter(String search)
@@ -49,23 +58,28 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     }
     private void buildIngredientTable(){
 
-        IL=ID.getIngredientItemArrayList();
+        //IL=ID.getIngredientItemArrayList();
         String[][] data;
-        int n = IL.size();
+        int n = ID.getSize();
         data = new String[n][2];
-        String[] header = new String[] {"ingredient", "Amount on hand"};
+        String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
 
 
 
         ingredientTable = new JTable();
+
         DTM = (DefaultTableModel) ingredientTable.getModel();
         ingredientTable.setRowSelectionAllowed(true);
-        DTM.addColumn("Ingredient");
-        DTM.addColumn("Amount on hand");
-        String[] rowData;
+        DTM.addColumn(header[0]);
+        DTM.addColumn(header[1]);
+        DTM.addColumn(header[2]);
+
+
+
+
         for(int r = 0; r < n; r++) {
-            rowData = new String[]{IL.get(r).getName(), String.valueOf(IL.get(r).getWeight()) + " " + IL.get(r).getMeasurementUnit()};
-            DTM.addRow(rowData);
+
+            DTM.addRow(ID.printDictionary(r));
 
 
         }
@@ -128,15 +142,15 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     //The following code builds toolbar;
         {
             ingreSearchTF.setColumns(12);
-        add(ingreSearchTF);
+            add(ingreSearchTF);
 
 
-        ingreToolBar.add(ingreSearchB);
-        ingreToolBar.add(ingreAddB);
-        ingreToolBar.add(ingreUpdateB);
-        ingreToolBar.add(ingreRemoveB);
-        ingreToolBar.addSeparator();
-        ingreToolBar.add(ingreListAllB);
+            ingreToolBar.add(ingreSearchB);
+            ingreToolBar.add(ingreAddB);
+            ingreToolBar.add(ingreUpdateB);
+            ingreToolBar.add(ingreRemoveB);
+            ingreToolBar.addSeparator();
+            ingreToolBar.add(ingreListAllB);
          }
 
     // The following code adds the listener to the  Buttons.
@@ -172,22 +186,29 @@ public class IngrediantPanel extends JPanel implements ActionListener {
         else if(e.getSource() == ingreAddB)
         {
 
-            new AddDialog(this);
+            AddDialog addDialog = new AddDialog(this);
+            //TODO How are we going to update the default table model
 
-            System.out.println("Add");
+
         }
         else if(e.getSource() == ingreUpdateB)
         {
-            System.out.println("Update");
+            int selectRow = ingredientTable.getSelectedRow();
+
+            //TODO make sure we create an if-else statement that makes sure the user selected an item!
+            String name = (String) ingredientTable.getValueAt(selectRow, 0);
+            IngredientItem ingredientItem= ID.getIngredientItem(name);
+            System.out.println("Update " + name + " with Amount: "+ ingredientItem.getWeight() + " "+ingredientItem.getMeasurementUnit());
+
 
         }
         else if(e.getSource() == ingreRemoveB)
         {
-            System.out.println("Remove");
+            System.out.println("Ingredient Remove");
         }
         else if(e.getSource() == ingreListAllB){
 
-            System.out.println("list all");
+            System.out.println("Listing All");
 
         }
     }
