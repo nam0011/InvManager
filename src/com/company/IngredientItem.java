@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -116,51 +115,6 @@ public class IngredientItem implements Cloneable{
                 "weight\" : \"" + weight + "\", \"" +
                 "quantityOnHand\" : \"" + quantityOnHand + "\", \"" +
                 "lastUsedDate\" : \"" + lastUsedDate + "\"}";
-    }
-
-    /**
-     * Method to fill the Current Table Setup
-     * TODO check to see if the data for the tables can be populated differently
-     * @return
-     */
-    public String[] toQOHString() {
-        return new String[]{this.name , this.weight + " " + this.measurementUnit,this.currencyFormat()};
-    }
-
-    private String currencyFormat()
-    {
-        String output= new String();
-
-        String format = String.valueOf(cost);
-        String arr[] = format.split("\\.");
-        String dec = arr[1];
-        String whole = arr[0];
-        if(dec.length() == 1)
-        {
-
-            output = "$" + format + "0";
-        }
-        else if(dec.length()== 2)
-        {
-            output = "$" + format;
-        }
-        else {
-            int thirdDec = Character.getNumericValue(dec.charAt(2));
-            if(thirdDec < 5)
-            {
-                output = "$"+whole + "." + dec.substring(0,2);
-            }
-            else
-            {
-                int i = Integer.parseInt(dec.substring(0,2)) + 1;
-
-                output = "$" + whole + "." + String.valueOf(i);
-
-            }
-        }
-
-
-        return output;
     }
 
     /**

@@ -12,7 +12,7 @@ public class DemoSetup {
     Currently Demos without using the Inventory Manager. This is to showcase that the foundation code works properly
      */
     public DemoSetup(){
-        //test
+
         this.createDictionary();
         ingredientDictionary.printDictionary();
         this.printDemo();

@@ -1,6 +1,5 @@
 package com.company;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.ListIterator;
@@ -9,33 +8,7 @@ public class IngredientDictionary {
 
     private ArrayList<IngredientItem> ingredientItemArrayList;
     private static  IngredientDictionary instance = null;
-    private ChangeLogger ingredientChangeLogger;
-    private IngredientFactory ingredientFactory;
-    private FileManager fileManager;
-    private static double initialCost;
-
-
-
-    /**
-     * Method to create the Ingredient Dictionary and initiated within the IngredientController Class
-     *  as Singleton Class
-     */
-    private void createIngredientDictionary(){
-        try {
-            fileManager = new FileManager("DataSource/ingredients.json");
-            ingredientFactory = new IngredientFactory();
-            fileManager.generateStringArrayList();
-            this.ingredientChangeLogger = new ChangeLogger();
-            //This will set the Original Ingredient File in Change Logger. This is the Raw read in String.
-            ingredientChangeLogger.setOriginalIngredientFile(fileManager.getStringArrayList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        fileManager.createObjectArray();
-        ingredientFactory.startFactory(fileManager.getObjectArrayList());
-        this.setIngredientItemArrayList(ingredientFactory.getList());
-
-    }
+    private static ChangeLogger ingredientChangeLogger;
 
     /**
      * Gets instance the single instance of IngredientFact
@@ -51,22 +24,14 @@ public class IngredientDictionary {
         return instance;
 
     }
-
-    /*
-    If the GUI takes the Ingredient Dictionary and create the instance. Then--
-    GuI Says add, delete, update,
-    Create Separate Class to do the Cost calculations, Change Calculations, and Other Actions to be
-        performed on the Ingredient Dictionary.
-    This will allow for the GuI to have the Results of the Calculations returned in the needed DataType
-     */
-
-    /**
-     * Constructor of the Ingredient Dictionary for the Singleton Instance
-     */
     private IngredientDictionary()
     {
         this.ingredientItemArrayList = new ArrayList<>();
-        this.createIngredientDictionary();
+        for(int i = 0; i < ingredientItemArrayList.size(); i++){
+
+            this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
+
+        }
 
     }
 
@@ -82,6 +47,20 @@ public class IngredientDictionary {
 
         }
 
+    }
+
+
+    /**
+     * Constructor to Create a Clone of the Ingredient Item Array List
+     * @param ingredientItemArrayList  The Ingredient Item Array List to be Cloned
+     */
+    public IngredientDictionary(ArrayList<IngredientItem> ingredientItemArrayList) {
+        this.ingredientItemArrayList = new ArrayList<>();
+        for(int i = 0; i < ingredientItemArrayList.size(); i++){
+
+            this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
+
+        }
     }
 
     /**
@@ -126,7 +105,7 @@ public class IngredientDictionary {
      * @return  Boolean Value to be returned to verify the operation succeeded.
      * This is a duplicate method so that if the "Name" of the Ingredient Item needs to be searched for.
      */
-    public boolean searchForIngredient(String ingredientName){
+    public boolean ingredientCheck(String ingredientName){
         boolean isIngredient = false;
         try{
             for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
@@ -149,7 +128,7 @@ public class IngredientDictionary {
      * This is a duplicate method so that if other elements of the Ingredient Item need to be searched for
      * TODO implement elements to check other elements of the Ingredient Item
      */
-    public boolean searchForIngredient(IngredientItem ingredientItem){
+    public boolean ingredientCheck(IngredientItem ingredientItem){
 
         boolean isIngredient = false;
         try{
@@ -177,15 +156,11 @@ public class IngredientDictionary {
      */
 
     public boolean addIngredientToList(IngredientItem ingredientItem){
-        boolean alreadyExists = searchForIngredient(ingredientItem);
+        boolean alreadyExists = ingredientCheck(ingredientItem);
 
 
         if(alreadyExists == false){
             System.out.println("Safe to Add to List");
-            ingredientChangeLogger.recordIngredientChange(
-                    ChangeLoggerAction.ADD,
-                    ingredientItem,
-                    null);
             this.ingredientItemArrayList.add(ingredientItem);
             System.out.println(ingredientItem.getName() + ":: Has Been Added To the List");
             return true;
@@ -202,16 +177,12 @@ public class IngredientDictionary {
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
     public void removeIngredientFromList(IngredientItem ingredientItem){
-       boolean exists = searchForIngredient(ingredientItem);
+       boolean exists = ingredientCheck(ingredientItem);
 
         if(exists == true) {
             for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {
                 if (this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())) {
                     String temp = this.ingredientItemArrayList.get(i).getName();
-                    ingredientChangeLogger.recordIngredientChange(
-                            ChangeLoggerAction.DELETE,
-                            this.ingredientItemArrayList.get(i),
-                            null);
                     this.ingredientItemArrayList.remove(i);
                     System.out.println(temp + ":: Removed From Ingredient Dictionary List");
                 }
@@ -226,10 +197,6 @@ public class IngredientDictionary {
      * @return  Boolean Value to be returned to verify the operation succeeded.
      */
     public boolean updateIngredientInList(IngredientItem updateItem){
-        ingredientChangeLogger.recordIngredientChange(
-                ChangeLoggerAction.UPDATE,
-                this.getIngredientItem(updateItem.getName()),
-                updateItem);
         this.removeIngredientFromList(updateItem);
         this.addIngredientToList(updateItem);
         return true;
@@ -266,95 +233,7 @@ public class IngredientDictionary {
         }
     }
 
-    /**
-     * Method to Populate the Data Model Tables with Each Ingredient Being Returned
-     * Currently Called in Ingredient Panel
-     * @param i
-     * @return
-     */
-    public String[] printDictionary(int i){
-        return this.ingredientItemArrayList.get(i).toQOHString();
-    }
 
-    /**
-     * Method to Generate/Create the JSON file for Ingredients before closing of program
-     */
-    public void saveIngredientDictionary(){
-        fileManager = new FileManager();
-        //TODO Update to reflect a file name being passed in, either from initial setup or from a demo setup
-        fileManager.setFileName("DataSource/IngredientsTEST.json");
-        fileManager.setStringArrayList(this.convertToStringArrayList());
-
-        try {
-            fileManager.generateJSONFile(FileType.INGREDIENTS);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            fileManager.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Method to return the Size of the Ingredient Dictionary
-     * @return
-     */
-    public int getSize(){
-        return this.ingredientItemArrayList.size();
-    }
-
-    /**
-     * Method to Get the Initial Cost of the Ingredient Dictionary at the Time of Load.
-     * @return
-     */
-    public static double getInitialCost() {
-        return initialCost;
-    }
-
-    /**
-     * This returns the current cost of all items in the inventory.
-     * @return A double which represents the current cost of all items in the inventory
-     * */
-    public double curInventoryCost(){
-        return this.inventoryCost();
-    }
-    /**
-     * This returns the difference between the initial cost of all items and the current cost.
-     * @return A double which represents the cost difference.
-     * */
-    public double costDifference(){
-        return this.initialCost - curInventoryCost();
-    }
-
-    /**
-     * This function takes in a string of the ingredient name and returns it's index.
-     *
-     *
-     * @param ingredientItem String of the
-     * @return
-     */
-
-    public int searchForIngredientIndex(String ingredientItem){
-        int index = -1;
-        ingredientItem = ingredientItem.toUpperCase();
-        try{
-            for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
-                if(this.ingredientItemArrayList.get(i).getName().equals(ingredientItem)){
-
-                    index = i;
-                    break;
-                }
-            }
-        }
-        catch(NullPointerException e){
-            System.out.println(e.getMessage());
-        }
-        //TODO add exception Handling here
-        //if(isIngredient == false) System.out.println(ingredientItem.getName() + " :: Error Not Found");
-
-        return index;
-    }
 }
+
+//hello
