@@ -2,19 +2,10 @@
 "CHANGELOG":
 
 [
-{,
-"CHANGELOG":,
-[,
-,
-,
-,
-,
-,
-{"ChangeAction" : "ADDED", "name" : "GROUND BEEF", "type" : "Dry", "measurementUnit" : "lb", "cost" : "5.7", "weight" : "2.0", "quantityOnHand" : "0.5", "lastUsedDate" : "null"},
-{"ChangeAction" : "ADDED", "name" : "BEEF STEAK", "type" : "Dry", "measurementUnit" : "lb", "cost" : "5.7", "weight" : "2.0", "quantityOnHand" : "0.5", "lastUsedDate" : "null"},
-{"ChangeAction" : "DELETED", "name" : "BUTTER", "type" : "WET", "measurementUnit" : "LB", "cost" : "3.97", "weight" : "16.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
-{"ChangeAction" : "UPDATED", "name" : "SALT", "type" : "DRY", "measurementUnit" : "LB", "cost" : "0.89", "weight" : "26.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
-{"ChangeAction" : "UPDATED", "name" : "SALT", "type" : "DRY", "measurementUnit" : "Changed Names", "cost" : "0.89", "weight" : "26.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"}
+
+
+
+
 
 
 ]

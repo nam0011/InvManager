@@ -14,13 +14,13 @@ public class Main {
 	// write your code here
 
        // DemoSetup demoSetup = new DemoSetup();
-        DemoInventory demoinvent = new DemoInventory();
-        demoinvent.testInventory();
+       // DemoInventory demoinvent = new DemoInventory();
+       // demoinvent.testInventory();
 
         //demoinvent.testChangeLogger();
 
 
-       //new loginGUI();
+       new loginGUI();
 
 
 
