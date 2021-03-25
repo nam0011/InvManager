@@ -175,21 +175,22 @@ public class AddDialog extends JDialog implements ActionListener {
 
                             System.out.println(itemStr + " has been added.");
 
-                            int row = findInsertionPoint(itemStr);
-                            Object newRow[] = {itemStr, amtPurchasedValue + " " + getUnit, priceValue};
-                            DTM.insertRow(row, newRow);
+
                             //*****************************************************************************************
                             // TODO insert add ingredient code here for backend work.
                             // this is just temporary code for testing purposes!
                             IngredientItem item = new IngredientItem();
                             item.setName(itemStr);
                             item.setCost(priceValue);
+
                             item.setMeasurementUnit(getUnit);
-                            item.setQuantityOnHand(amtPurchasedValue);
+                            item.setWeight(amtPurchasedValue);
                             ID.addIngredientToList(item);
 
                             //******************************************************************************************
+                            int row = findInsertionPoint(itemStr);
 
+                            DTM.insertRow(row, item.toQOHString());
                             dispose();
                         } else {
                             System.out.println(itemStr + " was not added.");
