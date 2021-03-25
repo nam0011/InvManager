@@ -9,7 +9,6 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
     private String last;
 
 
-
     public SelfClearingNumbField(String title, int width) {
         super(title, width);
         last = "";
@@ -17,7 +16,8 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
         addKeyListener(this);
 
     }
-    public double getValue(){
+
+    public double getValue() {
         double value;
         value = Double.parseDouble(getText());
         return value;
@@ -28,29 +28,30 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
         String selected = getSelectedText();
-        if (!((c >= 48) && (c <= 57) ||c == KeyEvent.VK_ENTER|| (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || c == '.'))
-        {
+        if (!((c >= 48) && (c <= 57) || c == KeyEvent.VK_ENTER || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || c == '.')) {
             getToolkit().beep();
             e.consume();
         }
-        if((c == '.' && last.contains(".")))
-        {
+        if ((c == '.' && last.contains("."))) {
             getToolkit().beep();
             e.consume();
         }
-        if(selected != null){
-            if(selected.contains(".")){
+        if (selected != null) {
+            if (selected.contains(".")) {
                 last = "";
             }
-        }
-        else {
+        } else {
             last = getText() + c;
         }
+        int mod = e.getModifiersEx();
+        if (c == '\u0016' && mod == 128) {
+            try {
+                Double.parseDouble(getText());
+            } catch (NumberFormatException numberFormatException) {
+                this.removeAll();
+            }
 
-
-
-
-
+        }
 
     }
 
@@ -61,6 +62,5 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
 
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
 }

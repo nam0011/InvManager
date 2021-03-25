@@ -52,21 +52,25 @@ public class IngrediantPanel extends JPanel implements ActionListener {
         IL=ID.getIngredientItemArrayList();
         String[][] data;
         int n = IL.size();
-        data = new String[n][2];
-        String[] header = new String[] {"ingredient", "Amount on hand"};
+
+        String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
+
 
 
 
         ingredientTable = new JTable();
         DTM = (DefaultTableModel) ingredientTable.getModel();
-        ingredientTable.setRowSelectionAllowed(true);
-        DTM.addColumn("Ingredient");
-        DTM.addColumn("Amount on hand");
-        String[] rowData;
-        for(int r = 0; r < n; r++) {
-            rowData = new String[]{IL.get(r).getName(), String.valueOf(IL.get(r).getWeight()) + " " + IL.get(r).getMeasurementUnit()};
-            DTM.addRow(rowData);
 
+        DTM.addColumn(header[0]);
+        DTM.addColumn(header[1]);
+        DTM.addColumn(header[2]);
+        ingredientTable.setRowSelectionAllowed(true);
+
+
+
+        for(int r = 0; r < n; r++) {
+
+            DTM.addRow(ID.printDictionary(r));
 
         }
 
@@ -85,6 +89,10 @@ public class IngrediantPanel extends JPanel implements ActionListener {
         add(scrollPane);
 
 
+    }
+    public DefaultTableModel getDTM(){
+
+        return DTM;
     }
 
     /**

@@ -34,6 +34,15 @@ public class IngredientDictionary {
         }
 
     }
+    /**
+     * Method to Populate the Data Model Tables with Each Ingredient Being Returned
+     * Currently Called in Ingredient Panel
+     * @param i
+     * @return
+     */
+    public String[] printDictionary(int i){
+        return this.ingredientItemArrayList.get(i).toQOHString();
+    }
 
     /**
      * Creates the Array list for the Singleton
