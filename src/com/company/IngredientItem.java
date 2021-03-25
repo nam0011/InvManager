@@ -9,7 +9,7 @@ import java.util.Date;
  * Ingredient Item Object Class
  */
 public class IngredientItem implements Cloneable{
-
+    //TODO weight vs quantityOnHand may be lead to some confusion.
     //Private Variables
     private String name;   //What the Ingredient Item is called
     private String type;   //What type, Dry or wet
