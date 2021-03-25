@@ -107,6 +107,8 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     ingreSearchB =new JButton("Search");
     ingreSearchTF =new SelfClearingTextField("Search", 60);
 
+
+
     ingreSearchTF.addKeyListener(new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -194,6 +196,8 @@ public void turnOffToolBar(boolean on) {
         }
         else if(e.getSource() == ingreUpdateB)
         {
+            new UpdateDialog(this);
+
             System.out.println("Update");
 
         }
@@ -201,11 +205,7 @@ public void turnOffToolBar(boolean on) {
         {
             System.out.println("Remove");
         }
-        else if(e.getSource() == ingreListAllB){
 
-            System.out.println("list all");
-
-        }
     }
 
 }
