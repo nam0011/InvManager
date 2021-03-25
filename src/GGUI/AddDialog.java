@@ -17,6 +17,7 @@ public class AddDialog extends JDialog implements ActionListener {
     private JComboBox unitDropDownBox;
     private ArrayList<SelfClearingTextField> listTextFields;
     private JButton oKB;
+    private JButton cancel;
     private IngredientDictionary ID;
     private String getUnit;
     private String[] unitArray = new String[4];
@@ -24,6 +25,8 @@ public class AddDialog extends JDialog implements ActionListener {
     private IngrediantPanel indgredentPanel;
 
     public AddDialog(IngrediantPanel panel) {
+       //This freezes the parent panel.
+
         setTitle("Add Item");
         indgredentPanel = panel;
 
@@ -36,7 +39,8 @@ public class AddDialog extends JDialog implements ActionListener {
         pack();
         //setResizable(true);
         setVisible(true);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
     }
 
     private void buildDialog() {
@@ -55,6 +59,10 @@ public class AddDialog extends JDialog implements ActionListener {
 
         oKB = new JButton("Ok");
         oKB.addActionListener(this);
+
+        cancel = new JButton("Cancel");
+        cancel.addActionListener(this);
+
         unitArray = new String[]{"lb", "oz", "L", "mL"};
         getUnit = unitArray[0];
         unitDropDownBox = new JComboBox(unitArray);
@@ -83,6 +91,10 @@ public class AddDialog extends JDialog implements ActionListener {
         gc.gridx = 4;
         gc.gridy = 4;
         add(oKB, gc);
+
+        gc.gridx = 5;
+        gc.gridy = 4;
+        add(cancel,gc);
 
     }
 
@@ -191,6 +203,7 @@ public class AddDialog extends JDialog implements ActionListener {
                             int row = findInsertionPoint(itemStr);
 
                             DTM.insertRow(row, item.toQOHString());
+                            indgredentPanel.turnOffToolBar(true);
                             dispose();
                         } else {
                             System.out.println(itemStr + " was not added.");
@@ -204,6 +217,11 @@ public class AddDialog extends JDialog implements ActionListener {
                 }
             } else if (e.getSource() == unitDropDownBox) {
                 getUnit = (String) unitDropDownBox.getSelectedItem();
+            }
+            else if(e.getSource() == cancel){
+                indgredentPanel.turnOffToolBar(true);
+                dispose();
+
             }
         }
     }

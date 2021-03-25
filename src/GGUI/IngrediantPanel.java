@@ -165,7 +165,15 @@ public class IngrediantPanel extends JPanel implements ActionListener {
 
 
 
+}
 
+
+public void turnOffToolBar(boolean on) {
+        int n = ingreToolBar.getComponentCount();
+        for(int i = 0; i < n; i++){
+            ingreToolBar.getComponentAtIndex(i).setEnabled(on);
+
+        }
 }
 
     /**
@@ -179,7 +187,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
         }
         else if(e.getSource() == ingreAddB)
         {
-
+            turnOffToolBar(false);
             new AddDialog(this);
 
             System.out.println("Add");
