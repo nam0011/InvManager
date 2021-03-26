@@ -22,11 +22,11 @@ public class AddDialog extends JDialog implements ActionListener {
     private String getUnit;
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
-    private IngrediantPanel indgredentPanel;
+    private IngredientPanel indgredentPanel;
 
-    public AddDialog(IngrediantPanel panel) {
-       //This freezes the parent panel.
-
+    public AddDialog(IngredientPanel panel) {
+       
+        DTM = indgredentPanel.getDTM();
         setTitle("Add Item");
         indgredentPanel = panel;
 
@@ -150,7 +150,7 @@ public class AddDialog extends JDialog implements ActionListener {
      * @return
      */
     private int findInsertionPoint(String name) {
-        DTM = indgredentPanel.getDTM();
+
         int index = DTM.getRowCount();
         for (int i = 0; i < DTM.getRowCount(); i++) {
             if (name.compareTo((String) DTM.getValueAt(i, 0)) < 0) {
@@ -177,8 +177,17 @@ public class AddDialog extends JDialog implements ActionListener {
                     if (ID.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
                         JOptionPane.showMessageDialog(this, itemStr + " is already in the inventory.");
                     } else {
+                        IngredientItem item = new IngredientItem();
+                        item.setName(itemStr);
+                        item.setCost(priceValue);
+
+                        item.setMeasurementUnit(getUnit);
+                        item.setWeight(amtPurchasedValue);
+
+                        String itemStrArr[]= item.toQOHString();
+
                         int n = JOptionPane.showOptionDialog(this,
-                                "Are you sure you want to add " + amtPurchasedValue + " " + getUnit + " of " + itemStr + " for $" + priceValue + "?",
+                                "Are you sure you want to add " + itemStrArr[1] + " of " + itemStr + " for "+ itemStrArr[2] + "?",
 
                                 "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
                                 JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -191,12 +200,7 @@ public class AddDialog extends JDialog implements ActionListener {
                             //*****************************************************************************************
                             // TODO insert add ingredient code here for backend work.
                             // this is just temporary code for testing purposes!
-                            IngredientItem item = new IngredientItem();
-                            item.setName(itemStr);
-                            item.setCost(priceValue);
 
-                            item.setMeasurementUnit(getUnit);
-                            item.setWeight(amtPurchasedValue);
                             ID.addIngredientToList(item);
 
                             //******************************************************************************************

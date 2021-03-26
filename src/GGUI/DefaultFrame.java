@@ -1,7 +1,6 @@
 package GGUI;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 public class DefaultFrame extends JFrame {
         private JPanel recepPanel;
@@ -11,14 +10,14 @@ public class DefaultFrame extends JFrame {
    private JTabbedPane ingredientsTab;
 
     /**
-     *  Builds the frame adds the tabs. At the moment IngrediantPanel is the only operational frame.
+     *  Builds the frame adds the tabs. At the moment IngredientPanel is the only operational frame.
      */
     public DefaultFrame()
     {
         tabbedPane = new JTabbedPane();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         recepPanel = new JPanel();
-        tabbedPane.add("Ingredients", new IngrediantPanel());
+        tabbedPane.add("Ingredients", new IngredientPanel());
         tabbedPane.add("Recipes", recepPanel);
         tabbedPane.add("Form", formPanel);
         setResizable(false);

@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-public class IngrediantPanel extends JPanel implements ActionListener {
+
+public class IngredientPanel extends JPanel implements ActionListener {
 
     private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
@@ -31,7 +31,7 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private DefaultTableModel DTM;
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
     ArrayList<IngredientItem> IL;
-    public IngrediantPanel(){
+    public IngredientPanel(){
 
         tablePane = new JScrollPane();
 
@@ -102,10 +102,10 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     private void buildIngrePanel(){
 
 
-    ingreToolBar =new JToolBar();
+    ingreToolBar = new JToolBar();
     ingreToolBar.setFloatable(false);
-    ingreSearchB =new JButton("Search");
-    ingreSearchTF =new SelfClearingTextField("Search", 60);
+    ingreSearchB = new JButton("Search");
+    ingreSearchTF = new SelfClearingTextField("Search", 60);
 
 
 
@@ -134,10 +134,11 @@ public class IngrediantPanel extends JPanel implements ActionListener {
     ingreRemoveB = new JButton("Remove");
 
     ingreListAllB =new JButton("List All");
+    ingreSearchTF.setColumns(12);
 
     //The following code builds toolbar;
         {
-            ingreSearchTF.setColumns(12);
+
         add(ingreSearchTF);
 
 
@@ -185,12 +186,13 @@ public void turnOffToolBar(boolean on) {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == ingreSearchB) {
-            System.out.println(ingreSearchTF.getText());
+            //System.out.println(ingreSearchTF.getText());y
         }
         else if(e.getSource() == ingreAddB)
         {
-            turnOffToolBar(false);
+            turnOffToolBar(false);//this turns off the toolbar buttons. true to turn it back on
             new AddDialog(this);
+
 
             System.out.println("Add");
         }
@@ -204,7 +206,22 @@ public void turnOffToolBar(boolean on) {
         }
         else if(e.getSource() == ingreRemoveB)
         {
-            System.out.println("Remove");
+            int removeIndex[] = ingredientTable.getSelectedRows();
+
+
+            int n = removeIndex.length;
+            ArrayList<String> removeNames = new ArrayList<>();
+            String curr;
+            for(int r = 0; r < n; r++)
+            {
+                System.out.println(removeIndex[r]);
+                System.out.println(DTM.getValueAt(r, 0));
+                curr = (String)ingredientTable.getValueAt(removeIndex[r], 0);
+                removeNames.add(curr);
+            }
+            new RemoveDialog(this, removeNames);
+
+
         }
 
     }
