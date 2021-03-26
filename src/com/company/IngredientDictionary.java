@@ -220,45 +220,47 @@ public class IngredientDictionary {
             for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {                         //start iterating through the list
                 if (this.ingredientItemArrayList.get(i).getName().equals(updateItem.getName())) {   //if found we need to do some math and push to a list
                     double ogPrice = this.ingredientItemArrayList.get(i).getCost();
-                    double ogQuant = this.ingredientItemArrayList.get(i).getQuantityOnHand();
+                    double ogQuant = this.ingredientItemArrayList.get(i).getWeight();
 
-                    double priceDif = updateItem.getCost() - ogPrice;   //find the difference between the prices and store in a temp value name price difference
+                    double priceDif ;   //find the difference between the prices and store in a temp value name price difference
                     double priceChangeRatio;
 
-                    if(priceDif != 0){                                      //if there is a difference in price we want a percentage value of that difference
-                        priceChangeRatio = updateItem.getCost()/ogPrice;    //store that value for later use
-                    }else{
-                        priceChangeRatio = 0;                               //else set the stored value to 0
+                    if (updateItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
+                        priceDif = updateItem.getCost() - ogPrice;  //TODO always return positive number
+                        priceChangeRatio = updateItem.getCost() / ogPrice;    //store that value
+                        this.ingredientItemArrayList.get(i).setCost(ogPrice + ogPrice*priceChangeRatio);
+                    } else {
+                        this.ingredientItemArrayList.get(i).setCost(ogPrice);
                     }
 
-            //TODO object field to store priceChangeRatio for display in Reports panel
-
-                    double quantDif = updateItem.getWeight() - ogQuant;   //find the difference between the quantities and store in a temp value name quantity difference
+                    //TODO object field to store priceChangeRatio for display in Reports panel
+                    //TODO object field to store priceDif for display in Reports panel
+                    double quantDif = updateItem.getWeight() + ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
                     double quantChangeRatio;
 
-                    if(updateItem.getWeight() < ogQuant){                     //if we enter more than we have we need to know how to act depending on decrementing or incrementing values MAYBE THIS SHOULD BE IN A BUTTON INSTEAD?
-                            //if removing that amount just set the total quantity to 0
-                            //else increment or decrement
+                    if (quantDif != 0) {//if there is a difference in quantity we want a percentage value of that difference and we need to know if the input value is incrementing or decrementing our inventory
+                        if (updateItem.getWeight() > 0) {        //if incrementing inventory amount
+                            quantChangeRatio = updateItem.getWeight() / ogQuant;    //find the change ratio
+                            this.ingredientItemArrayList.get(i).setWeight(ogQuant + updateItem.getWeight()); //increment the weight of the item in the list
 
-
+                        } else if (updateItem.getWeight() < 0) {    //if decrementing
+                            quantChangeRatio = -1 * (updateItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
+                            this.ingredientItemArrayList.get(i).setWeight(ogQuant + updateItem.getWeight()); //decrement the weight of the item in the list
+                        }
+                    } else {  //if no change(this will never be the case if update is filled out but here for continuity
+                        this.ingredientItemArrayList.get(i).setWeight(ogQuant);
                     }
 
-                    if(quantDif != 0){                                      //if there is a difference in quantity we want a percentage value of that difference
-                        quantChangeRatio = updateItem.getWeight()/ogQuant;    //store that value for later use
-                    }else{
-                        quantChangeRatio = 0;                               //else set the stored value to 0
+                    //TODO object field to store quantChangeRatio for display in Reports panel
+                    //TODO object field to store quantDif for display in Reports panel
+
+                    //TODO figure out why the object list on dropdown menu is not updating even though values when debugging are
+                        }
                     }
-
-            //TODO object field to store quantChangeRatio for display in Reports panel
-
-                    this.ingredientItemArrayList.remove(i);; //after math has completed pass the incoming object to remove old copy from list ONLY IMPLEMENTING THIS FOR TESTING PURPOSES
-                }
             }
-
-            this.addIngredientToList(updateItem);               //insert the incoming item
+            return true;
         }
-        return true;
-    }
+
 
     /**
      * Method convert Ingredient Array List to an Array List of String Printouts

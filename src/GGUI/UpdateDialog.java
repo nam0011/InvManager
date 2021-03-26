@@ -53,10 +53,8 @@ public class UpdateDialog extends JDialog implements ActionListener {
         itemNameTF.setSize(30, 12);
         itemNameTF.setFont(new Font("New Times Roman", Font.ITALIC, 12));
         amtPurchaseTF = new SelfClearingNumbField("Amount Purchased", 10);
-
-        priceTF = new SelfClearingNumbField("price", 30);
-
         amtUsedTF = new SelfClearingNumbField("Amount Used", 10);
+        priceTF = new SelfClearingNumbField("price", 30);
 
         setListTextFields();
 
@@ -156,7 +154,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
      * //@param name
      * @return
      */
-/*
+//TODO rewrite to overwrite item instead of insert
     private int findInsertionPoint(String name) {
         DTM = indgredentPanel.getDTM();
         int index = DTM.getRowCount();
@@ -169,7 +167,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
         }
         return index;
     }
-*/
+
 
 
     @Override
@@ -187,7 +185,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                 if (ID.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
 
                     int n = JOptionPane.showOptionDialog(this,
-                            "Are you sure you want to update " + amtPurchasedValue + " " + getUnit + " of " + itemStr + " for $" + priceValue + "?",
+                            "Are you sure you want to update " + (amtPurchasedValue - amtUsedValue) + " " + getUnit + " of " + itemStr + " for $" + priceValue + "?",
                             "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
                             JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                     if (n == 0) {
@@ -199,9 +197,14 @@ public class UpdateDialog extends JDialog implements ActionListener {
                         item.setName(itemStr);                      //set the values
                         item.setCost(priceValue);
                         item.setMeasurementUnit(getUnit);
-                        item.setWeight(amtPurchasedValue - amtUsedValue);
+                        item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
 
                         ID.updateIngredientInList(item);            //updating the item in the list
+
+                        //******************************************************************************************
+                        //int row = findInsertionPoint(itemStr);
+
+                        //DTM.insertRow(row, item.toQOHString());
 
                         indgredentPanel.turnOffToolBar(true);
                         dispose();
