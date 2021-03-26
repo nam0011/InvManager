@@ -196,6 +196,7 @@ public void turnOffToolBar(boolean on) {
         }
         else if(e.getSource() == ingreUpdateB)
         {
+            turnOffToolBar(false);
             new UpdateDialog(this);
 
             System.out.println("Update");
