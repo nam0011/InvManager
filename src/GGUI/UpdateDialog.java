@@ -56,6 +56,8 @@ public class UpdateDialog extends JDialog implements ActionListener {
 
         priceTF = new SelfClearingNumbField("price", 30);
 
+        amtUsedTF = new SelfClearingNumbField("Amount Used", 10);
+
         setListTextFields();
 
         oKB = new JButton("Ok");
@@ -83,6 +85,10 @@ public class UpdateDialog extends JDialog implements ActionListener {
 
         gc.gridx = 1;
         gc.gridy = 1;
+        add(amtUsedTF, gc);
+
+        gc.gridx = 3;
+        gc.gridy = 1;
         add(unitDropDownBox, gc);
 
         gc.gridx = 0;
@@ -107,7 +113,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
         listTextFields.add(itemNameTF);
         listTextFields.add(amtPurchaseTF);
         listTextFields.add(priceTF);
-
+        listTextFields.add(amtUsedTF);
 
     }
 
