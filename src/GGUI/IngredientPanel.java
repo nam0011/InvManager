@@ -219,6 +219,7 @@ public void turnOffToolBar(boolean on) {
                 curr = (String)ingredientTable.getValueAt(removeIndex[r], 0);
                 removeNames.add(curr);
             }
+            turnOffToolBar(false);
             new RemoveDialog(this, removeNames);
 
 

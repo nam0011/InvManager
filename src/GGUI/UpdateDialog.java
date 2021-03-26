@@ -23,9 +23,9 @@ public class UpdateDialog extends JDialog implements ActionListener {
     private String getUnit;
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
-    private IngrediantPanel indgredentPanel;
+    private IngredientPanel indgredentPanel;
 
-    public UpdateDialog(IngrediantPanel panel) {
+    public UpdateDialog(IngredientPanel panel) {
         //This freezes the parent panel.
 
         setTitle("Add Item");

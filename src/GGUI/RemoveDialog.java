@@ -139,9 +139,12 @@ public class RemoveDialog extends JDialog implements ActionListener {
             /*******************************************************************************
              *****************************TODO BACKEND code goes here***********************
             ********************************************************************************/
+            ingredientPanel.turnOffToolBar(true);
             dispose();
         }
         else if (e.getSource() ==cancelB){
+
+            ingredientPanel.turnOffToolBar(true);
             dispose();
         }
 
