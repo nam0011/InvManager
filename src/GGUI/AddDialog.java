@@ -22,14 +22,14 @@ public class AddDialog extends JDialog implements ActionListener {
     private String getUnit;
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
-    private IngredientPanel indgredentPanel;
+    private IngredientPanel ingredientPanel;
 
     public AddDialog(IngredientPanel panel) {
        
-        DTM = indgredentPanel.getDTM();
-        setTitle("Add Item");
-        indgredentPanel = panel;
 
+        setTitle("Add Item");
+        ingredientPanel = panel;
+        DTM = ingredientPanel.getDTM();
         ID = IngredientDictionary.getIngredientDictionary();
         setLayout(new GridBagLayout());
         JDialog j = new JDialog();
@@ -207,7 +207,7 @@ public class AddDialog extends JDialog implements ActionListener {
                             int row = findInsertionPoint(itemStr);
 
                             DTM.insertRow(row, item.toQOHString());
-                            indgredentPanel.turnOffToolBar(true);
+                            ingredientPanel.turnOffToolBar(true);
                             dispose();
                         } else {
                             System.out.println(itemStr + " was not added.");
@@ -223,7 +223,7 @@ public class AddDialog extends JDialog implements ActionListener {
                 getUnit = (String) unitDropDownBox.getSelectedItem();
             }
             else if(e.getSource() == cancel){
-                indgredentPanel.turnOffToolBar(true);
+                ingredientPanel.turnOffToolBar(true);
                 dispose();
 
             }
