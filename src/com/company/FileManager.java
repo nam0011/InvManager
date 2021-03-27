@@ -172,7 +172,8 @@ public class FileManager extends Reader {
     private void openFileWriter() throws IOException {
         if(this.fileName == null){
             System.out.println("Please Enter the File Name or File Path");
-            this.fileName = this.getUserInput();
+            this.fileName = this.getUserInput();//////CODY WANTED TO BE ABLE TO OPEN WHATEVER FILE USER WANTED
+           // fileName = "DataSource/ingredientsUPDATE.json";
         }
         this.writer = new BufferedWriter(new FileWriter(this.fileName));
     }

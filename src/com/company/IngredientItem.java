@@ -8,7 +8,7 @@ import java.util.Date;
  * CS321-03
  * Ingredient Item Object Class
  */
-public class IngredientItem implements Cloneable{
+public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     //TODO weight vs quantityOnHand may be lead to some confusion.
     //Private Variables
     private String name;   //What the Ingredient Item is called
@@ -363,4 +363,20 @@ public class IngredientItem implements Cloneable{
     public void setLastUsedDate(Date lastUsedDate) {
         this.lastUsedDate = lastUsedDate;
     }
+
+
+    public int compareTo(IngredientItem otherItem){
+
+        if (this.getName().compareTo(otherItem.getName())==1) {
+            return 1;
+        }
+        else if (this.getName().compareTo(otherItem.getName())==-1) {
+            return -1;
+        }
+        else if (this.getName().compareTo(otherItem.getName())==0) {
+            return 0;
+        }
+    return this.getName().compareTo(otherItem.getName());
+    }
+
 }   //End of IngredientItem

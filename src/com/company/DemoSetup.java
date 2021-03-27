@@ -11,7 +11,7 @@ public class DemoSetup {
     /*
     Currently Demos without using the Inventory Manager. This is to showcase that the foundation code works properly
      */
-    public DemoSetup(){
+    public DemoSetup() throws IOException {
 
         this.createDictionary();
         ingredientDictionary.printDictionary();
@@ -58,7 +58,7 @@ public class DemoSetup {
 
     }
 
-    public void printDemo(){
+    public void printDemo() throws IOException {
         //TEST INGREDIENT TO ADD TO LIST TO BE ADDED TO FILE UPDATE
         IngredientItem NewItem = new IngredientItem();
         NewItem.setName("GROUND BEEF");
@@ -77,7 +77,7 @@ public class DemoSetup {
 
         System.out.println("\n\nDemoing the Remove Ingredient Method");
         //TESTS THE REMOVAL AND UPDATE OF AN INGREDIENT
-        IngredientItem demoRemove = new IngredientItem(ingredientDictionary.getIngredientItem("BUTTER"));
+        IngredientItem demoRemove = new IngredientItem(ingredientDictionary.getIngredientItem("ALL PURPOSE FLOUR"));
         ingredientDictionary.removeIngredientFromList(demoRemove);
 
         System.out.println("\n\nDemoing the Update Ingredient Method");
@@ -86,5 +86,7 @@ public class DemoSetup {
         demo.setMeasurementUnit("Changed Names");
         ingredientDictionary.updateIngredientInList(demo);
         System.out.println("Updates By Removing the Current Version of the Ingredient and then Adding the Updated Version");
+
+        ingredientDictionary.UpdateJSONFile();
     }
 }

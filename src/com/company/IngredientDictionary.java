@@ -1,14 +1,18 @@
 package com.company;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.ListIterator;
 
 public class IngredientDictionary {
 
     private ArrayList<IngredientItem> ingredientItemArrayList;
     private static IngredientDictionary instance = null;
-    private static ChangeLogger ingredientChangeLogger;
+    private static ChangeLogger ingredientChangeLogger = new ChangeLogger();
+    private static FileManager FileUpdate = new FileManager();
 
     /**
      * Gets instance the single instance of IngredientFact
@@ -176,6 +180,7 @@ public class IngredientDictionary {
             System.out.println("Safe to Add to List");
             this.ingredientItemArrayList.add(ingredientItem);
             System.out.println(ingredientItem.getName() + ":: Has Been Added To the List");
+            ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.ADD, ingredientItem, ingredientItem);
             return true;
         } else {
             System.out.println("Error, Ingredient" + ingredientItem.getName() + "Already Exists");
@@ -199,6 +204,7 @@ public class IngredientDictionary {
                     String temp = this.ingredientItemArrayList.get(i).getName();
                     this.ingredientItemArrayList.remove(i);
                     System.out.println(temp + ":: Removed From Ingredient Dictionary List");
+                    ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE, ingredientItem, ingredientItem);
                 }
             }
         }
@@ -290,6 +296,19 @@ public class IngredientDictionary {
         ListIterator<IngredientItem> itr = this.ingredientItemArrayList.listIterator(0);
         while(itr.hasNext()){
             System.out.println(itr.next().toJSONString());
+        }
+    }
+
+    public void UpdateJSONFile() throws IOException {
+        Collections.sort(ingredientItemArrayList);
+
+        FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
+        FileUpdate.setStringArrayList(this.convertToStringArrayList());
+
+        try {
+            FileUpdate.generateJSONFile(FileType.INGREDIENTS);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
