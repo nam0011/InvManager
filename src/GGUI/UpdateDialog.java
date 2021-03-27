@@ -26,12 +26,12 @@ public class UpdateDialog extends JDialog implements ActionListener {
     private IngredientPanel indgredentPanel;
 
     public UpdateDialog(IngredientPanel panel) {
-        //This freezes the parent panel.
+
 
         setTitle("Add Item");
         indgredentPanel = panel;
 
-        ID = IngredientDictionary.getIngredientDictionary();
+        ID = IngredientDictionary.getIngredientDictionary();//<=======================================
         setLayout(new GridBagLayout());
         JDialog j = new JDialog();
 
