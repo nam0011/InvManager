@@ -61,17 +61,17 @@ public class DemoSetup {
     public void printDemo() throws IOException {
         //TEST INGREDIENT TO ADD TO LIST TO BE ADDED TO FILE UPDATE
         IngredientItem NewItem = new IngredientItem();
-        NewItem.setName("GROUND BEEF");
+        NewItem.setName("RICE");
         NewItem.setType("Dry");
         NewItem.setCost(5.7);
         NewItem.setWeight(2);
         NewItem.setMeasurementUnit("lb");
-        NewItem.setQuantityOnHand(0.5);
+        NewItem.setQuantityOnHand(5);
         System.out.println("\n\nAttempt to Add and Existing Ingredient");
 
         ingredientDictionary.addIngredientToList(NewItem);
 
-        NewItem.setName("BEEF STEAK");
+       // NewItem.setName("BEEF STEAK");
         System.out.println("\n\nAdding Beef Steak as an Ingredient Item");
         ingredientDictionary.addIngredientToList(NewItem);
 

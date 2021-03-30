@@ -16,7 +16,7 @@ public class Main {
        DemoSetup demoSetup = new DemoSetup();
        DemoInventory demoinvent = new DemoInventory();
 
-
+//TEST PLANS AND EXCEPTION HANDLING
 
 
        new loginGUI();
