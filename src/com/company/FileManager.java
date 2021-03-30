@@ -47,7 +47,7 @@ public class FileManager extends Reader {
      */
     public void generateJSONFile(FileType fileType) throws IOException {
         this.openFileWriter();
-
+        //TODO we must clear the JSON file.
         switch (fileType){
             case INGREDIENTS:
                 this.writer.write("{\n" +
@@ -157,6 +157,10 @@ public class FileManager extends Reader {
     }
 
     /**
+     * Clear the fo
+     */
+
+    /**
      * Method to to Close the File Reader for Easier Management
      * @throws IOException
      */
@@ -172,8 +176,8 @@ public class FileManager extends Reader {
     private void openFileWriter() throws IOException {
         if(this.fileName == null){
             System.out.println("Please Enter the File Name or File Path");
-            this.fileName = this.getUserInput();//////CODY WANTED TO BE ABLE TO OPEN WHATEVER FILE USER WANTED
-           // fileName = "DataSource/ingredientsUPDATE.json";
+            //this.fileName = this.getUserInput();//////CODY WANTED TO BE ABLE TO OPEN WHATEVER FILE USER WANTED
+           fileName = "DataSource/ingredientsUPDATE.json";
         }
         this.writer = new BufferedWriter(new FileWriter(this.fileName));
     }
@@ -310,7 +314,9 @@ public class FileManager extends Reader {
      * @param stringArrayList
      */
     public void setStringArrayList(ArrayList<String> stringArrayList) {
-        for(int i = 0; i < stringArrayList.size(); i++){
+        this.stringArrayList.clear();
+        IngredientDictionary id = IngredientDictionary.getIngredientDictionary();
+        for(int i = 0; i < id.getIngredientItemArrayList().size(); i++){
             this.stringArrayList.add(stringArrayList.get(i));
         }
     }
