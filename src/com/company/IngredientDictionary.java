@@ -175,7 +175,7 @@ public class IngredientDictionary {
     public boolean addIngredientToList(IngredientItem ingredientItem) {
         boolean alreadyExists = ingredientCheck(ingredientItem);
 
-
+//TODO fix the nonsense. - Jay
         if (alreadyExists == false) {
             System.out.println("Safe to Add to List");
             this.ingredientItemArrayList.add(ingredientItem);
