@@ -218,7 +218,7 @@ public class IngredientDictionary {
      * @param updateItem The Ingredient Item to be updated
      * @return Boolean Value to be returned to verify the operation succeeded.
      */
-    public boolean updateIngredientInList(IngredientItem updateItem) {
+    public boolean updateIngredientInList(IngredientItem updateItem) {  //maybe I should be passing this the front end array list?
         //before removing old copy we need to do some math and store some values
         boolean exists = ingredientCheck(updateItem);     //check if the item exists in list (this must be true for this function to complete
 
@@ -241,7 +241,7 @@ public class IngredientDictionary {
 
                     //TODO object field to store priceChangeRatio for display in Reports panel
                     //TODO object field to store priceDif for display in Reports panel
-                    double quantDif = updateItem.getWeight() + ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
+                    double quantDif = updateItem.getWeight() - ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
                     double quantChangeRatio;
 
                     if (quantDif != 0) {//if there is a difference in quantity we want a percentage value of that difference and we need to know if the input value is incrementing or decrementing our inventory

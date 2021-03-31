@@ -74,7 +74,7 @@ public class DemoInventory {
        //TESTING FOR TAKING AN INGREDIENT TO MODIFY AND SEND TO UPDATE
        IngredientItem demo = new IngredientItem(ingredientDictionary.getIngredientItem("SALT"));
        demo.setMeasurementUnit("Changed Names");
-       inventoryManager.updateIngredientItem(demo);
+       ingredientDictionary.updateIngredientInList(demo);
        System.out.println("Updates By Removing the Current Version of the Ingredient " +
                "and then Adding the Updated Version");
 

@@ -169,7 +169,9 @@ public class UpdateDialog extends JDialog implements ActionListener {
         return index;
     }
 
-
+//THIS ACTION IS NOT PERFECT BUT SERVES FOR OUR ALPHA PURPOSES IRL WILL HAVE SEPERATE FUNCTIONS TO ADD FOR A WEEK AND REMOVE UPDATE AN AVERAGE PRICE AND
+//THEN REMOVE THE AMOUNT OF INVENTORY USED OVER THE TIME PERIOD; SINCE OUT ALPHA ONLY UPDATES FOR ONE USE AT A TIME IT IS EASIER TO IMPLEMENT THIS
+//VERSION AND THEN UPDATE AT A LATER TIME TO A MORE REALISTIC UPDATE SERIES OF FUNCTIONALITY
 
     @Override
     public void actionPerformed (ActionEvent e){
@@ -184,36 +186,69 @@ public class UpdateDialog extends JDialog implements ActionListener {
                 double amtUsedValue = amtUsedTF.getValue();
                 double priceValue = priceTF.getValue();
                 if (ID.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
+                    if(amtPurchasedValue - amtUsedValue > 0){       //if we bought more than we used
+                        int n = JOptionPane.showOptionDialog(this,
+                                "Are you sure you want to add " + (amtPurchasedValue - amtUsedValue) + " " + getUnit + " of " + itemStr + " for $" + priceValue + "?",
+                                "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                        if (n == 0) {
 
-                    int n = JOptionPane.showOptionDialog(this,
-                            "Are you sure you want to update " + (amtPurchasedValue - amtUsedValue) + " " + getUnit + " of " + itemStr + " for $" + priceValue + "?",
-                            "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
-                            JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                    if (n == 0) {
+                            //*****************************************************************************************
+                            // TODO insert update ingredient code here for backend work.
+                            // this is just temporary code for testing purposes!
+                            IngredientItem item = new IngredientItem(); // create temp object to hold all new values
+                            item.setName(itemStr);                      //set the values
+                            item.setCost(priceValue);
+                            item.setMeasurementUnit(getUnit);
+                            item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
 
-                        //*****************************************************************************************
-                        // TODO insert update ingredient code here for backend work.
-                        // this is just temporary code for testing purposes!
-                        IngredientItem item = new IngredientItem(); // create temp object to hold all new values
-                        item.setName(itemStr);                      //set the values
-                        item.setCost(priceValue);
-                        item.setMeasurementUnit(getUnit);
-                        item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
+                            ID.updateIngredientInList(item);            //updating the item in the list
 
-                        ID.updateIngredientInList(item);            //updating the item in the list
+                            //******************************************************************************************
+                            //int row = findInsertionPoint(itemStr);
 
-                        //******************************************************************************************
-                        //int row = findInsertionPoint(itemStr);
+                            //DTM.insertRow(row, item.toQOHString());
 
-                        //DTM.insertRow(row, item.toQOHString());
+                            indgredentPanel.turnOffToolBar(true);
+                            dispose();
 
-                        indgredentPanel.turnOffToolBar(true);
-                        dispose();
+                            System.out.println(itemStr + " has been updated.");
 
-                        System.out.println(itemStr + " has been updated.");
+                        } else {
+                            System.out.println(itemStr + " was not updated.");
+                        }
+                    }
+                    else if(amtPurchasedValue - amtUsedValue < 0){  //if we used more than we bought
+                        int n = JOptionPane.showOptionDialog(this,
+                                "Are you sure you used " + -1*(amtPurchasedValue - amtUsedValue) + " " + getUnit + " of " + itemStr,
+                                "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                        if (n == 0) {
 
-                    } else {
-                        System.out.println(itemStr + " was not updated.");
+                            //*****************************************************************************************
+                            // TODO insert update ingredient code here for backend work.
+                            // this is just temporary code for testing purposes!
+                            IngredientItem item = new IngredientItem(); // create temp object to hold all new values
+                            item.setName(itemStr);                      //set the values
+                            item.setCost(priceValue);
+                            item.setMeasurementUnit(getUnit);
+                            item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
+
+                            ID.updateIngredientInList(item);            //updating the item in the list
+
+                            //******************************************************************************************
+                            //int row = findInsertionPoint(itemStr);
+
+                            //DTM.insertRow(row, item.toQOHString());
+
+                            indgredentPanel.turnOffToolBar(true);
+                            dispose();
+
+                            System.out.println(itemStr + " has been updated.");
+
+                        } else {
+                            System.out.println(itemStr + " was not updated.");
+                        }
                     }
                 }
                 else{
