@@ -23,7 +23,7 @@ public class DefaultFrame extends JFrame {
         tabbedPane = new JTabbedPane();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         recepPanel = new JPanel();
-        tabbedPane.add("Ingredients", new IngredientPanel());
+        tabbedPane.add("Ingredients", new IngredientPanel(this));
         tabbedPane.add("Recipes", recepPanel);
         tabbedPane.add("Form", formPanel);
         setResizable(false);

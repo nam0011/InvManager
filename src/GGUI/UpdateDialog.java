@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class UpdateDialog extends JDialog implements ActionListener {
     private SelfClearingTextField itemNameTF;
+
     private SelfClearingNumbField amtPurchaseTF;
     private SelfClearingNumbField amtUsedTF;
     private SelfClearingNumbField priceTF;

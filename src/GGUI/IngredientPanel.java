@@ -29,15 +29,25 @@ public class IngredientPanel extends JPanel implements ActionListener {
     private JScrollPane tablePane;
     private JScrollPane scrollPane;
     private DefaultTableModel DTM;
+    private DefaultFrame defaultFrame;
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
     ArrayList<IngredientItem> IL;
-    public IngredientPanel(){
-
+    public IngredientPanel(DefaultFrame inframe){
+        defaultFrame = inframe;
         tablePane = new JScrollPane();
 
         buildIngrePanel();
         buildIngredientTable();
 
+    }
+
+    /**
+     * Turns on or off the main frame so the user cannot do more one thing
+     * @param enable
+     */
+    public void setDefaultFrameEnable(boolean enable)
+    {
+        defaultFrame.setEnabled(enable);
     }
 
     private void filter(String search)
@@ -190,8 +200,11 @@ public void turnOffToolBar(boolean on) {
         }
         else if(e.getSource() == ingreAddB)
         {
-            turnOffToolBar(false);//this turns off the toolbar buttons. true to turn it back on
-            new AddDialog(this);
+            AddDialog a = new AddDialog(this);
+
+
+
+
 
 
             System.out.println("Add");
@@ -219,7 +232,7 @@ public void turnOffToolBar(boolean on) {
                 curr = (String)ingredientTable.getValueAt(removeIndex[r], 0);
                 removeNames.add(curr);
             }
-            turnOffToolBar(false);
+
             new RemoveDialog(this, removeNames);
 
 
