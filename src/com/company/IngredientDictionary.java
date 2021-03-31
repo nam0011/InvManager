@@ -218,7 +218,7 @@ public class IngredientDictionary {
      * @param updateItem The Ingredient Item to be updated
      * @return Boolean Value to be returned to verify the operation succeeded.
      */
-    public boolean updateIngredientInList(IngredientItem updateItem) {  //maybe I should be passing this the front end array list?
+    public IngredientItem updateIngredientInList(IngredientItem updateItem) {  //maybe I should be passing this the front end array list?
         //before removing old copy we need to do some math and store some values
         boolean exists = ingredientCheck(updateItem);     //check if the item exists in list (this must be true for this function to complete
 
@@ -261,13 +261,13 @@ public class IngredientDictionary {
                     //TODO object field to store quantDif for display in Reports panel
 
                     //TODO figure out why the object list on dropdown menu is not updating even though values when debugging are
-
-                }
                     updateItem = ingredientItem;
+                }
+
             }
             }
 
-            return true;
+            return updateItem;
         }
 
 

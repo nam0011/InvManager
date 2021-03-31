@@ -202,12 +202,13 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             item.setMeasurementUnit(getUnit);
                             item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
 
-                            ID.updateIngredientInList(item);            //updating the item in the list
+                            item = ID.updateIngredientInList(item);            //updating the item in the list
 
                             //******************************************************************************************
-                            //int row = findInsertionPoint(itemStr);
+                            int row = findInsertionPoint(itemStr);
 
-                            //DTM.insertRow(row, item.toQOHString());
+                            DTM.removeRow(row-1);
+                            DTM.insertRow(row, item.toQOHString());
 
                             indgredentPanel.turnOffToolBar(true);
                             dispose();
@@ -234,7 +235,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             item.setMeasurementUnit(getUnit);
                             item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
 
-                            ID.updateIngredientInList(item);            //updating the item in the list
+                            item = ID.updateIngredientInList(item);            //updating the item in the list
 
                             //******************************************************************************************
                             int row = findInsertionPoint(itemStr);
