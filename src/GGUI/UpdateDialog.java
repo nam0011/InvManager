@@ -237,9 +237,10 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             ID.updateIngredientInList(item);            //updating the item in the list
 
                             //******************************************************************************************
-                            //int row = findInsertionPoint(itemStr);
+                            int row = findInsertionPoint(itemStr);
 
-                            //DTM.insertRow(row, item.toQOHString());
+                            DTM.removeRow(row-1);
+                            DTM.insertRow(row, item.toQOHString());
 
                             indgredentPanel.turnOffToolBar(true);
                             dispose();

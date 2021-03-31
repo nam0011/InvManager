@@ -261,9 +261,12 @@ public class IngredientDictionary {
                     //TODO object field to store quantDif for display in Reports panel
 
                     //TODO figure out why the object list on dropdown menu is not updating even though values when debugging are
+
                 }
+                    updateItem = ingredientItem;
             }
             }
+
             return true;
         }
 
