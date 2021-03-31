@@ -31,13 +31,17 @@ public class AddDialog extends JDialog implements ActionListener {
        
 
         setTitle("Add Item");
-        setRootPaneCheckingEnabled(true);
+
         panel.setEnabled(false);
-        setAlwaysOnTop(true);
+
         setResizable(false);
 
 
         ingredientPanel = panel;
+
+        //Sets the dialogbox on top frame and disables the DefaultFrame
+        setAlwaysOnTop(true);
+        setLocation(150,150);
        ingredientPanel.setDefaultFrameEnable(false);
 
         DTM = ingredientPanel.getDTM();

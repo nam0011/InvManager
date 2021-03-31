@@ -10,6 +10,7 @@ public class ConfirmationDialog extends JDialog implements ActionListener {
     private String verb, item;
     private JLabel areYouSureLabel;
     private JButton okBtn, cancelBtn;
+    //TODO REMOVE this class doesn't do shit.
 
     public ConfirmationDialog(String P_verbStr, String P_itemStr)
     {
