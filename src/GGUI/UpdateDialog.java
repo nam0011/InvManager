@@ -208,6 +208,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             int row = findInsertionPoint(itemStr);
 
                             DTM.removeRow(row-1);
+                            
                             DTM.insertRow(row, item.toQOHString());
 
                             indgredentPanel.turnOffToolBar(true);
@@ -241,6 +242,8 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             int row = findInsertionPoint(itemStr);
 
                             DTM.removeRow(row-1);
+
+
                             DTM.insertRow(row, item.toQOHString());
 
                             indgredentPanel.turnOffToolBar(true);
