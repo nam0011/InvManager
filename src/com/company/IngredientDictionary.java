@@ -234,7 +234,8 @@ public class IngredientDictionary {
                     if (updateItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
                         priceDif = updateItem.getCost() - ogPrice;  //TODO always return positive number
                         priceChangeRatio = updateItem.getCost() / ogPrice;    //store that value
-                        ingredientItem.setCost(ogPrice + (ogPrice * priceChangeRatio));
+                        double meanPrice = (updateItem.getCost()+ogPrice)/2;
+                        ingredientItem.setCost(meanPrice);
                     } else {
                         ingredientItem.setCost(ogPrice);
                     }
