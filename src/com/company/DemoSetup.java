@@ -84,6 +84,8 @@ public class DemoSetup {
         //TESTING FOR TAKING AN INGREDIENT TO MODIFY AND SEND TO UPDATE
         IngredientItem demo = new IngredientItem(ingredientDictionary.getIngredientItem("SALT"));
         demo.setMeasurementUnit("Changed Names");
+        demo.setWeight(5);
+        demo.setCost(1);
         ingredientDictionary.updateIngredientInList(demo);
         System.out.println("Updates By Removing the Current Version of the Ingredient and then Adding the Updated Version");
 

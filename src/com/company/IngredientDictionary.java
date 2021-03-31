@@ -223,20 +223,20 @@ public class IngredientDictionary {
         boolean exists = ingredientCheck(updateItem);     //check if the item exists in list (this must be true for this function to complete
 
         if (exists) {                                                                                 //if true
-            for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {                         //start iterating through the list
-                if (this.ingredientItemArrayList.get(i).getName().equals(updateItem.getName())) {   //if found we need to do some math and push to a list
-                    double ogPrice = this.ingredientItemArrayList.get(i).getCost();
-                    double ogQuant = this.ingredientItemArrayList.get(i).getWeight();
+            for (IngredientItem ingredientItem : this.ingredientItemArrayList) {                         //start iterating through the list
+                if (ingredientItem.getName().equals(updateItem.getName())) {   //if found we need to do some math and push to a list
+                    double ogPrice = ingredientItem.getCost();
+                    double ogQuant = ingredientItem.getWeight();
 
-                    double priceDif ;   //find the difference between the prices and store in a temp value name price difference
+                    double priceDif;   //find the difference between the prices and store in a temp value name price difference
                     double priceChangeRatio;
 
                     if (updateItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
                         priceDif = updateItem.getCost() - ogPrice;  //TODO always return positive number
                         priceChangeRatio = updateItem.getCost() / ogPrice;    //store that value
-                        this.ingredientItemArrayList.get(i).setCost(ogPrice + ogPrice*priceChangeRatio);
+                        ingredientItem.setCost(ogPrice + (ogPrice * priceChangeRatio));
                     } else {
-                        this.ingredientItemArrayList.get(i).setCost(ogPrice);
+                        ingredientItem.setCost(ogPrice);
                     }
 
                     //TODO object field to store priceChangeRatio for display in Reports panel
@@ -247,22 +247,22 @@ public class IngredientDictionary {
                     if (quantDif != 0) {//if there is a difference in quantity we want a percentage value of that difference and we need to know if the input value is incrementing or decrementing our inventory
                         if (updateItem.getWeight() > 0) {        //if incrementing inventory amount
                             quantChangeRatio = updateItem.getWeight() / ogQuant;    //find the change ratio
-                            this.ingredientItemArrayList.get(i).setWeight(ogQuant + updateItem.getWeight()); //increment the weight of the item in the list
+                            ingredientItem.setWeight(ogQuant + updateItem.getWeight()); //increment the weight of the item in the list
 
                         } else if (updateItem.getWeight() < 0) {    //if decrementing
                             quantChangeRatio = -1 * (updateItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
-                            this.ingredientItemArrayList.get(i).setWeight(ogQuant + updateItem.getWeight()); //decrement the weight of the item in the list
+                            ingredientItem.setWeight(ogQuant + updateItem.getWeight()); //decrement the weight of the item in the list
                         }
                     } else {  //if no change(this will never be the case if update is filled out but here for continuity
-                        this.ingredientItemArrayList.get(i).setWeight(ogQuant);
+                        ingredientItem.setWeight(ogQuant);
                     }
 
                     //TODO object field to store quantChangeRatio for display in Reports panel
                     //TODO object field to store quantDif for display in Reports panel
 
                     //TODO figure out why the object list on dropdown menu is not updating even though values when debugging are
-                        }
-                    }
+                }
+            }
             }
             return true;
         }
