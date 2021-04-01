@@ -143,7 +143,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
 
     ingreRemoveB = new JButton("Remove");
 
-    ingreListAllB =new JButton("List All");
+    ingreListAllB =new JButton("v");
     ingreSearchTF.setColumns(12);
 
     //The following code builds toolbar;
@@ -152,12 +152,11 @@ public class IngredientPanel extends JPanel implements ActionListener {
         add(ingreSearchTF);
 
 
-        ingreToolBar.add(ingreSearchB);
+
         ingreToolBar.add(ingreAddB);
         ingreToolBar.add(ingreUpdateB);
         ingreToolBar.add(ingreRemoveB);
-        ingreToolBar.addSeparator();
-        ingreToolBar.add(ingreListAllB);
+
          }
 
     // The following code adds the listener to the  Buttons.

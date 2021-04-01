@@ -24,8 +24,10 @@ public class DefaultFrame extends JFrame {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         recepPanel = new JPanel();
         tabbedPane.add("Ingredients", new IngredientPanel(this));
-        tabbedPane.add("Recipes", recepPanel);
-        tabbedPane.add("Form", formPanel);
+
+        tabbedPane.add("Reports", formPanel);
+
+
         setResizable(false);
         add(tabbedPane);
         ID = IngredientDictionary.getIngredientDictionary();

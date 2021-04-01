@@ -29,7 +29,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
     public UpdateDialog(IngredientPanel panel) {
 
 
-        setTitle("Add Item");
+        setTitle("Update Item");
         indgredentPanel = panel;
 
         ID = IngredientDictionary.getIngredientDictionary();//<=======================================
@@ -160,7 +160,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
         DTM = indgredentPanel.getDTM();
         int index = DTM.getRowCount();
         for (int i = 0; i < DTM.getRowCount(); i++) {
-            if (name.compareTo((String) DTM.getValueAt(i, 0)) < 0) {
+            if (name.compareTo((String) DTM.getValueAt(i, 0)) == 0) {
                 index = i;
                 break;
             }
@@ -207,7 +207,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             //******************************************************************************************
                             int row = findInsertionPoint(itemStr);
 
-                            DTM.removeRow(row-1);
+                            DTM.removeRow(row);
                             
                             DTM.insertRow(row, item.toQOHString());
 
@@ -241,7 +241,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             //******************************************************************************************
                             int row = findInsertionPoint(itemStr);
 
-                            DTM.removeRow(row-1);
+                            DTM.removeRow(row);
 
 
                             DTM.insertRow(row, item.toQOHString());

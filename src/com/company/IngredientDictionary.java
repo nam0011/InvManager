@@ -153,6 +153,7 @@ public class IngredientDictionary {
                 if (this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())) {
                     System.out.println("Found Ingredient ::" + this.ingredientItemArrayList.get(i).getName());
                     isIngredient = true;
+                    break;
                 }
             }
         } catch (NullPointerException e) {
@@ -218,8 +219,7 @@ public class IngredientDictionary {
      * @param updateItem The Ingredient Item to be updated
      * @return Boolean Value to be returned to verify the operation succeeded.
      */
-    public IngredientItem updateIngredientInList(IngredientItem updateItem) {  //maybe I should be passing this the front end array list?
-        //before removing old copy we need to do some math and store some values
+    public IngredientItem updateIngredientInList(IngredientItem updateItem) {
         boolean exists = ingredientCheck(updateItem);     //check if the item exists in list (this must be true for this function to complete
 
         if (exists) {                                                                                 //if true
@@ -234,7 +234,9 @@ public class IngredientDictionary {
                     if (updateItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
                         priceDif = updateItem.getCost() - ogPrice;  //TODO always return positive number
                         priceChangeRatio = updateItem.getCost() / ogPrice;    //store that value
+
                         double meanPrice = (updateItem.getCost()+ogPrice)/2;
+                        //average price per unit?
                         ingredientItem.setCost(meanPrice);
                     } else {
                         ingredientItem.setCost(ogPrice);
