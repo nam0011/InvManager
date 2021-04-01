@@ -24,7 +24,6 @@ public class IngredientDictionary {
         }
 
         return instance;
-
     }
 
     private IngredientDictionary() {
@@ -140,7 +139,7 @@ public class IngredientDictionary {
     /**
      * Method to check if an Ingredient Already Exists in the Array List
      *
-     * @param ingredientItem
+     * @param ingredientItem The object of the ingredient to be searched for
      * @return Boolean Value to be returned to verify the operation succeeded.
      * This is a duplicate method so that if other elements of the Ingredient Item need to be searched for
      * TODO implement elements to check other elements of the Ingredient Item

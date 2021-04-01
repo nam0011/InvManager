@@ -2,77 +2,105 @@ package com.company;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 
 
 public class InventoryManager {
     IngredientDictionary IngredientDictionary; //Copy instance of IngredientDictionary here to load inventory
-
-    FileManager FileManager;
+    private static InventoryManager instance = null;
     IngredientFactory IngredientFactory;
-    ChangeLogger InventoryChangeLogger;
+    private static ChangeLogger InventoryChangeLogger = new ChangeLogger();
+    private static FileManager FileUpdate = new FileManager();
     double initialInventorycost;
 
+    public static InventoryManager getInventoryManager() {
+        if (instance == null) {
+
+            instance = new InventoryManager();
+        }
+
+        return instance;
+    }
 
     public InventoryManager(){
         //TODO make so that it takes in a file name here for either Initial Setup or Demo Setup
-        FileManager = new FileManager("DataSource/ingredients.json");
+        FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
         IngredientFactory = new IngredientFactory();
         createIngredientDictionary();
         initialInventorycost = IngredientDictionary.inventoryCost();
     }
 
     /**
+     * Method to Get the Ingredient Item Linked List to be managed else where.
+     * TODO look into security issues with passing this from the Dictionary.
+     *
+     * @return
+     */
+    public ArrayList<IngredientItem> getIngredientItemArrayList() {
+        return IngredientDictionary.getIngredientItemArrayList();
+    }
+
+    /**
+     * Method allows you to get a single Ingredient Item referenced by name
+     *
+     * @param ingredientName Name of the Ingredient Item to returned
+     * @return Returns Ingredient Item Extracted from the Array List
+     */
+    public IngredientItem getIngredientItem(String ingredientName) {
+
+        IngredientItem tempIngredientItem = null;
+        for (int i = 0; i < IngredientDictionary.getIngredientItemArrayList().size(); i++) {
+            if (IngredientDictionary.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
+                tempIngredientItem = new IngredientItem(IngredientDictionary.getIngredientItemArrayList().get(i));
+            }
+        }
+        //Exception Handling for ingredient not in array list.
+        try {
+            for (int i = 0; i > -1; i++) {
+                if (IngredientDictionary.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
+                    i = -2;
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(ingredientName + ":: Ingredient Not Found");
+        }
+        return tempIngredientItem;
+    }
+    /**
      * Method to create the Ingredient Dictionary and House within the Inventory Manger for Ease of Access to the GUI
      * Designed for Future Development with Recipes being Managed as well
      */
     private void createIngredientDictionary(){
-        try {
-            FileManager.generateStringArrayList();
-            InventoryChangeLogger = new ChangeLogger();
-            //This will set the Original Ingredient File in Change Logger. This is the Raw read in String.
-            InventoryChangeLogger.setOriginalIngredientFile(FileManager.getStringArrayList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FileManager.createObjectArray();
-        IngredientFactory.startFactory(FileManager.getObjectArrayList());
-        IngredientDictionary = new IngredientDictionary(IngredientFactory.getList());
+//        try {
+//            FileManager.generateStringArrayList();
+//            InventoryChangeLogger = new ChangeLogger();
+//            //This will set the Original Ingredient File in Change Logger. This is the Raw read in String.
+//            InventoryChangeLogger.setOriginalIngredientFile(FileManager.getStringArrayList());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        FileManager.createObjectArray();
+//        IngredientFactory.startFactory(FileManager.getObjectArrayList());
+      //  IngredientDictionary = IngredientDictionary.getIngredientDictionary();
 
-        try {
-            FileManager.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FileManager.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FileManager.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            FileManager.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
      * Method to Generate/Create the JSON file for Ingredients before closing of program
      */
-    public void createIngredientFileWriter(){
-        FileManager = new FileManager();
-        //TODO Update to reflect a file name being passed in, either from initial setup or from a demo setup
-        FileManager.setFileName("DataSource/Ingredients.json");
-        FileManager.setStringArrayList(IngredientDictionary.convertToStringArrayList());
 
-        try {
-            FileManager.generateJSONFile(FileType.INGREDIENTS);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FileManager.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Method to Update a Single Item and Get its original for Storing the Changes made.
@@ -215,9 +243,18 @@ public class InventoryManager {
         return IngredientDictionary.ingredientCheck(ingredient);
     }
 
-    //Need???
-    public boolean ingredientHasNext(IngredientItem ingredient){
-        return false;
+
+    public void UpdateJSONFile() throws IOException {
+        Collections.sort(IngredientDictionary.getIngredientItemArrayList());
+
+        FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
+        FileUpdate.setStringArrayList(IngredientDictionary.convertToStringArrayList());
+
+        try {
+            FileUpdate.generateJSONFile(FileType.INGREDIENTS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
