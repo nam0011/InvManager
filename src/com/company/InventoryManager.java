@@ -3,11 +3,12 @@ package com.company;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 
 public class InventoryManager {
-    IngredientDictionary IngredientDictionary; //Copy instance of IngredientDictionary here to load inventory
+    IngredientDictionary IngredientDictionary = com.company.IngredientDictionary.getIngredientDictionary(); //Copy instance of IngredientDictionary here to load inventory
     private static InventoryManager instance = null;
     IngredientFactory IngredientFactory;
     private static ChangeLogger InventoryChangeLogger = new ChangeLogger();
@@ -18,6 +19,7 @@ public class InventoryManager {
         if (instance == null) {
 
             instance = new InventoryManager();
+
         }
 
         return instance;
@@ -106,20 +108,20 @@ public class InventoryManager {
      * Method to Update a Single Item and Get its original for Storing the Changes made.
      * @param updateItem The Item to be updated.
      */
-    public void updateIngredientItem(IngredientItem updateItem){
+    public IngredientItem updateIngredientInList(IngredientItem updateItem){
             //Gets the Original Item from the Dictionary Prior to Updating.
         IngredientItem original = new IngredientItem(this.IngredientDictionary.getIngredientItem(updateItem.getName()));
             //Records both Original and Updated Item versions to the Changelog
         InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, original, updateItem);
             //Updates the Item in the Ingredient Dictionary
-        this.IngredientDictionary.updateIngredientInList(updateItem);
+        return this.IngredientDictionary.updateIngredientInList(updateItem);
     }
 
     /**
      * Method to Add an Ingredient to the Inventory
      * @param addItem   The Ingredient Item to be Added
      */
-    public void addIngredient(IngredientItem addItem){
+    public void addIngredientToList(IngredientItem addItem){
             //Records the Item to be Added to the Ingredient Dictionary
         InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.ADD,addItem,null);
             //Adds the Item to the Ingredient Dictionary
@@ -130,7 +132,7 @@ public class InventoryManager {
      * Method to Remove/Delete from Inventory
      * @param removeItem    Ingredient Item to be Removed/Deleted
      */
-    public void removeIngredient(IngredientItem removeItem){
+    public void removeIngredientFromList(IngredientItem removeItem){
             //Records the Item to Removed from the Ingredient Dictionary to the ChangeLog
         this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE,removeItem,null);
             //Removes the Item from the Ingredient Dictionary
@@ -239,7 +241,7 @@ public class InventoryManager {
      * @param ingredient    The Ingredient Item to be Searched for
      * @return  Boolean Value based on result
      */
-    public boolean doesIngredientExist(IngredientItem ingredient){
+    public boolean ingredientCheck(String ingredient){
         return IngredientDictionary.ingredientCheck(ingredient);
     }
 
@@ -257,4 +259,7 @@ public class InventoryManager {
         }
     }
 
+    public String[] printDictionary(int i){
+        return IngredientDictionary.printDictionary(i);
+    }
 }

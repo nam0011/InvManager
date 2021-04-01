@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
