@@ -14,7 +14,7 @@ public class Main {
 	// write your code here
 
        DemoSetup demoSetup = new DemoSetup();
-       DemoInventory demoinvent = new DemoInventory();
+      // DemoInventory demoinvent = new DemoInventory();
 
 //TEST PLANS AND EXCEPTION HANDLING
 
