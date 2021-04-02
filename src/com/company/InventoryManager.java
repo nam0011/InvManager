@@ -9,9 +9,11 @@ import java.util.NoSuchElementException;
 
 public class InventoryManager {
     IngredientDictionary IngredientDictionary = com.company.IngredientDictionary.getIngredientDictionary(); //Copy instance of IngredientDictionary here to load inventory
+    FileManager FileManager = new FileManager("DataSource/ingredients.json");
     private static InventoryManager instance = null;
     IngredientFactory IngredientFactory;
     private static ChangeLogger InventoryChangeLogger = new ChangeLogger();
+    IngredientFactory testFactory = new IngredientFactory();
     private static FileManager FileUpdate = new FileManager();
     double initialInventorycost;
 
@@ -73,6 +75,9 @@ public class InventoryManager {
      * Method to create the Ingredient Dictionary and House within the Inventory Manger for Ease of Access to the GUI
      * Designed for Future Development with Recipes being Managed as well
      */
+
+
+
     private void createIngredientDictionary(){
 //        try {
 //            FileManager.generateStringArrayList();
@@ -99,9 +104,6 @@ public class InventoryManager {
 //        }
     }
 
-    /**
-     * Method to Generate/Create the JSON file for Ingredients before closing of program
-     */
 
 
     /**

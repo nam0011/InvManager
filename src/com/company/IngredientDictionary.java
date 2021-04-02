@@ -233,7 +233,9 @@ public class IngredientDictionary {
                     if (updateItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
                         priceDif = updateItem.getCost() - ogPrice;  //TODO always return positive number
                         priceChangeRatio = updateItem.getCost() / ogPrice;    //store that value
-                        double meanPrice = (updateItem.getCost()+ogPrice)/2;
+                       // double meanPrice = (updateItem.getCost()+ogPrice)/2;
+                        //This formula works because everything is in LB right now I don't know if we're adding other units
+                        double meanPrice = (((updateItem.getCost()*updateItem.getWeight())+(ogPrice*ogQuant))/(updateItem.getWeight()+ogQuant));
                         ingredientItem.setCost(meanPrice);
                     } else {
                         ingredientItem.setCost(ogPrice);
