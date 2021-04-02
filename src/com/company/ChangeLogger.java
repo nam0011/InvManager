@@ -88,8 +88,14 @@ public class ChangeLogger {
                         "name\" : \"" + original.getName() + "\", \"" +
                         "type\" : \"" + original.getType() + "\", \"" +
                         "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
-                        "cost\" : \"" + original.getCost() + "\", \"" +
-                        "weight\" : \"" + original.getWeight()+ "\", \"" +
+                        "Original Cost\" : \""+original.getOGPrice()+ "\", \"" +
+                        "New Cost\" : \"" + original.getCost() + "\", \"" +
+                        "Monetary Difference in Cost\" : \"" + original.getPriceDiff() + "\", \"" +
+                        "Percentage Difference in Cost\" : \"" + original.getPriceChangeRatio() + "\", \"" +
+                        "Original Weight\" : \""+original.getOGQuant()+ "\", \"" +
+                        "New Weight\" : \"" + original.getWeight() + "\", \"" +
+                        "Monetary Difference in Weight\" : \"" + original.getQuantDiff() + "\", \"" +
+                        "Percentage Difference in Weight\" : \"" + original.getQuantChangeRatio() + "\", \"" +
                         "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
                         "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
 /*  NOT SURE WHAT THIS BLOCK IS DOING - CLONE OF THE ABOVE LINES IN UPDATE CASE (NATHAN CHANGED FROM CHANGESMADE TO PENDUPDATE ORIGINALLY WAS SAME CALL)
