@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class DemoSetup {
 
-    FileManager FileManager = new FileManager("DataSource/ingredients.json");
+    FileManager FileManager;
     IngredientFactory testFactory = new IngredientFactory();
     IngredientDictionary ingredientDictionary;
 
@@ -22,6 +22,7 @@ public class DemoSetup {
     }
 
     public void createDictionary(){
+        FileManager = new FileManager("DataSource/ingredients.json");
         try {
             FileManager.generateStringArrayList();
         } catch (IOException e) {
