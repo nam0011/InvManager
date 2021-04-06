@@ -44,12 +44,17 @@ public class loginGUI extends JFrame implements ActionListener {
         inPW = passwordTextField.getText();
         inUN = userTextField.getText();
         if (ac.giveAccess(inUN, inPW)) {
-            invalidLabel.setText("You're in");
+            
             loginButton.removeActionListener(this);
 
             dispose();
             new DefaultFrame();
 
+        }
+        else{
+            //error message
+
+            invalidLabel.setText("incorrect password");
         }
     }
 }
