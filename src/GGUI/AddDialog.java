@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,7 @@ public class AddDialog extends JDialog implements ActionListener {
     private ArrayList<SelfClearingTextField> listTextFields;
     private JButton oKB;
     private JButton cancel;
-    private IngredientDictionary ID;
+    private InventoryManager IM;
     private String getUnit;
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
@@ -45,7 +46,7 @@ public class AddDialog extends JDialog implements ActionListener {
        ingredientPanel.setDefaultFrameEnable(false);
 
         DTM = ingredientPanel.getDTM();
-        ID = IngredientDictionary.getIngredientDictionary();
+        IM = InventoryManager.getInventoryManager();
         setLayout(new GridBagLayout());
         JDialog j = new JDialog();
 
@@ -200,7 +201,7 @@ public class AddDialog extends JDialog implements ActionListener {
                     itemStr = itemStr.toUpperCase();
                     double amtPurchasedValue = amtPurchaseTF.getValue();
                     double priceValue = priceTF.getValue();
-                    if (ID.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
+                    if (IM.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
                         JOptionPane.showMessageDialog(this, itemStr + " is already in the inventory.");
                     } else {
                         IngredientItem item = new IngredientItem();
@@ -227,7 +228,7 @@ public class AddDialog extends JDialog implements ActionListener {
                             // TODO insert add ingredient code here for backend work.
                             // this is just temporary code for testing purposes!
 
-                            ID.addIngredientToList(item);
+                            IM.addIngredientToList(item);
 
                             //******************************************************************************************
                             int row = findInsertionPoint(itemStr);

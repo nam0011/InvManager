@@ -31,7 +31,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
     private DefaultTableModel DTM;
     private DefaultFrame defaultFrame;
-    IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
+    InventoryManager IM = InventoryManager.getInventoryManager();
     ArrayList<IngredientItem> IL;
     public IngredientPanel(DefaultFrame inframe){
         defaultFrame = inframe;
@@ -60,7 +60,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
     }
     private void buildIngredientTable(){
 
-        IL=ID.getIngredientItemArrayList();
+        IL=IM.getIngredientItemArrayList();
         String[][] data;
         int n = IL.size();
 
@@ -81,7 +81,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
 
         for(int r = 0; r < n; r++) {
 
-            DTM.addRow(ID.printDictionary(r));
+            DTM.addRow(IM.printDictionary(r));
 
         }
 

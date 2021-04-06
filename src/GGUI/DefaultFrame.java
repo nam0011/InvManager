@@ -1,6 +1,7 @@
 package GGUI;
 
 import com.company.IngredientDictionary;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -11,7 +12,7 @@ public class DefaultFrame extends JFrame {
         private JPanel recepPanel;
         private JPanel formPanel;
         private JTabbedPane tabbedPane;
-        private IngredientDictionary ID;
+        private InventoryManager IM;
 
    private JTabbedPane ingredientsTab;
 
@@ -28,13 +29,13 @@ public class DefaultFrame extends JFrame {
         tabbedPane.add("Form", formPanel);
         setResizable(false);
         add(tabbedPane);
-        ID = IngredientDictionary.getIngredientDictionary();
+        IM = InventoryManager.getInventoryManager();
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 // call terminate
                 try {
-                    ID.UpdateJSONFile();
+                    IM.UpdateJSONFile();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

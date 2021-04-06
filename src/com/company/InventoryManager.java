@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 
 
 public class InventoryManager {
-    IngredientDictionary IngredientDictionary = com.company.IngredientDictionary.getIngredientDictionary(); //Copy instance of IngredientDictionary here to load inventory
+    IngredientDictionary ID = IngredientDictionary.getIngredientDictionary(); //Copy instance of IngredientDictionary here to load inventory
     FileManager FileManager;
     private static InventoryManager instance = null;
     IngredientFactory IngredientFactory;
@@ -48,16 +48,16 @@ public class InventoryManager {
         testFactory.startFactory(FileManager.getObjectArrayList());
 
         //TODO Jonathan
-        IngredientDictionary.setIngredientItemArrayList(testFactory.getList());
+        ID.setIngredientItemArrayList(testFactory.getList());
 
         try {
             FileManager.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        initialInventorycost = IngredientDictionary.inventoryCost();
-        CurrentItem = IngredientDictionary.getIngredientItemArrayList().get(0);
-        IngredientSize = IngredientDictionary.getIngredientItemArrayList().size();
+        initialInventorycost = ID.inventoryCost();
+        CurrentItem = ID.getIngredientItemArrayList().get(0);
+        IngredientSize = ID.getIngredientItemArrayList().size();
 
     }
     /**
@@ -75,7 +75,7 @@ public class InventoryManager {
      * @return The main list that contains ingredient items.
      */
     public ArrayList<IngredientItem> getIngredientItemArrayList() {
-        return IngredientDictionary.getIngredientItemArrayList();
+        return ID.getIngredientItemArrayList();
     }
 
     /**
@@ -87,15 +87,15 @@ public class InventoryManager {
     public IngredientItem getIngredientItem(String ingredientName) {
 
         IngredientItem tempIngredientItem = null;
-        for (int i = 0; i < IngredientDictionary.getIngredientItemArrayList().size(); i++) {
-            if (IngredientDictionary.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
-                tempIngredientItem = new IngredientItem(IngredientDictionary.getIngredientItemArrayList().get(i));
+        for (int i = 0; i < ID.getIngredientItemArrayList().size(); i++) {
+            if (ID.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
+                tempIngredientItem = new IngredientItem(ID.getIngredientItemArrayList().get(i));
             }
         }
         //Exception Handling for ingredient not in array list.
         try {
             for (int i = 0; i > -1; i++) {
-                if (IngredientDictionary.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
+                if (ID.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
                     i = -2;
                 }
             }
@@ -114,7 +114,7 @@ public class InventoryManager {
         if (CurIndexIngredient<IngredientSize-1){
             CurIndexIngredient++;
         }
-        CurrentItem = IngredientDictionary.getIngredientItemArrayList().get(CurIndexIngredient);
+        CurrentItem = ID.getIngredientItemArrayList().get(CurIndexIngredient);
 
         return CurrentItem;
     }
@@ -133,7 +133,7 @@ public class InventoryManager {
         if (CurIndexIngredient>0){
             CurIndexIngredient--;
         }
-        CurrentItem = IngredientDictionary.getIngredientItemArrayList().get(CurIndexIngredient);
+        CurrentItem = ID.getIngredientItemArrayList().get(CurIndexIngredient);
 
         return CurrentItem;
     }
@@ -172,11 +172,11 @@ public class InventoryManager {
      */
     public IngredientItem updateIngredientInList(IngredientItem updateItem){
             //Gets the Original Item from the Dictionary Prior to Updating.
-        IngredientItem original = new IngredientItem(this.IngredientDictionary.getIngredientItem(updateItem.getName()));
+        IngredientItem original = new IngredientItem(this.ID.getIngredientItem(updateItem.getName()));
             //Records both Original and Updated Item versions to the Changelog
         InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, original, updateItem);
             //Updates the Item in the Ingredient Dictionary
-        return this.IngredientDictionary.updateIngredientInList(updateItem);
+        return this.ID.updateIngredientInList(updateItem);
     }
 
     /**
@@ -187,7 +187,7 @@ public class InventoryManager {
             //Records the Item to be Added to the Ingredient Dictionary
         InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.ADD,addItem,null);
             //Adds the Item to the Ingredient Dictionary
-        IngredientDictionary.addIngredientToList(addItem);
+        ID.addIngredientToList(addItem);
     }
 
     /**
@@ -198,7 +198,7 @@ public class InventoryManager {
             //Records the Item to Removed from the Ingredient Dictionary to the ChangeLog
         this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE,removeItem,null);
             //Removes the Item from the Ingredient Dictionary
-        this.IngredientDictionary.removeIngredientFromList(removeItem);
+        this.ID.removeIngredientFromList(removeItem);
 
     }
     /**
@@ -209,7 +209,7 @@ public class InventoryManager {
 
     public IngredientItem searchIngredient(String searchInput){
 
-        IngredientItem SearchResult = IngredientDictionary.getIngredientItem(searchInput);
+        IngredientItem SearchResult = ID.getIngredientItem(searchInput);
 
 //        if(!SearchResult.equals(null)){
 //            return SearchResult;
@@ -255,7 +255,7 @@ public class InventoryManager {
  * @return A double which represents the current cost of all items in the inventory
  * */
     public double curInventoryCost(){
-        return IngredientDictionary.inventoryCost();
+        return ID.inventoryCost();
     }
     /**
      * This returns the difference between the initial cost of all items and the current cost.
@@ -272,7 +272,7 @@ public class InventoryManager {
      * TODO add Exception Handler for when the Ingredient Item Does not
      */
     public IngredientItem getIngredient(String ingredientName){
-        return IngredientDictionary.getIngredientItem(ingredientName);
+        return ID.getIngredientItem(ingredientName);
     }
 
     /**
@@ -281,15 +281,15 @@ public class InventoryManager {
      * @return  Boolean Value based on result
      */
     public boolean ingredientCheck(String ingredient){
-        return IngredientDictionary.ingredientCheck(ingredient);
+        return ID.ingredientCheck(ingredient);
     }
 
 
     public void UpdateJSONFile() throws IOException {
-        Collections.sort(IngredientDictionary.getIngredientItemArrayList());
+        Collections.sort(ID.getIngredientItemArrayList());
 
         FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
-        FileUpdate.setStringArrayList(IngredientDictionary.convertToStringArrayList());
+        FileUpdate.setStringArrayList(ID.convertToStringArrayList());
 
         try {
             FileUpdate.generateJSONFile(FileType.INGREDIENTS);
@@ -299,6 +299,6 @@ public class InventoryManager {
     }
 
     public String[] printDictionary(int i){
-        return IngredientDictionary.printDictionary(i);
+        return ID.printDictionary(i);
     }
 }

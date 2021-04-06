@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +21,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
     private ArrayList<SelfClearingTextField> listTextFields;
     private JButton oKB;
     private JButton cancel;
-    private IngredientDictionary ID;
+    private InventoryManager IM;
     private String getUnit;
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
@@ -32,7 +33,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
         setTitle("Add Item");
         indgredentPanel = panel;
 
-        ID = IngredientDictionary.getIngredientDictionary();//<=======================================
+        IM = InventoryManager.getInventoryManager();//<=======================================
         setLayout(new GridBagLayout());
         JDialog j = new JDialog();
 
@@ -185,7 +186,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                 double amtPurchasedValue = amtPurchaseTF.getValue();
                 double amtUsedValue = amtUsedTF.getValue();
                 double priceValue = priceTF.getValue();
-                if (ID.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
+                if (IM.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
                     if(amtPurchasedValue - amtUsedValue > 0){       //if we bought more than we used
                         int n = JOptionPane.showOptionDialog(this,
                                 "Are you sure you want to add " + (amtPurchasedValue - amtUsedValue) + " " + getUnit + " of " + itemStr + " for $" + priceValue + "?",
@@ -202,7 +203,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             item.setMeasurementUnit(getUnit);
                             item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
 
-                            item = ID.updateIngredientInList(item);            //updating the item in the list
+                            item = IM.updateIngredientInList(item);            //updating the item in the list
 
                             //******************************************************************************************
                             int row = findInsertionPoint(itemStr);
@@ -236,7 +237,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             item.setMeasurementUnit(getUnit);
                             item.setWeight(amtPurchasedValue - amtUsedValue);   //forces always decrement upon use; always increment upon purchase
 
-                            item = ID.updateIngredientInList(item);            //updating the item in the list
+                            item = IM.updateIngredientInList(item);            //updating the item in the list
 
                             //******************************************************************************************
                             int row = findInsertionPoint(itemStr);

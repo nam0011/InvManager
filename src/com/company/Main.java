@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 	// write your code here
 
-       DemoSetup demoSetup = new DemoSetup();
+      // DemoSetup demoSetup = new DemoSetup();
       // DemoInventory demoinvent = new DemoInventory();
 
 //TEST PLANS AND EXCEPTION HANDLING
