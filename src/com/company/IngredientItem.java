@@ -17,6 +17,12 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     private double cost;  //Cost per oz or ml
     private double weight;    //Weights is how per cost, i.e. ground beef cost "$5.50 per 1lb"
     private double quantityOnHand;    //Current stock of Ingredient.
+    private double quantDiff;
+    private double quantChangeRatio;
+    private double priceDiff;
+    private double priceChangeRatio;
+    private double OGPrice;
+    private double OGQuant;
     private Date lastUsedDate;
 
 
@@ -185,6 +191,10 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
         this.cost = 0.0;  //Cost per oz or ml
         this.weight = 0.0;    //Weights is how per cost, i.e. ground beef cost "$5.50 per 1lb"
         this.quantityOnHand = 0.0;    //Current stock of Ingredient.
+        this.quantDiff = 0.0;
+        this.quantChangeRatio = 0.0;
+        this.priceDiff = 0.0;
+        this.priceChangeRatio = 0.0;
         this.lastUsedDate = null;
     }
 
@@ -347,6 +357,106 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     public void setQuantityOnHand(double quantityOnHand) {
         this.quantityOnHand = quantityOnHand;
     }
+
+
+    /**
+     * Method to set the ratio change from previous amount to new amount of single item inventory
+     * @param changeRatioQuantity will always default to null and will only be updated by the update item function call
+     */
+    public void setQuantChangeRatio(double changeRatioQuantity) {
+        this.quantChangeRatio = changeRatioQuantity;
+    }
+
+    /**
+     * Method to set the actual weight difference between what was used and bought, and what was previously in the inventory
+     * @param diffQuant - set by the update function call
+     */
+    public void setQuantDiff(double diffQuant) {
+        this.quantDiff = diffQuant;
+    }
+
+    /**
+     * Method to set the price difference between a newly purchased amount and the current average inventory price
+     * @param diffPrice will be set in the update function call
+     */
+    public void setPriceDiff(double diffPrice) {
+        this.priceDiff = diffPrice;
+    }
+
+    /**
+     * Method to se tht price change ratio found by averaging prices of purchased, used, and old inv
+     * @param changeRatioPrice will be set in update function call
+     */
+    public void setPriceChangeRatio(double changeRatioPrice) {
+        this.priceChangeRatio = changeRatioPrice;
+    }
+
+    /**
+     * getter for price change ratio
+     * @return ratio of price price
+     */
+    public double getPriceChangeRatio() {
+        return priceChangeRatio;
+    }
+
+    /**
+     * getter for price difference
+     * @return difference between old and new price
+     */
+    public double getPriceDiff() {
+        return priceDiff ;
+    }
+
+    /**
+     * getter for quantity difference
+     * @return difference between current inventory and updated inventory quanities
+     */
+    public double getQuantDiff() {
+        return quantDiff;
+    }
+
+    /**
+     * getter for quantity change ratio
+     * @return ratio between used, purchased, and prev inventory amount
+     */
+    public double getQuantChangeRatio() {
+        return quantChangeRatio;
+    }
+
+    /**
+     * setter for the original price for display in reports panel
+     * @param ogPrice   set by update method
+     */
+    public void setOGPrice(double ogPrice) {
+        this.OGPrice = ogPrice;
+    }
+
+    /**
+     * getter to retrieve original pricing of item if item was updated
+     * @return original item price
+     */
+    public double getOGPrice() {
+        return OGPrice;
+    }
+
+    /**
+     * setter for the original quantity in inventory of an item
+     * @param ogQuant   set by update method
+     */
+    public void setOGQuant(double ogQuant){
+        this.OGQuant = ogQuant;
+    }
+
+    /**
+     * getter for the original item quantity
+     * @return  original inventory amount of item
+     */
+    public double getOGQuant() {
+        return OGQuant;
+    }
+
+
+
 
     /**
      * Method to get the Last Date the Recipe was last used

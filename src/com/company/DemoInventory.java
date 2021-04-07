@@ -59,16 +59,16 @@ public class DemoInventory {
        NewItem.setQuantityOnHand(0.5);
        System.out.println("\n\nAttempt to Add and Existing Ingredient");
 
-       inventoryManager.addIngredient(NewItem);
+    //   inventoryManager.addIngredient(NewItem);
 
        NewItem.setName("BEEF STEAK");
        System.out.println("\n\nAdding Beef Steak as an Ingredient Item");
-       inventoryManager.addIngredient(NewItem);
+     //  inventoryManager.addIngredient(NewItem);
 
        System.out.println("\n\nDemoing the Remove Ingredient Method");
        //TESTS THE REMOVAL AND UPDATE OF AN INGREDIENT
        IngredientItem demoRemove = new IngredientItem(ingredientDictionary.getIngredientItem("BUTTER"));
-       inventoryManager.removeIngredient(demoRemove);
+       //inventoryManager.removeIngredient(demoRemove);
 
        System.out.println("\n\nDemoing the Update Ingredient Method");
        //TESTING FOR TAKING AN INGREDIENT TO MODIFY AND SEND TO UPDATE
@@ -80,7 +80,7 @@ public class DemoInventory {
        System.out.println("Updates By Removing the Current Version of the Ingredient " +
                "and then Adding the Updated Version");
 
-       inventoryManager.InventoryChangeLogger.beforeClosing();
+     //  inventoryManager.InventoryChangeLogger.beforeClosing();
    }
 
 

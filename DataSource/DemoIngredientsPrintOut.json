@@ -29,7 +29,7 @@
 {"name" : "POTATOES", "type" : "DRY", "measurementUnit" : "LB", "cost" : "3.95", "weight" : "80.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
 {"name" : "RED WINE", "type" : "WET", "measurementUnit" : "LB", "cost" : "2.18", "weight" : "13.1", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
 {"name" : "RICE", "type" : "Dry", "measurementUnit" : "lb", "cost" : "5.7", "weight" : "2.0", "quantityOnHand" : "5.0", "lastUsedDate" : "null"},
-{"name" : "SALT", "type" : "DRY", "measurementUnit" : "LB", "cost" : "0.9450000000000001", "weight" : "31.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
+{"name" : "SALT", "type" : "DRY", "measurementUnit" : "LB", "cost" : "0.9077419354838709", "weight" : "31.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
 {"name" : "SEASONED BREAD CRUMBS", "type" : "DRY", "measurementUnit" : "LB", "cost" : "4.5", "weight" : "24.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
 {"name" : "SHREDDED COBLY CHEESE", "type" : "WET", "measurementUnit" : "LB", "cost" : "2.77", "weight" : "16.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},
 {"name" : "SHREDDED MOZZARELLA CHEESE", "type" : "WET", "measurementUnit" : "LB", "cost" : "5.34", "weight" : "80.0", "quantityOnHand" : "0.0", "lastUsedDate" : "null"},

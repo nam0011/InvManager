@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +31,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
     private JScrollPane scrollPane;
     private DefaultTableModel DTM;
     private DefaultFrame defaultFrame;
-    IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
+    InventoryManager IM = InventoryManager.getInventoryManager();
     ArrayList<IngredientItem> IL;
     public IngredientPanel(DefaultFrame inframe){
         defaultFrame = inframe;
@@ -59,7 +60,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
     }
     private void buildIngredientTable(){
 
-        IL=ID.getIngredientItemArrayList();
+        IL=IM.getIngredientItemArrayList();
         String[][] data;
         int n = IL.size();
 
@@ -80,7 +81,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
 
         for(int r = 0; r < n; r++) {
 
-            DTM.addRow(ID.printDictionary(r));
+            DTM.addRow(IM.printDictionary(r));
 
         }
 
@@ -192,6 +193,7 @@ public void turnOffToolBar(boolean on) {
      * The actionPerformed method determines what button you pressed and performs a certain action via a series of if-else statements
      * @param e
      */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == ingreSearchB) {

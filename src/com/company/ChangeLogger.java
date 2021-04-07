@@ -8,9 +8,12 @@ public class ChangeLogger {
     private ArrayList<String> originalIngredientFile;
     private ArrayList<String> originalRecipeFile;
     private ArrayList<String> changesMade;
-    private ArrayList<String> pendAdd;
-    private ArrayList<String> pendRemoval;
-    private ArrayList<String> pendUpdate;
+    private ArrayList<IngredientItem> pendAdd;
+    private ArrayList<IngredientItem> pendRemoval;
+    private ArrayList<IngredientItem> pendUpdate;
+    private IngredientItem addIngredient;
+    private IngredientItem removeIngredient;
+    private IngredientItem updateIngredient;
     private static final String changeLogFilePath = "DataSource/ChangeLog.json";
     //TODO Create other original Attributes that would need to be temporarily stored for Change Logging
     //TODO Methods that compare the Original to the New Read out to record changes, also to generate Reports
@@ -22,6 +25,9 @@ public class ChangeLogger {
         this.pendRemoval = new ArrayList<>();
         this.pendUpdate = new ArrayList<>();
         this.changesMade = new ArrayList<>();
+        this.addIngredient = null;
+        this.removeIngredient = null;
+        this.updateIngredient = null;
         this.createChangeLogFile();
     }
 
@@ -62,36 +68,46 @@ public class ChangeLogger {
         switch (action){
             case ADD:
                 //Adds the Items to Added to the pending Add ArrayList
-                this.pendAdd.add("{\"ChangeAction\" : \"ADDED\", \"" +
-                        "name\" : \"" + original.getName() + "\", \"" +
-                        "type\" : \"" + original.getType() + "\", \"" +
-                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
-                        "cost\" : \"" + original.getCost() + "\", \"" +
-                        "weight\" : \"" + original.getWeight()+ "\", \"" +
-                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
-                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
+
+                this.pendAdd.add(original);
+//                this.pendAdd.add("{\"ChangeAction\" : \"ADDED\", \"" +
+//                        "name\" : \"" + original.getName() + "\", \"" +
+//                        "type\" : \"" + original.getType() + "\", \"" +
+//                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
+//                        "cost\" : \"" + original.getCost() + "\", \"" +
+//                        "weight\" : \"" + original.getWeight()+ "\", \"" +
+//                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
+//                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
                 break;
             case DELETE:
                 //Adds the Item to be Deleted to the pending Removal ArrayList
-                this.pendRemoval.add("{\"ChangeAction\" : \"DELETED\", \"" +
-                        "name\" : \"" + original.getName() + "\", \"" +
-                        "type\" : \"" + original.getType() + "\", \"" +
-                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
-                        "cost\" : \"" + original.getCost() + "\", \"" +
-                        "weight\" : \"" + original.getWeight()+ "\", \"" +
-                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
-                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
+                this.pendRemoval.add(original);
+//                this.pendRemoval.add("{\"ChangeAction\" : \"DELETED\", \"" +
+//                        "name\" : \"" + original.getName() + "\", \"" +
+//                        "type\" : \"" + original.getType() + "\", \"" +
+//                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
+//                        "cost\" : \"" + original.getCost() + "\", \"" +
+//                        "weight\" : \"" + original.getWeight()+ "\", \"" +
+//                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
+//                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
                 break;
             case UPDATE:
                 //Adds the Updating Item Original and New to the pending Removal ArrayList
-                this.pendUpdate.add("{\"ChangeAction\" : \"UPDATED\", \"" +
-                        "name\" : \"" + original.getName() + "\", \"" +
-                        "type\" : \"" + original.getType() + "\", \"" +
-                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
-                        "cost\" : \"" + original.getCost() + "\", \"" +
-                        "weight\" : \"" + original.getWeight()+ "\", \"" +
-                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
-                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
+                this.pendUpdate.add(change);
+//                this.pendUpdate.add("{\"ChangeAction\" : \"UPDATED\", \"" +
+//                        "name\" : \"" + original.getName() + "\", \"" +
+//                        "type\" : \"" + original.getType() + "\", \"" +
+//                        "measurementUnit\" : \"" + original.getMeasurementUnit() + "\", \"" +
+//                        "Original Cost\" : \""+original.getOGPrice()+ "\", \"" +
+//                        "New Cost\" : \"" + original.getCost() + "\", \"" +
+//                        "Monetary Difference in Cost\" : \"" + original.getPriceDiff() + "\", \"" +
+//                        "Percentage Difference in Cost\" : \"" + original.getPriceChangeRatio() + "\", \"" +
+//                        "Original Weight\" : \""+original.getOGQuant()+ "\", \"" +
+//                        "New Weight\" : \"" + original.getWeight() + "\", \"" +
+//                        "Monetary Difference in Weight\" : \"" + original.getQuantDiff() + "\", \"" +
+//                        "Percentage Difference in Weight\" : \"" + original.getQuantChangeRatio() + "\", \"" +
+//                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
+//                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
 /*  NOT SURE WHAT THIS BLOCK IS DOING - CLONE OF THE ABOVE LINES IN UPDATE CASE (NATHAN CHANGED FROM CHANGESMADE TO PENDUPDATE ORIGINALLY WAS SAME CALL)
                 //Adding the Changed item
                 this.changesMade.add("{\"ChangeAction\" : \"UPDATED\", \"" +

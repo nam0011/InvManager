@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,7 @@ public class RemoveDialog extends JDialog implements ActionListener {
     private JScrollPane listPane;
     private JPanel mainPanel;
     private DefaultTableModel DTM;
-    private IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
+    private InventoryManager IM = InventoryManager.getInventoryManager();
 
     public RemoveDialog(IngredientPanel panel, ArrayList<String> array)
     {
@@ -138,8 +139,8 @@ public class RemoveDialog extends JDialog implements ActionListener {
             for(int i = 0; i < removeArray.size(); i++){
                 ii = findIndexDTM(removeArray.get(i));
                 DTM.removeRow(ii);
-                temp = ID.getIngredientItem(removeArray.get(i));
-                ID.removeIngredientFromList(temp);
+                temp = IM.getIngredientItem(removeArray.get(i));
+                IM.removeIngredientFromList(temp);
 
             }
 

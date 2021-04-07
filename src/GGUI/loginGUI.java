@@ -44,7 +44,7 @@ public class loginGUI extends JFrame implements ActionListener {
         inPW = passwordTextField.getText();
         inUN = userTextField.getText();
         if (ac.giveAccess(inUN, inPW)) {
-            
+
             loginButton.removeActionListener(this);
 
             dispose();
