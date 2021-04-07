@@ -88,7 +88,7 @@ public class AddDialog extends JDialog implements ActionListener {
         cancel = new JButton("Cancel");
         cancel.addActionListener(this);
 
-        unitArray = new String[]{"lb", "oz", "L", "mL"};
+        unitArray = new String[]{"LB", "oz", "L", "mL"};
         getUnit = unitArray[0];
         unitDropDownBox = new JComboBox(unitArray);
         unitDropDownBox.addActionListener(this);
@@ -221,8 +221,6 @@ public class AddDialog extends JDialog implements ActionListener {
                         if (n == 0) {
 
 
-                            System.out.println(itemStr + " has been added.");
-
 
                             //*****************************************************************************************
                             // TODO insert add ingredient code here for backend work.
@@ -250,9 +248,8 @@ public class AddDialog extends JDialog implements ActionListener {
             } else if (e.getSource() == unitDropDownBox) {
                 getUnit = (String) unitDropDownBox.getSelectedItem();
             }
-            else if(e.getSource() == cancel){
-                //TODO get rid of the
-                ingredientPanel.turnOffToolBar(true);
+            else if(e.getSource() == cancel)
+            {
                 ingredientPanel.setDefaultFrameEnable(true);
                 dispose();
 

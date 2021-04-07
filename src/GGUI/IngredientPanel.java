@@ -212,10 +212,19 @@ public void turnOffToolBar(boolean on) {
         }
         else if(e.getSource() == ingreUpdateB)
         {
-            turnOffToolBar(false);
-            new UpdateDialog(this);
+            int updateIndex[] = ingredientTable.getSelectedRows();
+            if(updateIndex.length != 1)
+            {
+                JOptionPane.showMessageDialog(this, "Please select only select one item from the table.");
+            }
 
-            System.out.println("Update");
+            else {
+                String itemName = (String)ingredientTable.getValueAt(updateIndex[0],0);
+                IngredientItem itemObj = IM.getIngredientItem(itemName);
+                new UpdateDialog(this, itemObj);
+
+                System.out.println("Update");
+            }
 
         }
         else if(e.getSource() == ingreRemoveB)

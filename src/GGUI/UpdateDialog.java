@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UpdateDialog extends JDialog implements ActionListener {
+public class UpdateDialog extends abstractDialog implements ActionListener {
     private SelfClearingTextField itemNameTF;
 
     private SelfClearingNumbField amtPurchaseTF;
@@ -25,24 +25,26 @@ public class UpdateDialog extends JDialog implements ActionListener {
     private String getUnit;
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
-    private IngredientPanel indgredentPanel;
+    private IngredientPanel ingredientPanel;
+    private IngredientItem item;
 
-    public UpdateDialog(IngredientPanel panel) {
-
-
+    public UpdateDialog(IngredientPanel panel, IngredientItem itemIn) {
+        super(panel);
+        item = itemIn;
         setTitle("Update Item");
-        indgredentPanel = panel;
+        //Freezes the default frame and makes sure this dialog box is always on top!
+        ingredientPanel = panel;
 
-        IM = InventoryManager.getInventoryManager();//<=======================================
+
+        IM = InventoryManager.getInventoryManager();
         setLayout(new GridBagLayout());
-        JDialog j = new JDialog();
+
 
         buildDialog();
         setSize(300, 300);
         pack();
         //setResizable(true);
         setVisible(true);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
     }
 
@@ -51,9 +53,11 @@ public class UpdateDialog extends JDialog implements ActionListener {
         GridBagConstraints gc = new GridBagConstraints();
         gc.insets = new Insets(4, 4, 4, 4);
 
-        itemNameTF = new SelfClearingTextField("Item Name", 30);
+        itemNameTF = new SelfClearingTextField(" ", 30);
+        itemNameTF.setText(item.getName());
         itemNameTF.setSize(30, 12);
-        itemNameTF.setFont(new Font("New Times Roman", Font.ITALIC, 12));
+        itemNameTF.setEditable(false);
+        itemNameTF.setFont(new Font("New Times Roman", Font.BOLD, 12));
         amtPurchaseTF = new SelfClearingNumbField("Amount Purchased", 10);
         amtUsedTF = new SelfClearingNumbField("Amount Used", 10);
         priceTF = new SelfClearingNumbField("price", 30);
@@ -66,7 +70,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
         cancel = new JButton("Cancel");
         cancel.addActionListener(this);
 
-        unitArray = new String[]{"lb", "oz", "L", "mL"};
+        unitArray = new String[]{"LB", "OZ", "L", "mL"};
         getUnit = unitArray[0];
         unitDropDownBox = new JComboBox(unitArray);
         unitDropDownBox.addActionListener(this);
@@ -110,7 +114,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
      */
     private void setListTextFields() {
         listTextFields = new ArrayList<>();
-        listTextFields.add(itemNameTF);
+
         listTextFields.add(amtPurchaseTF);
         listTextFields.add(priceTF);
         listTextFields.add(amtUsedTF);
@@ -158,7 +162,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
      */
 //TODO rewrite to overwrite item instead of insert
     private int findInsertionPoint(String name) {
-        DTM = indgredentPanel.getDTM();
+        DTM = ingredientPanel.getDTM();
         int index = DTM.getRowCount();
         for (int i = 0; i < DTM.getRowCount(); i++) {
             if (name.compareTo((String) DTM.getValueAt(i, 0)) == 0) {
@@ -212,7 +216,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                             
                             DTM.insertRow(row, item.toQOHString());
 
-                            indgredentPanel.turnOffToolBar(true);
+                            ingredientPanel.setDefaultFrameEnable(true);
                             dispose();
 
                             System.out.println(itemStr + " has been updated.");
@@ -247,7 +251,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
 
                             DTM.insertRow(row, item.toQOHString());
 
-                            indgredentPanel.turnOffToolBar(true);
+                            ingredientPanel.setDefaultFrameEnable(true);
                             dispose();
 
                             System.out.println(itemStr + " has been updated.");
@@ -270,7 +274,7 @@ public class UpdateDialog extends JDialog implements ActionListener {
                     getUnit = (String) unitDropDownBox.getSelectedItem();
                 }
                 else if(e.getSource() == cancel){
-                    indgredentPanel.turnOffToolBar(true);
+                    ingredientPanel.setDefaultFrameEnable(true);
                     dispose();
 
                 }

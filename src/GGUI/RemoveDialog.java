@@ -27,6 +27,8 @@ public class RemoveDialog extends JDialog implements ActionListener {
     public RemoveDialog(IngredientPanel panel, ArrayList<String> array)
     {
         ingredientPanel = panel;
+        ingredientPanel.setDefaultFrameEnable(false);
+        this.isAlwaysOnTop();
 
         DTM = ingredientPanel.getDTM();
         removeArray = array;
@@ -40,7 +42,7 @@ public class RemoveDialog extends JDialog implements ActionListener {
         arrangeMainPanel();
 
         setSize(350, 300);
-        setVisible(true);
+        this.setVisible(true);
         //TODO change this to do nothing at close!!
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
@@ -144,12 +146,12 @@ public class RemoveDialog extends JDialog implements ActionListener {
 
             }
 
-            ingredientPanel.turnOffToolBar(true);
+            ingredientPanel.setDefaultFrameEnable(true);
             dispose();
         }
         else if (e.getSource() ==cancelB){
 
-            ingredientPanel.turnOffToolBar(true);
+            ingredientPanel.setDefaultFrameEnable(true);
             dispose();
         }
 
