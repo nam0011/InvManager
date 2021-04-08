@@ -185,6 +185,7 @@ public class UpdateDialog extends abstractDialog implements ActionListener {
             Object[] options = {"Yes", "no"};
             String itemStr = itemNameTF.getText();
 
+
             if (allFilled()) {
                 itemStr = itemStr.toUpperCase();
                 double amtPurchasedValue = amtPurchaseTF.getValue();
@@ -247,7 +248,6 @@ public class UpdateDialog extends abstractDialog implements ActionListener {
                             int row = findInsertionPoint(itemStr);
 
                             DTM.removeRow(row);
-
 
                             DTM.insertRow(row, item.toQOHString());
 

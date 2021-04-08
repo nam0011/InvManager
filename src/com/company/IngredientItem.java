@@ -8,6 +8,7 @@ import java.util.Date;
  * CS321-03
  * Ingredient Item Object Class
  */
+
 public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     //TODO weight vs quantityOnHand may be lead to some confusion.
     //Private Variables
@@ -25,6 +26,36 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     private double OGQuant;
     private Date lastUsedDate;
 
+    /**
+     * Constructor with no parameters
+     */
+    public IngredientItem(){
+        this.name = "";   //What the Ingredient Item is called
+        this.type = "";   //What type, Dry or wet
+        this.measurementUnit = "";    //The measurement Unit Used: oz, ml, grams
+        this.cost = 0.0;  //Cost per oz or ml
+        this.weight = 0.0;    //Weights is how per cost, i.e. ground beef cost "$5.50 per 1lb"
+        this.quantityOnHand = 0.0;    //Current stock of Ingredient.
+        this.quantDiff = 0.0;
+        this.quantChangeRatio = 0.0;
+        this.priceDiff = 0.0;
+        this.priceChangeRatio = 0.0;
+        this.lastUsedDate = null;
+    }
+
+    /**
+     * Constructor to make a copy of an Ingredient Item
+     * @param item  The Ingredient Item to be Copied
+     */
+    public IngredientItem(IngredientItem item) {
+        this.name = item.getName();
+        this.type = item.getType();
+        this.cost = item.getCost();
+        this.weight = item.getWeight();
+        this.measurementUnit = item.getMeasurementUnit();
+        this.quantityOnHand = item.getQuantityOnHand();
+        this.lastUsedDate = item.getLastUsedDate();   //TODO Setup Date System Until then All Dates will be null!
+    }
 
     //Comparator Methods to allow for the Ingredient Item to be sorted by every Attribute if neccessary
 
@@ -179,38 +210,9 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     }
 
 
-//****Constructors, Getters, and Setters Below************************/
+//****Getters, and Setters Below************************/
 
-    /**
-     * Constructor with no parameters
-     */
-    public IngredientItem(){
-        this.name = "";   //What the Ingredient Item is called
-        this.type = "";   //What type, Dry or wet
-        this.measurementUnit = "";    //The measurement Unit Used: oz, ml, grams
-        this.cost = 0.0;  //Cost per oz or ml
-        this.weight = 0.0;    //Weights is how per cost, i.e. ground beef cost "$5.50 per 1lb"
-        this.quantityOnHand = 0.0;    //Current stock of Ingredient.
-        this.quantDiff = 0.0;
-        this.quantChangeRatio = 0.0;
-        this.priceDiff = 0.0;
-        this.priceChangeRatio = 0.0;
-        this.lastUsedDate = null;
-    }
 
-    /**
-     * Constructo to make a copy of an Ingredient Item
-     * @param item  The Ingredient Item to be Copied
-     */
-    public IngredientItem(IngredientItem item) {
-        this.name = item.getName();
-        this.type = item.getType();
-        this.cost = item.getCost();
-        this.weight = item.getWeight();
-        this.measurementUnit = item.getMeasurementUnit();
-        this.quantityOnHand = item.getQuantityOnHand();
-        this.lastUsedDate = item.getLastUsedDate();   //TODO Setup Date System Until then All Dates will be null!
-    }
 
     /**
      * Method to take an Array List of String to convert to Ingredient Item

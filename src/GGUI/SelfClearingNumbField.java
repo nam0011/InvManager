@@ -17,6 +17,7 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
 
     }
 
+    //TODO catch exception to not allow any string to be input here
     public double getValue() {
         double value;
         value = Double.parseDouble(getText());

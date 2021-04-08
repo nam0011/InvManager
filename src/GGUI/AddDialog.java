@@ -205,11 +205,12 @@ public class AddDialog extends JDialog implements ActionListener {
                         JOptionPane.showMessageDialog(this, itemStr + " is already in the inventory.");
                     } else {
                         IngredientItem item = new IngredientItem();
-                        item.setName(itemStr);
-                        item.setCost(priceValue);
-
-                        item.setMeasurementUnit(getUnit);
-                        item.setWeight(amtPurchasedValue);
+                        item.setName(itemStr);  //set name
+                        item.setCost(priceValue);   //set cost to display on ingredients tab
+                        item.setOGPrice(priceValue);    //set original cost to display on reports tab
+                        item.setMeasurementUnit(getUnit);   //set measurement unit
+                        item.setWeight(amtPurchasedValue);  //set the incoming weight on ingredients tab
+                        item.setOGQuant(amtPurchasedValue); //set the original weight to display on reports tab
 
                         String itemStrArr[]= item.toQOHString();
 
