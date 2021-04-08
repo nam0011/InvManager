@@ -16,7 +16,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 
-public class IngredientPanel extends JPanel implements ActionListener {
+public class IngredientPanel extends abstractPanel implements ActionListener {
 
     private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
@@ -34,6 +34,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
     InventoryManager IM = InventoryManager.getInventoryManager();
     ArrayList<IngredientItem> IL;
     public IngredientPanel(DefaultFrame inframe){
+        super(inframe);
         defaultFrame = inframe;
         tablePane = new JScrollPane();
 
@@ -42,14 +43,7 @@ public class IngredientPanel extends JPanel implements ActionListener {
 
     }
 
-    /**
-     * Turns on or off the main frame so the user cannot do more one thing
-     * @param enable
-     */
-    public void setDefaultFrameEnable(boolean enable)
-    {
-        defaultFrame.setEnabled(enable);
-    }
+
 
     private void filter(String search)
     {
@@ -58,6 +52,11 @@ public class IngredientPanel extends JPanel implements ActionListener {
 
         tr.setRowFilter(RowFilter.regexFilter(search));
     }
+
+    /**
+     * This builds the ingredient table, connects the default table model to the table, and creates
+     * the scrollabe panal
+     */
     private void buildIngredientTable(){
 
         IL=IM.getIngredientItemArrayList();
@@ -65,8 +64,6 @@ public class IngredientPanel extends JPanel implements ActionListener {
         int n = IL.size();
 
         String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
-
-
 
 
         ingredientTable = new JTable();
@@ -201,7 +198,7 @@ public void turnOffToolBar(boolean on) {
         }
         else if(e.getSource() == ingreAddB)
         {
-            AddDialog a = new AddDialog(this);
+            new AddDialog(this);
 
 
 
@@ -215,7 +212,7 @@ public void turnOffToolBar(boolean on) {
             int updateIndex[] = ingredientTable.getSelectedRows();
             if(updateIndex.length != 1)
             {
-                JOptionPane.showMessageDialog(this, "Please select only select one item from the table.");
+                JOptionPane.showMessageDialog(this, "Please only select one item from the table.");
             }
 
             else {

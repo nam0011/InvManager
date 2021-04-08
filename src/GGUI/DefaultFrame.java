@@ -23,10 +23,10 @@ public class DefaultFrame extends JFrame {
     {
         tabbedPane = new JTabbedPane();
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        recepPanel = new JPanel();
+
         tabbedPane.add("Ingredients", new IngredientPanel(this));
 
-        tabbedPane.add("Reports", formPanel);
+        tabbedPane.add("Reports", new ReportsPanel(this));
 
 
         setResizable(false);
