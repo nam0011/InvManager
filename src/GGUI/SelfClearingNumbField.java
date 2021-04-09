@@ -28,30 +28,13 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
     @Override
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
-        String selected = getSelectedText();
-        if (!((c >= 48) && (c <= 57) || c == KeyEvent.VK_ENTER || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE) || c == '.')) {
-            getToolkit().beep();
-            e.consume();
-        }
-        if ((c == '.' && last.contains("."))) {
-            getToolkit().beep();
-            e.consume();
-        }
-        if (selected != null) {
-            if (selected.contains(".")) {
-                last = "";
-            }
-        } else {
-            last = getText() + c;
-        }
-        int mod = e.getModifiersEx();
-        if (c == '\u0016' && mod == 128) {
-            try {
-                Double.parseDouble(getText());
-            } catch (NumberFormatException numberFormatException) {
-                this.removeAll();
-            }
+        last = getText() + c;
+        try {
+            Double.parseDouble(last);
+        } catch (NumberFormatException numberFormatException) {
 
+            e.consume();
+            getToolkit().beep();
         }
 
     }

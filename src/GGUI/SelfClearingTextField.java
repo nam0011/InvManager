@@ -2,14 +2,17 @@ package GGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class SelfClearingTextField extends JTextField implements MouseListener{
+public class SelfClearingTextField extends JTextField implements MouseListener, KeyListener {
     private boolean beenClicked;
     private String defaultText;
     public SelfClearingTextField(String title, int width){
         setText(title);
+        addKeyListener(this);
 
         setMinimumSize(new Dimension(width,30));
 
@@ -64,6 +67,25 @@ public class SelfClearingTextField extends JTextField implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if(getText().equals(defaultText)){
+            setText("");
+            beenClicked = true;
+            setFont(new Font("New Times Roman", Font.PLAIN, 12));
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
