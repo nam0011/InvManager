@@ -69,6 +69,8 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
         ingredientTable = new JTable();
+        ingredientTable.getTableHeader().setReorderingAllowed(false);
+
         DTM = (DefaultTableModel) ingredientTable.getModel();
 
         DTM.addColumn(header[0]);
@@ -258,6 +260,9 @@ private void setLayout(){
             new RemoveDialog(this, removeNames);
 
 
+        }
+        if(e.getSource() != ingreSearchTF && !ingreSearchTF.hasBeenClickedAndFilled()){
+            ingreSearchTF.reset();
         }
 
     }

@@ -71,10 +71,11 @@ public class AddDialog extends JDialog implements ActionListener {
     private void buildDialog() {
 
         GridBagConstraints gc = new GridBagConstraints();
-        gc.insets = new Insets(4, 4, 4, 4);
+        gc.insets = new Insets(4, 1, 4, 1);
 
         itemNameTF = new SelfClearingTextField("Item Name", 30);
         itemNameTF.setSize(30, 12);
+
         itemNameTF.setFont(new Font("New Times Roman", Font.ITALIC, 12));
         amtPurchaseTF = new SelfClearingNumbField("Amount Purchased", 10);
 
@@ -95,6 +96,9 @@ public class AddDialog extends JDialog implements ActionListener {
 
 
 //Set the grid layout
+
+
+
         gc.gridx = 0;
         gc.gridy = 0;
         gc.fill = 2;

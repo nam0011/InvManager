@@ -1,16 +1,26 @@
 package GGUI;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class SelfClearingNumbField extends SelfClearingTextField implements KeyListener {
     private int countPoint;
 
+    @Override
+    public void setTransferHandler(TransferHandler newHandler) {
+        super.setTransferHandler(null);
+    }
+
     private String last;
+    private String defaultText;
 
 
     public SelfClearingNumbField(String title, int width) {
         super(title, width);
+        defaultText = title;
         last = "";
         countPoint = 0;
         addKeyListener(this);
@@ -27,8 +37,17 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
 
     @Override
     public void keyTyped(KeyEvent e) {
+
+        if(getText().equals(defaultText)){
+            setText("");
+
+            setFont(new Font("New Times Roman", Font.PLAIN, 12));
+        }
         char c = e.getKeyChar();
         last = getText() + c;
+        if(last.charAt(0) == '.'){
+            last = "0" + last;
+        }
         try {
             Double.parseDouble(last);
         } catch (NumberFormatException numberFormatException) {
@@ -36,12 +55,21 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
             e.consume();
             getToolkit().beep();
         }
+        //For whatever reason, the parseDouble is allowing d and f to parse in certain locations of the text
+        if(c == 'd' || c == 'f'){
+
+            e.consume();
+            getToolkit().beep();
+
+        }
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if(e.getKeyChar() == InputEvent.CTRL_DOWN_MASK){
+            setEditable(false);
+        }
     }
 
     @Override
