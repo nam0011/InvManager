@@ -35,11 +35,13 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     ArrayList<IngredientItem> IL;
     public IngredientPanel(DefaultFrame inframe){
         super(inframe);
+        setLayout(new GridBagLayout());
         defaultFrame = inframe;
         tablePane = new JScrollPane();
 
         buildIngrePanel();
         buildIngredientTable();
+        setLayout();
 
     }
 
@@ -94,7 +96,8 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
         scrollPane.setPreferredSize(new Dimension(450, 450));
-        add(scrollPane);
+        GridBagConstraints gc = new GridBagConstraints();
+
 
 
     }
@@ -141,16 +144,15 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
     ingreRemoveB = new JButton("Remove");
 
-    ingreListAllB =new JButton("v");
+
     ingreSearchTF.setColumns(12);
 
     //The following code builds toolbar;
         {
 
-        add(ingreSearchTF);
+        //ingreSearchTF is not in the toolbar because of funky behavior.
 
-
-
+        ingreToolBar.add(ingreSearchTF);
         ingreToolBar.add(ingreAddB);
         ingreToolBar.add(ingreUpdateB);
         ingreToolBar.add(ingreRemoveB);
@@ -164,11 +166,11 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
         ingreAddB.addActionListener(this);
         ingreUpdateB.addActionListener(this);
         ingreRemoveB.addActionListener(this);
-        ingreListAllB.addActionListener(this);
+
 
 
     }
-      add(ingreToolBar);
+
 
 
 
@@ -176,15 +178,28 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
 }
+/**
+ * Set the layout
+ */
+private void setLayout(){
+    GridBagConstraints gc = new GridBagConstraints();
+
+    //gc.insets = new Insets(4, 4, 4, 4);
 
 
-public void turnOffToolBar(boolean on) {
-        int n = ingreToolBar.getComponentCount();
-        for(int i = 0; i < n; i++){
-            ingreToolBar.getComponentAtIndex(i).setEnabled(on);
 
-        }
+    gc.gridx = 0;
+    gc.gridy = 0;
+    add(ingreToolBar,gc);
+
+    gc.gridx = 0;
+    gc.gridy = 1;
+    add(scrollPane,gc);
+
 }
+
+
+
 
     /**
      * The actionPerformed method determines what button you pressed and performs a certain action via a series of if-else statements

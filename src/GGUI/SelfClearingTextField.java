@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class SelfClearingTextField extends JTextField implements MouseListener {
+public class SelfClearingTextField extends JTextField implements MouseListener{
     private boolean beenClicked;
     private String defaultText;
     public SelfClearingTextField(String title, int width){

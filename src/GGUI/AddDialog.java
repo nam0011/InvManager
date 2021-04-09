@@ -43,7 +43,7 @@ public class AddDialog extends JDialog implements ActionListener {
         //Sets the dialogbox on top frame and disables the DefaultFrame
         setAlwaysOnTop(true);
         setLocation(150,150);
-       ingredientPanel.setDefaultFrameEnable(false);
+        ingredientPanel.setDefaultFrameEnable(false);
 
         DTM = ingredientPanel.getDTM();
         IM = InventoryManager.getInventoryManager();

@@ -18,7 +18,11 @@ public class loginGUI extends JFrame implements ActionListener {
 
     public loginGUI() {
         loginPanel = new JPanel(new GridLayout(3, 1));
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        ImageIcon img = new ImageIcon("src/GGUI/Restaurant.jpg");
+
+        this.setIconImage(img.getImage());
         userLabel = new JLabel("User Name");
         userTextField = new JTextField("jlew92");
         pwLabel = new JLabel("Password");
