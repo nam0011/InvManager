@@ -5,16 +5,19 @@ import com.company.InventoryManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-public class DefaultFrame extends JFrame {
+public class DefaultFrame extends JFrame implements ActionListener {
 
         private JPanel mainPanel;
         private JTabbedPane tabbedPane;
         private InventoryManager IM;
         private ImageIcon img;
+        private JButton logoutButton;
 
    private JTabbedPane ingredientsTab;
 
@@ -23,7 +26,7 @@ public class DefaultFrame extends JFrame {
      */
     public DefaultFrame()
     {
-        mainPanel = new JPanel();
+        mainPanel = new JPanel(new GridBagLayout());
 
         mainPanel.setSize(500, 600);
         setTitle("Inventory Manager");
@@ -38,13 +41,20 @@ public class DefaultFrame extends JFrame {
         tabbedPane.add("Ingredients", ingredientPanel);
 
         tabbedPane.add("Reports", new ReportsPanel(this));
-        JLabel logout =  new JLabel("LOGOUT");
 
+        //Builds the logout button
+        {
+            logoutButton = new JButton("Logout");
+            logoutButton.addActionListener(this);
+
+
+        }
 
 
         setResizable(false);
-        mainPanel.add(tabbedPane);
-        add(mainPanel);
+
+
+        buildLayout();
 
         IM = InventoryManager.getInventoryManager();
 
@@ -65,6 +75,27 @@ public class DefaultFrame extends JFrame {
         setVisible(true);
     }
 
+    private void buildLayout()
+    {
+        GridBagConstraints gc = new  GridBagConstraints();
+        gc.gridx =  0;
+        gc.gridy = 0;
+        mainPanel.add(tabbedPane, gc);
+        gc.gridy = 1;
+        gc.anchor = GridBagConstraints.SOUTHWEST;
+        gc.insets = new Insets(10,0,0,0);
+        mainPanel.add(logoutButton, gc);
+        add(mainPanel);
+
+    }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() ==  logoutButton) {
+            dispose();
+            //TODO add a "are you sure dialog"
+            new loginGUI();
+        }
+    }
 }

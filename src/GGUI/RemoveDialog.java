@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class RemoveDialog extends JDialog implements ActionListener {
+public class RemoveDialog extends abstractDialog implements ActionListener {
     private IngredientPanel ingredientPanel;
     private ArrayList<String> removeArray;
     private JList removeList;
@@ -26,6 +26,7 @@ public class RemoveDialog extends JDialog implements ActionListener {
 
     public RemoveDialog(IngredientPanel panel, ArrayList<String> array)
     {
+        super(panel);
         ingredientPanel = panel;
         ingredientPanel.setDefaultFrameEnable(false);
         this.isAlwaysOnTop();
@@ -43,8 +44,8 @@ public class RemoveDialog extends JDialog implements ActionListener {
 
         setSize(350, 300);
         this.setVisible(true);
-        //TODO change this to do nothing at close!!
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+
     }
 
     private void arrangeMainPanel() {

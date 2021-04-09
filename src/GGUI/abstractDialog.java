@@ -9,7 +9,7 @@ abstract class abstractDialog extends JDialog {
     private IngredientPanel ingredientPanel;
     abstractDialog(IngredientPanel panel){
         super();
-
+        setResizable(false);
         ingredientPanel = panel;
         ingredientPanel.setDefaultFrameEnable(false);
         this.isAlwaysOnTop();
