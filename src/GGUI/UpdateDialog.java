@@ -28,6 +28,7 @@ public class UpdateDialog extends abstractDialog implements ActionListener {
     private IngredientPanel ingredientPanel;
     private IngredientItem item;
 
+//TODO JAVADOC
     public UpdateDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel);
         item = itemIn;
@@ -47,7 +48,10 @@ public class UpdateDialog extends abstractDialog implements ActionListener {
         setVisible(true);
 
     }
-
+//TODO JAVADOC
+    /**
+     *
+     */
     private void buildDialog() {
 
         GridBagConstraints gc = new GridBagConstraints();
@@ -177,7 +181,11 @@ public class UpdateDialog extends abstractDialog implements ActionListener {
 //THIS ACTION IS NOT PERFECT BUT SERVES FOR OUR ALPHA PURPOSES IRL WILL HAVE SEPERATE FUNCTIONS TO ADD FOR A WEEK AND REMOVE UPDATE AN AVERAGE PRICE AND
 //THEN REMOVE THE AMOUNT OF INVENTORY USED OVER THE TIME PERIOD; SINCE OUT ALPHA ONLY UPDATES FOR ONE USE AT A TIME IT IS EASIER TO IMPLEMENT THIS
 //VERSION AND THEN UPDATE AT A LATER TIME TO A MORE REALISTIC UPDATE SERIES OF FUNCTIONALITY
-
+//TODO JAVADOC COMMENTATION FOR UPDATE DIALOG PANEL
+    /**
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed (ActionEvent e){
         if (e.getSource() == oKB) {
