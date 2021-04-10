@@ -491,4 +491,17 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     return this.getName().compareTo(otherItem.getName());
     }
 
+    /**
+     * This is function we can when we use when purchasing.
+     */
+    //TODO Nathan can you create this function
+    public void purchase(double newPrice, double amtPurchased){
+
+        return;
+    }
+    //TODO Nathan
+    public void amountUsed(double amtUsed){
+
+    }
+
 }   //End of IngredientItem

@@ -219,9 +219,9 @@ public class IngredientDictionary {
      * @return Boolean Value to be returned to verify the operation succeeded.
      */
     public IngredientItem updateIngredientInList(IngredientItem updateItem) {
-        boolean exists = ingredientCheck(updateItem);     //check if the item exists in list (this must be true for this function to complete
 
-        if (exists) {                                                                                 //if true
+
+
             for (IngredientItem ingredientItem : this.ingredientItemArrayList) {                         //start iterating through the list
                 if (ingredientItem.getName().equals(updateItem.getName())) {   //if found we need to do some math and push to a list
                     double ogPrice = ingredientItem.getCost();  //set the original price and quantity of the found item before changes
@@ -274,7 +274,7 @@ public class IngredientDictionary {
                     ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, updateItem, updateItem);
                 }
             }
-        }
+
         return updateItem;  //return the updated object
     }
 

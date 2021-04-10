@@ -23,7 +23,8 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     private SelfClearingTextField ingreSearchTF;
     private JButton ingreSearchB;
     private JButton ingreAddB;
-    private JButton ingreUpdateB;
+    private JButton ingrePurchaseB;
+    private JButton ingreUseB;
     private JButton ingreRemoveB;
     private JButton ingreListAllB;
     private JTable ingredientTable;
@@ -117,7 +118,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
     ingreToolBar = new JToolBar();
     ingreToolBar.setFloatable(false);
-    ingreSearchB = new JButton("Search");
+
     ingreSearchTF = new SelfClearingTextField("Search", 60);
 
 
@@ -142,9 +143,10 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
     ingreAddB =new JButton("Add");
 
-    ingreUpdateB =new JButton("Update");
+    ingrePurchaseB =new JButton("Purchase");
 
     ingreRemoveB = new JButton("Remove");
+    ingreUseB = new JButton("Use"); //TODO think of better name!!
 
 
     ingreSearchTF.setColumns(12);
@@ -152,11 +154,12 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     //The following code builds toolbar;
         {
 
-        //ingreSearchTF is not in the toolbar because of funky behavior.
+
 
         ingreToolBar.add(ingreSearchTF);
         ingreToolBar.add(ingreAddB);
-        ingreToolBar.add(ingreUpdateB);
+        ingreToolBar.add(ingrePurchaseB);
+        ingreToolBar.add(ingreUseB);
         ingreToolBar.add(ingreRemoveB);
 
          }
@@ -164,10 +167,11 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     // The following code adds the listener to the  Buttons.
     {
 
-        ingreSearchB.addActionListener(this);
+
         ingreAddB.addActionListener(this);
-        ingreUpdateB.addActionListener(this);
+        ingrePurchaseB.addActionListener(this);
         ingreRemoveB.addActionListener(this);
+        ingreUseB.addActionListener(this);
 
 
 
@@ -210,10 +214,7 @@ private void setLayout(){
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == ingreSearchB) {
-            //System.out.println(ingreSearchTF.getText());y
-        }
-        else if(e.getSource() == ingreAddB)
+        if(e.getSource() == ingreAddB)
         {
             new AddDialog(this);
 
@@ -224,7 +225,7 @@ private void setLayout(){
 
             System.out.println("Add");
         }
-        else if(e.getSource() == ingreUpdateB)
+        else if(e.getSource() == ingrePurchaseB)
         {
             int updateIndex[] = ingredientTable.getSelectedRows();
             if(updateIndex.length != 1)
@@ -235,9 +236,9 @@ private void setLayout(){
             else {
                 String itemName = (String)ingredientTable.getValueAt(updateIndex[0],0);
                 IngredientItem itemObj = IM.getIngredientItem(itemName);
-                new UpdateDialog(this, itemObj);
+                new PurchaseDialog(this, itemObj);
 
-                System.out.println("Update");
+                System.out.println("purchase");
             }
 
         }
@@ -260,6 +261,20 @@ private void setLayout(){
             new RemoveDialog(this, removeNames);
 
 
+        }
+        else if(e.getSource() == ingreUseB){
+            int updateIndex[] = ingredientTable.getSelectedRows();
+            if(updateIndex.length != 1)
+            {
+                JOptionPane.showMessageDialog(this, "Please only select one item from the table.");
+            }
+
+            else {
+                String itemName = (String) ingredientTable.getValueAt(updateIndex[0], 0);
+                IngredientItem itemObj = IM.getIngredientItem(itemName);
+                new UseDialog(this, itemObj);
+
+            }
         }
         if(e.getSource() != ingreSearchTF && !ingreSearchTF.hasBeenClickedAndFilled()){
             ingreSearchTF.reset();
