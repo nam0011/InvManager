@@ -497,11 +497,12 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     //TODO Nathan can you create this function
     public void purchase(double newPrice, double amtPurchased){
 
+
         return;
     }
     //TODO Nathan
     public void amountUsed(double amtUsed){
-
+        setWeight(weight - amtUsed);
     }
 
 }   //End of IngredientItem
