@@ -99,9 +99,11 @@ public class IngredientDictionary {
         for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {
             if (this.ingredientItemArrayList.get(i).getName().equals(ingredientName)) {
                 tempIngredientItem = new IngredientItem(this.ingredientItemArrayList.get(i));
+               break;
             }
         }
         //Exception Handling for ingredient not in array list.
+        /*
         try {
             for (int i = 0; i > -1; i++) {
                 if (ingredientItemArrayList.get(i).getName().equals(ingredientName)) {
@@ -110,7 +112,7 @@ public class IngredientDictionary {
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println(ingredientName + ":: Ingredient Not Found");
-        }
+        }*/
         return tempIngredientItem;
     }
 
@@ -271,7 +273,7 @@ public class IngredientDictionary {
                         ingredientItem.setWeight(ogQuant);
                     }
                     updateItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
-                    ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, updateItem, updateItem);
+                    //ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, updateItem, updateItem);
                 }
             }
 

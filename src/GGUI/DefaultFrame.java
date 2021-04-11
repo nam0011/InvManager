@@ -26,7 +26,10 @@ public class DefaultFrame extends JFrame implements ActionListener {
      */
     public DefaultFrame()
     {
+
         mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setBackground(new Color(0,50,100));
+
 
         mainPanel.setSize(500, 600);
         setTitle("Inventory Manager");

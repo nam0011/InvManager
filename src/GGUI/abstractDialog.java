@@ -1,11 +1,14 @@
 package GGUI;
 
+import com.company.InventoryManager;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 abstract class abstractDialog extends JDialog {
+    protected InventoryManager IM = InventoryManager.getInventoryManager();
     private IngredientPanel ingredientPanel;
     abstractDialog(IngredientPanel panel){
         super();

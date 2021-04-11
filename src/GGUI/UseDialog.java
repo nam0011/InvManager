@@ -1,6 +1,7 @@
 package GGUI;
 
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,8 @@ public class UseDialog extends AbstractUpdateDialog {
                         //*****************************************************************************************
                         // TODO insert add ingredient code here for backend work.
                         // this is just temporary code for testing purposes!
-                        iItem.amountUsed(getAmtTF().getValue());
+
+                        IM.useIngredientInList(iItem, getAmtTF().getValue());
 
                         //******************************************************************************************
                         int row = findInsertionPoint(iItem.getName());

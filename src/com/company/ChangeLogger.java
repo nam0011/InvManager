@@ -91,9 +91,9 @@ public class ChangeLogger {
 //                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
 //                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
                 break;
-            case UPDATE:
+            case USE:
                 //Adds the Updating Item Original and New to the pending Removal ArrayList
-                this.pendUpdate.add(change);
+                this.pendUpdate.add(original);
 //                this.pendUpdate.add("{\"ChangeAction\" : \"UPDATED\", \"" +
 //                        "name\" : \"" + original.getName() + "\", \"" +
 //                        "type\" : \"" + original.getType() + "\", \"" +

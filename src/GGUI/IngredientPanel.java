@@ -6,6 +6,7 @@ import com.company.InventoryManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -77,7 +78,10 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
         DTM.addColumn(header[0]);
         DTM.addColumn(header[1]);
         DTM.addColumn(header[2]);
+
         ingredientTable.setRowSelectionAllowed(true);
+
+
 
 
 
