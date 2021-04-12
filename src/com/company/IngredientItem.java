@@ -496,12 +496,18 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
      */
     //TODO Nathan can you create this function
     public void purchase(double newPrice, double amtPurchased){
+        double price = cost*quantityOnHand + newPrice*amtPurchased;
+        quantityOnHand+=amtPurchased;
+        cost = price/quantityOnHand;
 
         return;
     }
     //TODO Nathan
     public void amountUsed(double amtUsed){
-
+    if (amtUsed>quantityOnHand){
+    throw new ArithmeticException("Inventory stock exceeded!");
+    }
+    quantityOnHand-=amtUsed;
     }
 
 }   //End of IngredientItem

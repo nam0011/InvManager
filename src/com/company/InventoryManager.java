@@ -250,7 +250,17 @@ public class InventoryManager {
 
         return quantity*searchIngredient(ingredient).getCost();
     }
-/**
+
+    public void PurchaseIngredient(double newPrice, double amtPurchased){
+
+        return;
+    }
+    //TODO Nathan
+    public void UseIngredient(double amtUsed){
+
+    }
+
+    /**
  * This returns the current cost of all items in the inventory.
  * @return A double which represents the current cost of all items in the inventory
  * */
