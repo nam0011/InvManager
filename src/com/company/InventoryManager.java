@@ -166,7 +166,7 @@ public class InventoryManager {
         useItem.amountUsed(amtUsed);
 
         //Records both Original and Updated Item versions to the Changelog
-        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.USE, original, useItem);
+        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, original, useItem);
             //Updates the Item in the Ingredient Dictionary
 
     }
