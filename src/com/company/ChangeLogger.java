@@ -17,9 +17,7 @@ public class ChangeLogger {
     private static final String changeLogFilePath = "DataSource/ChangeLog.json";
     //TODO Create other original Attributes that would need to be temporarily stored for Change Logging
     //TODO Methods that compare the Original to the New Read out to record changes, also to generate Reports
-    /**
-     * Default constructor for the ChangeLogger.
-     */
+
     public ChangeLogger() {
         this.originalIngredientFile = new ArrayList<>();
         this.originalRecipeFile = new ArrayList<>();
@@ -32,9 +30,7 @@ public class ChangeLogger {
         this.updateIngredient = null;
         this.createChangeLogFile();
     }
-    /**
-     * Method returns the original array list for the original ingredient file.
-     */
+
     public ArrayList<String> getOriginalIngredientFile() {
         return originalIngredientFile;
     }
@@ -95,9 +91,9 @@ public class ChangeLogger {
 //                        "quantityOnHand\" : \"" + original.getQuantityOnHand() + "\", \"" +
 //                        "lastUsedDate\" : \"" + original.getLastUsedDate() + "\"}");
                 break;
-            case UPDATE:
+            case USE:
                 //Adds the Updating Item Original and New to the pending Removal ArrayList
-                this.pendUpdate.add(change);
+                this.pendUpdate.add(original);
 //                this.pendUpdate.add("{\"ChangeAction\" : \"UPDATED\", \"" +
 //                        "name\" : \"" + original.getName() + "\", \"" +
 //                        "type\" : \"" + original.getType() + "\", \"" +
@@ -138,10 +134,7 @@ public class ChangeLogger {
         changeFile.appendToFile(changesMade,FileType.CHANGELOG);
 
     }
-    /**
-     * Method creates the file where changes are written.
-     * @return True if created successfully. False otherwise.
-     */
+
     private boolean createChangeLogFile(){
         //TODO INCOMPLETE METHOD
         FileManager newFile = new FileManager(changeLogFilePath);

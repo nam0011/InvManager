@@ -86,23 +86,8 @@ public class InventoryManager {
      */
     public IngredientItem getIngredientItem(String ingredientName) {
 
-        IngredientItem tempIngredientItem = null;
-        for (int i = 0; i < ID.getIngredientItemArrayList().size(); i++) {
-            if (ID.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
-                tempIngredientItem = new IngredientItem(ID.getIngredientItemArrayList().get(i));
-            }
-        }
-        //Exception Handling for ingredient not in array list.
-        try {
-            for (int i = 0; i > -1; i++) {
-                if (ID.getIngredientItemArrayList().get(i).getName().equals(ingredientName)) {
-                    i = -2;
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(ingredientName + ":: Ingredient Not Found");
-        }
-        return tempIngredientItem;
+        return ID.getIngredientItem(ingredientName);
+
     }
 
     /**
@@ -168,15 +153,22 @@ public class InventoryManager {
 
     /**
      * Method to Update a Single Item and Get its original for Storing the Changes made.
-     * @param updateItem The Item to be updated.
+     * @param useItem The Item to be updated.
      */
-    public IngredientItem updateIngredientInList(IngredientItem updateItem){
+    public void useIngredientInList(IngredientItem useItem, Double amtUsed){
             //Gets the Original Item from the Dictionary Prior to Updating.
-        IngredientItem original = new IngredientItem(this.ID.getIngredientItem(updateItem.getName()));
-            //Records both Original and Updated Item versions to the Changelog
-        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, original, updateItem);
+        IngredientItem original = null;
+        try {
+            original = useItem.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        useItem.amountUsed(amtUsed);
+
+        //Records both Original and Updated Item versions to the Changelog
+        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.USE, original, useItem);
             //Updates the Item in the Ingredient Dictionary
-        return this.ID.updateIngredientInList(updateItem);
+
     }
 
     /**
@@ -250,17 +242,7 @@ public class InventoryManager {
 
         return quantity*searchIngredient(ingredient).getCost();
     }
-
-    public void PurchaseIngredient(double newPrice, double amtPurchased){
-
-        return;
-    }
-    //TODO Nathan
-    public void UseIngredient(double amtUsed){
-
-    }
-
-    /**
+/**
  * This returns the current cost of all items in the inventory.
  * @return A double which represents the current cost of all items in the inventory
  * */
