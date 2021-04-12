@@ -71,8 +71,10 @@ public class PurchaseDialog extends AbstractUpdateDialog{
 
                     getDTM().removeRow(row);
                     getDTM().insertRow(row, item.toQOHString());
+
                     getIngredientPanel().setDefaultFrameEnable(true);
                     dispose();
+
                     System.out.println(getItem().getName() + " has been updated.");
                 } else {
                     System.out.println(getItem().getName() + " was not updated.");

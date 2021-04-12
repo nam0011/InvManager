@@ -281,27 +281,19 @@ public class IngredientDictionary {
 
         for (IngredientItem ingredientItem : this.ingredientItemArrayList) {                         //start iterating through the list
             if (ingredientItem.getName().equals(purchaseItem.getName())) {   //if found we need to do some math and push to a list
-                double ogPrice = ingredientItem.getCost();  //set the original price and quantity of the found item before changes
-                double ogQuant = ingredientItem.getWeight();
-
-                ingredientItem.setOGPrice(ogPrice); //hold these values we need to display them later
-                ingredientItem.setOGQuant(ogQuant);
+                double ogPrice = purchaseItem.getOGPrice();  //set the original price and quantity of the found item before changes
+                double ogQuant = purchaseItem.getOGQuant();
 
                 double priceDif;   //find the difference between the prices and store in a temp value name price difference
-                double priceChangeRatio;
 
-                if (purchaseItem.getCost() != 0 && purchaseItem.getCost()) {//if there is a difference in price we want a percentage value of that difference
-                    priceDif = purchaseItem.getCost() - ogPrice;
-                    if(priceDif < 0){
-                        priceDif = -1*priceDif;
+                if (purchaseItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
+                    ingredientItem.setPriceDiff(purchaseItem.getCost() - ogPrice);  //store it
+                    if( ingredientItem.getPriceDiff() < 0){
+                        ingredientItem.setPriceDiff(-1*ingredientItem.getPriceDiff());  //make sure its always a positive difference
                     }
-                    priceChangeRatio = purchaseItem.getCost() / ogPrice;    //store that value
 
-                    //double meanPrice = (updateItem.getCost()+ogPrice)/2;
-                    //average price per unit?
+                    ingredientItem.setPriceChangeRatio(purchaseItem.getCost() / ogPrice); // store that value
 
-                    ingredientItem.setPriceChangeRatio(priceChangeRatio);
-                    ingredientItem.setPriceDiff(priceDif);
                     double meanPrice = (((purchaseItem.getCost()*purchaseItem.getWeight())+(ogPrice*ogQuant))/(purchaseItem.getWeight()+ogQuant));    //not universal enough but works for current build testing means 4-2-21
 
                     ingredientItem.setCost(meanPrice);
@@ -313,26 +305,27 @@ public class IngredientDictionary {
                 ingredientItem.setQuantDiff(quantDif);
                 double quantChangeRatio;
 
-                if (quantDif != 0) {//if there is a difference in quantity we want a percentage value of that difference and we need to know if the input value is incrementing or decrementing our inventory
-                    if (purchaseItem.getWeight() > 0) {        //if incrementing inventory amount
+//i dont think we need half this shit since we are only incrementing i just left it the way it was
+            //   if (quantDif != 0) {//if there is a difference in quantity we want a percentage value of that difference and we need to know if the input value is incrementing or decrementing our inventory
+               //    if (purchaseItem.getWeight() > 0) {        //if incrementing inventory amount
                         quantChangeRatio = purchaseItem.getWeight() / ogQuant;    //find the change ratio
                         ingredientItem.setQuantChangeRatio(quantChangeRatio);
                         ingredientItem.setWeight(ogQuant + purchaseItem.getWeight()); //increment the weight of the item in the list
 
-                    } else if (purchaseItem.getWeight() < 0) {    //if decrementing
-                        quantChangeRatio = -1 * (purchaseItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
-                        ingredientItem.setQuantChangeRatio(quantChangeRatio);
-                        ingredientItem.setWeight(ogQuant + purchaseItem.getWeight()); //decrement the weight of the item in the list
-                    }
-                } else {  //if no change(this will never be the case if update is filled out but here for continuity
-                    ingredientItem.setWeight(ogQuant);
-                }
+               //     } else if (purchaseItem.getWeight() < 0) {    //if decrementing
+               //         quantChangeRatio = -1 * (purchaseItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
+               //         ingredientItem.setQuantChangeRatio(quantChangeRatio);
+               //         ingredientItem.setWeight(ogQuant + purchaseItem.getWeight()); //decrement the weight of the item in the list
+               //     }
+              //  } else {  //if no change(this will never be the case if update is filled out but here for continuity
+                //    ingredientItem.setWeight(ogQuant);
+              //  }
                 purchaseItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
-                ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);
+                ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);   //feed it to the changelogger
             }
         }
 
-        return purchaseItem;
+        return purchaseItem;    //return the updated item
     }
 
 
