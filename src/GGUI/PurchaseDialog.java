@@ -1,5 +1,6 @@
 package GGUI;
 
+import com.company.IngredientDictionary;
 import com.company.IngredientItem;
 
 import javax.swing.*;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 public class PurchaseDialog extends AbstractUpdateDialog{
     private SelfClearingNumbField priceTF;
     private ArrayList<SelfClearingTextField> listTextFields;
+    private IngredientDictionary ID;
+
 
     PurchaseDialog(IngredientPanel panel, IngredientItem itemIn){
 
@@ -17,9 +20,10 @@ public class PurchaseDialog extends AbstractUpdateDialog{
         setTitle("PURCHASE MORE " + itemIn.getName() + "?");
         buildDialog();
         getListTextFields().add(priceTF);
-
-
+        ID = IngredientDictionary.getIngredientDictionary();
     }
+
+
     public void buildDialog()
     {
         GridBagConstraints gc = new GridBagConstraints();
@@ -30,13 +34,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
         gc.fill = 2;
         add(priceTF, gc);
         pack();
-
     }
-
-
-
-
-
 
 
     @Override
@@ -46,27 +44,36 @@ public class PurchaseDialog extends AbstractUpdateDialog{
                     Object[] options = {"Yes", "no"};
 
                 int n = JOptionPane.showOptionDialog(this,
-                        "Are you sure you want to purchase "+getAmtTF().getText() +" "+getItem().getMeasurementUnit()+" of " + getItem().getName() + " for " + priceTF.getValue() ,
+                        "Are you sure you want to purchase "+getAmtTF().getText() +" "+getItem().getMeasurementUnit()+" of " + getItem().getName() + " for $" + priceTF.getValue() ,
 
                         "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == 0) {
 
-                    IngredientItem iItem = getItem();
+
+                    IngredientItem item = getItem();    //this is the item we are wanting to update
 
                     //*****************************************************************************************
                     // TODO insert add ingredient code here for backend work.
                     // this is just temporary code for testing purposes!
 
-                        iItem.purchase(priceTF.getValue(), getAmtTF().getValue());
+                        //item.purchase(priceTF.getValue(), getAmtTF().getValue());
+//must use ingredient dictionary first for testing and then call through
+//inventory manager later to allow for good programming practices
+                       item.setOGQuant(item.getWeight());
+                       item.setOGPrice(item.getCost());
+                       item.setCost(priceTF.getValue());
+                       item.setWeight(getAmtTF().getValue());
+                       item = ID.purchaseIngredientInList(item);
 
                     //******************************************************************************************
-                    int row = findInsertionPoint(iItem.getName());
+                    int row = findInsertionPoint(item.getName());
 
                     getDTM().removeRow(row);
-                    getDTM().insertRow(row, iItem.toQOHString());
+                    getDTM().insertRow(row, item.toQOHString());
                     getIngredientPanel().setDefaultFrameEnable(true);
                     dispose();
+                    System.out.println(getItem().getName() + " has been updated.");
                 } else {
                     System.out.println(getItem().getName() + " was not updated.");
 
