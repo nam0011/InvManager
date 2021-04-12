@@ -60,7 +60,10 @@ public class PurchaseDialog extends AbstractUpdateDialog{
                         //item.purchase(priceTF.getValue(), getAmtTF().getValue());
 //must use ingredient dictionary first for testing and then call through
 //inventory manager later to allow for good programming practices
-
+                       item.setOGQuant(item.getWeight());
+                       item.setOGPrice(item.getCost());
+                       item.setCost(priceTF.getValue());
+                       item.setWeight(getAmtTF().getValue());
                        item = ID.purchaseIngredientInList(item);
 
                     //******************************************************************************************

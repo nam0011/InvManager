@@ -290,7 +290,7 @@ public class IngredientDictionary {
                 double priceDif;   //find the difference between the prices and store in a temp value name price difference
                 double priceChangeRatio;
 
-                if (purchaseItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
+                if (purchaseItem.getCost() != 0 && purchaseItem.getCost()) {//if there is a difference in price we want a percentage value of that difference
                     priceDif = purchaseItem.getCost() - ogPrice;
                     if(priceDif < 0){
                         priceDif = -1*priceDif;
