@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.IngredientItem;
+import com.company.InventoryManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
     private SelfClearingNumbField priceTF;
     private ArrayList<SelfClearingTextField> listTextFields;
     private IngredientDictionary ID;
-
+    private InventoryManager IM = InventoryManager.getInventoryManager();
 
     PurchaseDialog(IngredientPanel panel, IngredientItem itemIn){
 
@@ -20,7 +21,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
         setTitle("PURCHASE MORE " + itemIn.getName() + "?");
         buildDialog();
         getListTextFields().add(priceTF);
-        ID = IngredientDictionary.getIngredientDictionary();
+        IM = InventoryManager.getInventoryManager();
     }
 
 
@@ -59,7 +60,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
                        item.setOGPrice(item.getCost());
                        item.setCost(priceTF.getValue());
                        item.setWeight(getAmtTF().getValue());
-                       item = ID.purchaseIngredientInList(item);
+                       item = IM.purchaseIngredientInList(item);
 
                     //******************************************************************************************
                     int row = findInsertionPoint(item.getName());

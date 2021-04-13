@@ -172,22 +172,26 @@ public class InventoryManager {
 
     }
 
-    public void purchaseIngredientInList(IngredientItem removeItem){
+    public IngredientItem purchaseIngredientInList(IngredientItem purchasedItem){
 
         //Updates for purchasing the Item from the Ingredient Dictionary
-        this.ID.purchaseIngredientInList(removeItem);
+        this.ID.purchaseIngredientInList(purchasedItem);
+        purchasedItem = ID.purchaseIngredientInList(purchasedItem);
         //Records the Item to be Purchased from the Ingredient Dictionary to the ChangeLog
-        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,removeItem,null);
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,purchasedItem,null);
+
+        return purchasedItem;
     }
 
-    public void useIngredientInList(IngredientItem removeItem){
+    public IngredientItem useIngredientInList(IngredientItem usedItem){
 
         //Updates for Use Item from the Ingredient Dictionary
-        this.ID.useIngredientInList(removeItem);
-
+        this.ID.useIngredientInList(usedItem);
+        usedItem = ID.useIngredientInList(usedItem);
         //Records the Item to be Used from the Ingredient Dictionary to the ChangeLog
-        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,removeItem,null);
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,usedItem,null);
 
+        return usedItem;
     }
     /**
      * Method to Search for an Ingredient in the Inventory

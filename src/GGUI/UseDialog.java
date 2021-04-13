@@ -16,7 +16,6 @@ public class UseDialog extends AbstractUpdateDialog {
         super(panel, itemIn);
         setTitle("How much " + itemIn.getName() + " did you use!");
         getAmtTF().setDefaultText("Amount used");
-        ID = IngredientDictionary.getIngredientDictionary();
         IM = InventoryManager.getInventoryManager();
     }
 
@@ -42,7 +41,8 @@ public class UseDialog extends AbstractUpdateDialog {
                         item.setCost(0);
                         item.setWeight(getAmtTF().getValue());
 
-                        IM.useIngredientInList(item);
+                        item = IM.useIngredientInList(item);
+
                         //******************************************************************************************
                         int row = findInsertionPoint(item.getName());
 
