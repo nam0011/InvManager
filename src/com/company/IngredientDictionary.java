@@ -348,7 +348,7 @@ public class IngredientDictionary {
 
                          quantChangeRatio = -1 * (purchaseItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
                          ingredientItem.setQuantChangeRatio(quantChangeRatio);
-                         ingredientItem.setWeight(ogQuant + purchaseItem.getWeight()); //decrement the weight of the item in the list
+                         ingredientItem.setWeight(purchaseItem.getOGQuant() - purchaseItem.getWeight()); //decrement the weight of the item in the list
 
                 purchaseItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
                 ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);   //feed it to the changelogger
