@@ -71,6 +71,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
         ingredientTable = new JTable();
+        //Doesn't allow
         ingredientTable.getTableHeader().setReorderingAllowed(false);
 
         DTM = (DefaultTableModel) ingredientTable.getModel();

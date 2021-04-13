@@ -1,5 +1,7 @@
 package com.company;
 
+import GGUI.IngredientPanel;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -99,6 +101,7 @@ public class IngredientDictionary {
         for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {
             if (this.ingredientItemArrayList.get(i).getName().equals(ingredientName)) {
                 tempIngredientItem = new IngredientItem(this.ingredientItemArrayList.get(i));
+                tempIngredientItem.setIndex(i);
                break;
             }
         }
@@ -281,8 +284,10 @@ public class IngredientDictionary {
 
     public IngredientItem purchaseIngredientInList(IngredientItem purchaseItem){
 
-        for (IngredientItem ingredientItem : this.ingredientItemArrayList) {                         //start iterating through the list
-            if (ingredientItem.getName().equals(purchaseItem.getName())) {   //if found we need to do some math and push to a list
+        //Don't worry this will work even if we add or remove items from the arrayList. Trust me! See useItem
+        // for further explanation
+        IngredientItem ingredientItem = ingredientItemArrayList.get(purchaseItem.getIndex());                         //start iterating through the list
+              //if found we need to do some math and push to a list
                 double ogPrice = purchaseItem.getOGPrice();  //set the original price and quantity of the found item before changes
                 double ogQuant = purchaseItem.getOGQuant();
 
@@ -313,48 +318,50 @@ public class IngredientDictionary {
 
                 purchaseItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
                 ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);   //feed it to the changelogger
-            }
-        }
+
         return purchaseItem;    //return the updated item
     }
 
-    public IngredientItem useIngredientInList(IngredientItem purchaseItem){
+    public IngredientItem useIngredientInList(IngredientItem purchaseItem) {
 
-        for (IngredientItem ingredientItem : this.ingredientItemArrayList) {                         //start iterating through the list
-            if (ingredientItem.getName().equals(purchaseItem.getName())) {   //if found we need to do some math and push to a list
-                double ogPrice = purchaseItem.getOGPrice();  //set the original price and quantity of the found item before changes
-                double ogQuant = purchaseItem.getOGQuant();
+        //The index is set when IngredientItem is found in useDialog. The index acts as bookmarker and should work
+        //even when we add and remove items because it is the current index when the user clicks the button.
+        IngredientItem ingredientItem = ingredientItemArrayList.get(purchaseItem.getIndex());
 
-                double priceDif;   //find the difference between the prices and store in a temp value name price difference
+            double ogPrice = purchaseItem.getOGPrice();  //set the original price and quantity of the found item before changes
+            double ogQuant = purchaseItem.getOGQuant();
 
-                if (purchaseItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
-                    ingredientItem.setPriceDiff(purchaseItem.getCost() - ogPrice);  //store it
-                    if( ingredientItem.getPriceDiff() < 0){
-                        ingredientItem.setPriceDiff(-1*ingredientItem.getPriceDiff());  //make sure its always a positive difference
-                    }
+            double priceDif;   //find the difference between the prices and store in a temp value name price difference
 
-                    ingredientItem.setPriceChangeRatio(purchaseItem.getCost() / ogPrice); // store that value
-
-                    double meanPrice = (((purchaseItem.getCost()*purchaseItem.getWeight())+(ogPrice*ogQuant))/(purchaseItem.getWeight()+ogQuant));    //not universal enough but works for current build testing means 4-2-21
-
-                    ingredientItem.setCost(meanPrice);
-                } else {
-                    ingredientItem.setCost(ogPrice);
+            if (purchaseItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
+                ingredientItem.setPriceDiff(purchaseItem.getCost() - ogPrice);  //store it
+                if (ingredientItem.getPriceDiff() < 0) {
+                    ingredientItem.setPriceDiff(-1 * ingredientItem.getPriceDiff());  //make sure its always a positive difference
                 }
 
-                double quantDif = purchaseItem.getWeight() - ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
-                ingredientItem.setQuantDiff(quantDif);
-                double quantChangeRatio;
+                ingredientItem.setPriceChangeRatio(purchaseItem.getCost() / ogPrice); // store that value
 
-                         quantChangeRatio = -1 * (purchaseItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
-                         ingredientItem.setQuantChangeRatio(quantChangeRatio);
-                         ingredientItem.setWeight(purchaseItem.getOGQuant() - purchaseItem.getWeight()); //decrement the weight of the item in the list
+                double meanPrice = (((purchaseItem.getCost() * purchaseItem.getWeight()) + (ogPrice * ogQuant)) / (purchaseItem.getWeight() + ogQuant));    //not universal enough but works for current build testing means 4-2-21
 
-                purchaseItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
-                ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);   //feed it to the changelogger
+                ingredientItem.setCost(meanPrice);
+            } else {
+                ingredientItem.setCost(ogPrice);
             }
-        }
-        return purchaseItem;    //return the updated item
+
+            double quantDif = purchaseItem.getWeight() - ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
+            ingredientItem.setQuantDiff(quantDif);
+            double quantChangeRatio;
+
+            quantChangeRatio = -1 * (purchaseItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
+            ingredientItem.setQuantChangeRatio(quantChangeRatio);
+            ingredientItem.setWeight(purchaseItem.getOGQuant() - purchaseItem.getWeight()); //decrement the weight of the item in the list
+
+            purchaseItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
+            ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);   //feed it to the changelogger
+
+
+            return purchaseItem;    //return the updated item
+
     }
 
 

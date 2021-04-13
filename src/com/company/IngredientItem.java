@@ -26,6 +26,10 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     private double OGQuant;
     private Date lastUsedDate;
 
+
+
+    private int index;
+
     /**
      * Constructor with no parameters
      */
@@ -492,6 +496,15 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
             return 0;
         }
     return this.getName().compareTo(otherItem.getName());
+
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
 }   //End of IngredientItem
