@@ -150,8 +150,7 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
                 "measurementUnit\" : \"" + measurementUnit + "\", \"" +
                 "cost\" : \"" + cost + "\", \"" +
                 "weight\" : \"" + weight + "\", \"" +
-                "quantityOnHand\" : \"" + quantityOnHand + "\", \"" +
-                "lastUsedDate\" : \"" + lastUsedDate + "\"}";
+                "onHand\" : \"" + quantityOnHand + "\"}";
     }
     /**
      * Method to fill the Current Table Setup
