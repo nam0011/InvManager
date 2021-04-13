@@ -177,7 +177,7 @@ public class FileManager extends Reader {
         if(this.fileName == null){
             System.out.println("Please Enter the File Name or File Path");
             //this.fileName = this.getUserInput();//////CODY WANTED TO BE ABLE TO OPEN WHATEVER FILE USER WANTED
-           fileName = "DataSource/ingredientsUPDATE.json";
+           fileName = "DataSource/ingredientsBACKUP.json";
         }
         this.writer = new BufferedWriter(new FileWriter(this.fileName));
     }

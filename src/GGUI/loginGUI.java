@@ -5,6 +5,7 @@ import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class loginGUI extends JFrame implements ActionListener {
     private JPanel loginPanel;
@@ -80,7 +81,11 @@ public class loginGUI extends JFrame implements ActionListener {
             loginButton.removeActionListener(this);
 
             dispose();
-            new DefaultFrame();
+            try {
+                new DefaultFrame();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
 
         }
         else{

@@ -23,11 +23,8 @@ public class InventoryManager {
 
     public static InventoryManager getInventoryManager() {
         if (instance == null) {
-
             instance = new InventoryManager();
-
         }
-
         return instance;
     }
     //TODO ADD ELEMENTS TO MAKE IT MORE LIKE AN ITERATOR
@@ -36,7 +33,7 @@ public class InventoryManager {
      * */
     public InventoryManager(){
         setDefaultFile("DataSource/ingredients.json"); //IF IT EVER BREAKS CHECK HERE FIRST
-        FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
+        FileUpdate.setFileName("DataSource/ingredientsBACKUP.json");
         try {
             FileManager.generateStringArrayList();
         } catch (IOException e) {
@@ -62,6 +59,8 @@ public class InventoryManager {
     }
     /**
      * This function allows the file used to populate the dictionary be easily changed.
+     * This acts as an iterator even though the json file is not a class, but it defines the IngredientDictionary class and is the basis on which IngredientDictionaries are built.
+     * This allows multiple IngredientDictionaries to be iterated through.
      * @param name The string directory of the file used to populate the inventory.
      * */
 
@@ -277,10 +276,10 @@ public class InventoryManager {
     }
 
 
-    public void UpdateJSONFile() throws IOException {
+    public void UpdateBackups() throws IOException {
         Collections.sort(ID.getIngredientItemArrayList());
 
-        FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
+        FileUpdate.setFileName("DataSource/ingredientsBACKUP.json");
         FileUpdate.setStringArrayList(ID.convertToStringArrayList());
 
         try {
@@ -288,6 +287,28 @@ public class InventoryManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        FileUpdate.setFileName("DataSource/ingredientsBACKUP2.json");
+        FileUpdate.setStringArrayList(ID.convertToStringArrayList());
+
+        try {
+            FileUpdate.generateJSONFile(FileType.INGREDIENTS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void UpdateJSONFile() throws IOException {
+        Collections.sort(ID.getIngredientItemArrayList());
+
+        FileUpdate.setFileName("DataSource/ingredients.json");
+        FileUpdate.setStringArrayList(ID.convertToStringArrayList());
+
+        try {
+            FileUpdate.generateJSONFile(FileType.INGREDIENTS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String[] printDictionary(int i){

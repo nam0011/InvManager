@@ -144,13 +144,17 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
      * @return
      */
     public String toJSONString() {
+        Double format = Double.parseDouble(String.format("%.3f",weight*cost));
+        if (type == ""){
+            type = "DRY";
+        }
         return "{\"" +
                 "name\" : \"" + name + "\", \"" +
                 "type\" : \"" + type + "\", \"" +
                 "measurementUnit\" : \"" + measurementUnit + "\", \"" +
                 "cost\" : \"" + cost + "\", \"" +
                 "weight\" : \"" + weight + "\", \"" +
-                "onHand\" : \"" + quantityOnHand + "\"}";
+                "onHand\" : \"" + format + "\"}";
     }
     /**
      * Method to fill the Current Table Setup

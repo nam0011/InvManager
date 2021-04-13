@@ -393,7 +393,7 @@ public class IngredientDictionary {
     public void UpdateJSONFile() throws IOException {
         Collections.sort(ingredientItemArrayList);
 
-        FileUpdate.setFileName("DataSource/ingredientsUPDATE.json");
+        FileUpdate.setFileName("DataSource/ingredientsBACKUP.json");
         FileUpdate.setStringArrayList(this.convertToStringArrayList());
 
         try {

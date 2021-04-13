@@ -24,8 +24,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
     /**
      *  Builds the frame adds the tabs. At the moment IngredientPanel is the only operational frame.
      */
-    public DefaultFrame()
-    {
+    public DefaultFrame() throws IOException {
 
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(0,50,100));
@@ -60,7 +59,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
         buildLayout();
 
         IM = InventoryManager.getInventoryManager();
-
+        IM.UpdateBackups();
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 // call terminate
