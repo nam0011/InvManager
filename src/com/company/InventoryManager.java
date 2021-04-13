@@ -149,28 +149,6 @@ public class InventoryManager {
 ////        }
 //    }
 
-
-
-    /**
-     * Method to Update a Single Item and Get its original for Storing the Changes made.
-     * @param useItem The Item to be updated.
-     */
-    public void useIngredientInList(IngredientItem useItem, Double amtUsed){
-            //Gets the Original Item from the Dictionary Prior to Updating.
-        IngredientItem original = null;
-        try {
-            original = useItem.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        useItem.amountUsed(amtUsed);
-
-        //Records both Original and Updated Item versions to the Changelog
-        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, original, useItem);
-            //Updates the Item in the Ingredient Dictionary
-
-    }
-
     /**
      * Method to Add an Ingredient to the Inventory
      * @param addItem   The Ingredient Item to be Added
@@ -191,6 +169,24 @@ public class InventoryManager {
         this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE,removeItem,null);
             //Removes the Item from the Ingredient Dictionary
         this.ID.removeIngredientFromList(removeItem);
+
+    }
+
+    public void purchaseIngredientInList(IngredientItem removeItem){
+
+        //Updates for purchasing the Item from the Ingredient Dictionary
+        this.ID.purchaseIngredientInList(removeItem);
+        //Records the Item to be Purchased from the Ingredient Dictionary to the ChangeLog
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,removeItem,null);
+    }
+
+    public void useIngredientInList(IngredientItem removeItem){
+
+        //Updates for Use Item from the Ingredient Dictionary
+        this.ID.useIngredientInList(removeItem);
+
+        //Records the Item to be Used from the Ingredient Dictionary to the ChangeLog
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,removeItem,null);
 
     }
     /**

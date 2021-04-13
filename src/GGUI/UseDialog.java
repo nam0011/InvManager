@@ -10,12 +10,14 @@ import java.awt.event.ActionEvent;
 public class UseDialog extends AbstractUpdateDialog {
 
     private IngredientDictionary ID;
+    private InventoryManager IM = InventoryManager.getInventoryManager();
 
     public UseDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel, itemIn);
         setTitle("How much " + itemIn.getName() + " did you use!");
         getAmtTF().setDefaultText("Amount used");
         ID = IngredientDictionary.getIngredientDictionary();
+        IM = InventoryManager.getInventoryManager();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class UseDialog extends AbstractUpdateDialog {
                         item.setCost(0);
                         item.setWeight(getAmtTF().getValue());
 
-                        item = ID.useIngredientInList(item);
+                        IM.useIngredientInList(item);
                         //******************************************************************************************
                         int row = findInsertionPoint(item.getName());
 
