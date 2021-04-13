@@ -53,11 +53,6 @@ public class PurchaseDialog extends AbstractUpdateDialog{
 
                     IngredientItem item = getItem();    //this is the item we are wanting to update
 
-                    //*****************************************************************************************
-                    // TODO insert add ingredient code here for backend work.
-                    // this is just temporary code for testing purposes!
-
-                        //item.purchase(priceTF.getValue(), getAmtTF().getValue());
 //must use ingredient dictionary first for testing and then call through
 //inventory manager later to allow for good programming practices
                        item.setOGQuant(item.getWeight());

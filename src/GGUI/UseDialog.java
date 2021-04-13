@@ -1,5 +1,6 @@
 package GGUI;
 
+import com.company.IngredientDictionary;
 import com.company.IngredientItem;
 import com.company.InventoryManager;
 
@@ -7,10 +8,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class UseDialog extends AbstractUpdateDialog {
+
+    private IngredientDictionary ID;
+
     public UseDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel, itemIn);
         setTitle("How much " + itemIn.getName() + " did you use!");
         getAmtTF().setDefaultText("Amount used");
+        ID = IngredientDictionary.getIngredientDictionary();
     }
 
     @Override
@@ -28,21 +33,22 @@ public class UseDialog extends AbstractUpdateDialog {
                             "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                     if (n == 0) {
 
-                        IngredientItem iItem = getItem();
+                        IngredientItem item = getItem();
 
-                        //*****************************************************************************************
-                        // TODO insert add ingredient code here for backend work.
-                        // this is just temporary code for testing purposes!
+                        item.setOGQuant(item.getWeight());
+                        item.setOGPrice(item.getCost());
+                        item.setCost(0);
+                        item.setWeight(getAmtTF().getValue());
 
-                        IM.useIngredientInList(iItem, getAmtTF().getValue());
-
+                        item = ID.useIngredientInList(item);
                         //******************************************************************************************
-                        int row = findInsertionPoint(iItem.getName());
+                        int row = findInsertionPoint(item.getName());
 
                         getDTM().removeRow(row);
-                        getDTM().insertRow(row, iItem.toQOHString());
+                        getDTM().insertRow(row, item.toQOHString());
                         getIngredientPanel().setDefaultFrameEnable(true);
                         dispose();
+                        System.out.println(getItem().getName() + " has been updated.");
                     } else {
                         System.out.println(getItem().getName() + " was not updated.");
 
