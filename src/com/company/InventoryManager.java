@@ -172,7 +172,6 @@ public class InventoryManager {
     }
 
     public IngredientItem purchaseIngredientInList(IngredientItem purchasedItem){
-
         //Updates for purchasing the Item from the Ingredient Dictionary
         this.ID.purchaseIngredientInList(purchasedItem);
         purchasedItem = ID.purchaseIngredientInList(purchasedItem);
@@ -183,7 +182,6 @@ public class InventoryManager {
     }
 
     public IngredientItem useIngredientInList(IngredientItem usedItem){
-
         //Updates for Use Item from the Ingredient Dictionary
         this.ID.useIngredientInList(usedItem);
         usedItem = ID.useIngredientInList(usedItem);
@@ -192,6 +190,7 @@ public class InventoryManager {
 
         return usedItem;
     }
+
     /**
      * Method to Search for an Ingredient in the Inventory
      * @param searchInput The string corresponding to the IngredientItem to be searched

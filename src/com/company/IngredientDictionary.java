@@ -305,7 +305,7 @@ public class IngredientDictionary {
 
                     ingredientItem.setCost(meanPrice);
                 } else {
-                    ingredientItem.setCost(ogPrice);
+                    ingredientItem.setCost((ogPrice*ogQuant)/(ogQuant+purchaseItem.getWeight()));
                 }
 
                 double quantDif = purchaseItem.getWeight() - ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
