@@ -12,6 +12,11 @@ public class InventoryManager {
     FileManager FileManager;
     private static InventoryManager instance = null;
     IngredientFactory IngredientFactory;
+
+    public static ChangeLogger getInventoryChangeLogger() {
+        return InventoryChangeLogger;
+    }
+
     private static ChangeLogger InventoryChangeLogger = new ChangeLogger();
     IngredientFactory testFactory = new IngredientFactory();
     private static FileManager FileUpdate = new FileManager();
@@ -173,7 +178,7 @@ public class InventoryManager {
 
     public IngredientItem purchaseIngredientInList(IngredientItem purchasedItem){
         //Updates for purchasing the Item from the Ingredient Dictionary
-        this.ID.purchaseIngredientInList(purchasedItem);
+        //purchasedItem =this.ID.purchaseIngredientInList(purchasedItem);
         purchasedItem = ID.purchaseIngredientInList(purchasedItem);
         //Records the Item to be Purchased from the Ingredient Dictionary to the ChangeLog
         this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,purchasedItem,null);

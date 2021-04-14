@@ -201,9 +201,9 @@ public class IngredientDictionary {
      * @return Boolean Value to be returned to verify the operation succeeded.
      */
     public void removeIngredientFromList(IngredientItem ingredientItem) {
-        boolean exists = ingredientCheck(ingredientItem);
 
-        if (exists == true) {
+
+
             for (int i = 0; i < this.ingredientItemArrayList.size(); i++) {
                 if (this.ingredientItemArrayList.get(i).getName().equals(ingredientItem.getName())) {
                     String temp = this.ingredientItemArrayList.get(i).getName();
@@ -212,7 +212,7 @@ public class IngredientDictionary {
                     ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE, ingredientItem, ingredientItem);
                 }
             }
-        }
+
     }
 
 

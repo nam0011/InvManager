@@ -24,6 +24,7 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     private double priceChangeRatio;
     private double OGPrice;
     private double OGQuant;
+    private String typeOfChange;
     private Date lastUsedDate;
 
 
@@ -34,6 +35,7 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
      * Constructor with no parameters
      */
     public IngredientItem(){
+        this.typeOfChange = null;
         this.name = "";   //What the Ingredient Item is called
         this.type = "";   //What type, Dry or wet
         this.measurementUnit = "";    //The measurement Unit Used: oz, ml, grams
@@ -499,12 +501,29 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
 
     }
 
+    /**
+     * Returns the index where item is found acting as a bookmark
+     * @return
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     *  This function only works if during a guaranteed stream with the data base  is not changed.
+     *
+     * @param index
+     */
     public void setIndex(int index) {
         this.index = index;
     }
 
+
+    public String getTypeOfChange() {
+        return typeOfChange;
+    }
+
+    public void setTypeOfChange(String typeOfChange) {
+        this.typeOfChange = typeOfChange;
+    }
 }   //End of IngredientItem
