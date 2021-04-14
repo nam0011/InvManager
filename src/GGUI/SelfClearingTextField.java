@@ -48,7 +48,7 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
     @Override
     public void mouseClicked(MouseEvent e) {
         String text = getText();
-        if(!beenClicked && !text.equals("")) {
+        if(!beenClicked && !text.equals("") && this.isEditable()) {
             beenClicked = true;
             setFont(new Font("New Times Roman", Font.PLAIN, 12));
             setText("");

@@ -64,14 +64,14 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     private void buildIngredientTable(){
 
         IL=IM.getIngredientItemArrayList();
-        String[][] data;
+
         int n = IL.size();
 
         String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
 
 
         ingredientTable = new JTable();
-        //Doesn't allow
+
         ingredientTable.getTableHeader().setReorderingAllowed(false);
 
         DTM = (DefaultTableModel) ingredientTable.getModel();
@@ -104,7 +104,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
         scrollPane.setPreferredSize(new Dimension(450, 450));
-        GridBagConstraints gc = new GridBagConstraints();
+
 
 
 

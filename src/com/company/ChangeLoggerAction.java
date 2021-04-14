@@ -4,5 +4,6 @@ public enum ChangeLoggerAction {
     ADD,
     DELETE,
     UPDATE,
-    PURCHASE;
+    PURCHASE,
+    USE;
 }
