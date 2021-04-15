@@ -9,13 +9,17 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ReportsPanel  extends abstractPanel implements ActionListener {
     InventoryManager IM = InventoryManager.getInventoryManager();
     private JTable changeTable;
     private JScrollPane scrollPane;
+    private JButton saveAll;
     ReportsPanel(DefaultFrame inFrame) {
         super(inFrame);
+        saveAll = new JButton("Save All");
+        saveAll.addActionListener(this);
 
         changeTable = new JTable();
         DefaultTableModel intial = IM.getInventoryChangeLogger().getChangeDTM();
@@ -42,6 +46,13 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == saveAll)
+        {
+            try {
+                IM.UpdateJSONFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
 }

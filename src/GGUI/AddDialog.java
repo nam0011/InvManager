@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class AddDialog extends JDialog implements ActionListener {
     private SelfClearingTextField itemNameTF;
     private SelfClearingNumbField amtPurchaseTF;
-    private SelfClearingNumbField priceTF;
+    private SelfClearingPrice priceTF;
     private JComboBox unitDropDownBox;
     private ArrayList<SelfClearingTextField> listTextFields;
     private JButton oKB;
@@ -79,7 +79,7 @@ public class AddDialog extends JDialog implements ActionListener {
         itemNameTF.setFont(new Font("New Times Roman", Font.ITALIC, 12));
         amtPurchaseTF = new SelfClearingNumbField("Amount Purchased", 10);
 
-        priceTF = new SelfClearingNumbField("price", 30);
+        priceTF = new SelfClearingPrice("price", 30);
 
         setListTextFields();
 
@@ -205,7 +205,7 @@ public class AddDialog extends JDialog implements ActionListener {
                     itemStr = itemStr.toUpperCase();
                     double amtPurchasedValue = amtPurchaseTF.getValue();
                     double priceValue = priceTF.getValue();
-                    if (IM.ingredientCheck(itemStr)) {//too many checking ArrayList very inefficient! <=========================Replace me==================
+                    if (IM.ingredientCheck(itemStr)) {
                         JOptionPane.showMessageDialog(this, itemStr + " is already in the inventory.");
                     } else {
                         IngredientItem item = new IngredientItem();
