@@ -76,7 +76,8 @@ public class DemoInventory {
        demo.setCost(5);
        demo.setWeight(1);
        demo.setMeasurementUnit("Changed Names");
-       ingredientDictionary.updateIngredientInList(demo);
+       ingredientDictionary.purchaseIngredientInList(demo);
+       ingredientDictionary.useIngredientInList(demo);
        System.out.println("Updates By Removing the Current Version of the Ingredient " +
                "and then Adding the Updated Version");
 

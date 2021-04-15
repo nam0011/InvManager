@@ -87,7 +87,8 @@ public class DemoSetup {
         demo.setMeasurementUnit("Changed Names");
         demo.setWeight(5);
         demo.setCost(1);
-        ingredientDictionary.updateIngredientInList(demo);
+        ingredientDictionary.purchaseIngredientInList(demo);
+        ingredientDictionary.useIngredientInList(demo);
         System.out.println("Updates By Removing the Current Version of the Ingredient and then Adding the Updated Version");
 
         ingredientDictionary.UpdateJSONFile();

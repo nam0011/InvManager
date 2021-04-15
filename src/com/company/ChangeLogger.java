@@ -84,7 +84,7 @@ public class ChangeLogger {
 
                 break;
             case UPDATE:
-                row[1] =ogPriceWeight;
+                row[1] = ogPriceWeight;
                 row[2] = newPriceWeight;
                 if(item.getWeight() <= item.getOGQuant()){
                     row[3] = "USED";
