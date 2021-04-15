@@ -49,7 +49,6 @@ public class InventoryManager {
         //This should replace method in DemoSetup that initially populates the array
         testFactory.startFactory(FileManager.getObjectArrayList());
 
-        //TODO Jonathan
         ID.setIngredientItemArrayList(testFactory.getList());
 
         try {
@@ -206,45 +205,11 @@ public class InventoryManager {
 
         IngredientItem SearchResult = ID.getIngredientItem(searchInput);
 
-//        if(!SearchResult.equals(null)){
-//            return SearchResult;
-//        }else {
-//            System.out.println("Ingredient Not Found");
-//            return null;
-//        }   //TODO change to through exception
-//
-//       if (SearchResult.equals(null)){
-//            System.out.println("Ingredient not found. ");
-//        }
         return SearchResult;
     }
 
 
 
-    //This function will prompt the user for details about the new ingredient.
-    // All attributes will go into the arraylist.
-
-    /*This can be handled through the GUI and it's controller, then it can pass the new ingredient to be added
-    * to the "addIngredient()" method
-    * It would do so by prompting user to enter the relevant data, then store that in a temporary IngredientItem object
-    * That would then be passed to the Inventory Manager's addIngredient() method.
-    */
-    //CODY FUNCTION I HAVEN'T FOUND USE FOR JUST YET
-    public ArrayList<String> PromptForInput(){
-        ArrayList<String> InputStream = new ArrayList<String>();
-
-        return InputStream;
-    }
-    /**
-     * This calculates the cost of a specific quantity of an ingredient
-     * @param ingredient The string ingredient to be searched for
-     * @param quantity The quantity of the inredient searched
-     * @return An int that represents the cost of the quantity of the ingredient item
-     * */
-    public double calculateCost(String ingredient, double quantity){
-
-        return quantity*searchIngredient(ingredient).getCost();
-    }
 /**
  * This returns the current cost of all items in the inventory.
  * @return A double which represents the current cost of all items in the inventory
