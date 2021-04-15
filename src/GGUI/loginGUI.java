@@ -99,7 +99,8 @@ public class loginGUI extends JFrame implements ActionListener {
             else if (!inPW.equals(ac.getActPW())){
                 invalidLabel.setText("incorrect password");
             }
-
         }
     }
+
+    //end of loginGUI class
 }
