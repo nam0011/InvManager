@@ -66,7 +66,7 @@ public class loginGUI extends JFrame implements ActionListener {
         loginPanel.add(loginButton,gc);
 
         setTitle("Please Login Here !");
-        setSize(450, 350);
+        setSize(600, 350);
 
         add(loginPanel);
         setVisible(true);
@@ -90,11 +90,16 @@ public class loginGUI extends JFrame implements ActionListener {
         }
         else{
             //error message
-            if(!inUN.equals(ac.getActUN())) {
+            if(inUN.equals("") || inPW.equals("")) {
+                invalidLabel.setText("both fields must be filled");
+            }
+            else if(!inUN.equals(ac.getActUN())) {
                 invalidLabel.setText("incorrect username");
-            }else if (!inPW.equals(ac.getActPW())){
+            }
+            else if (!inPW.equals(ac.getActPW())){
                 invalidLabel.setText("incorrect password");
             }
+
         }
     }
 }
