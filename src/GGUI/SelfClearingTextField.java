@@ -11,6 +11,9 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
     protected boolean beenClicked;
     protected String start;
     public void setDefaultText(String defaultText) {
+
+        setText(defaultText);
+        setFont(new Font("New Times Roman" , Font.ITALIC, 12));
         this.defaultText = defaultText;
     }
 
@@ -35,6 +38,7 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
         beenClicked = false;
 
     }
+
 
     public boolean hasBeenClickedAndFilled() {
         boolean filled = true;

@@ -14,8 +14,8 @@ public class UseDialog extends AbstractUpdateDialog {
 
     public UseDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel, itemIn);
+        amtTF.setDefaultText("Used Amount");
         setTitle("How much " + itemIn.getName() + " did you use!");
-        getAmtTF().setDefaultText("Amount used");
         IM = InventoryManager.getInventoryManager();
     }
 
