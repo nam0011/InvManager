@@ -28,7 +28,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
     public void buildDialog()
     {
         GridBagConstraints gc = new GridBagConstraints();
-        priceTF = new SelfClearingNumbField("price", 30);
+        priceTF = new SelfClearingNumbField("Price", 30);
         gc.insets = new Insets(4, 4, 4, 4);
         gc.gridx = 0;
         gc.gridy = 2;

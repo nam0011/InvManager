@@ -12,6 +12,7 @@ public class UseDialog extends AbstractUpdateDialog {
     private IngredientDictionary ID;
     private InventoryManager IM = InventoryManager.getInventoryManager();
 
+
     public UseDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel, itemIn);
         setTitle("How much " + itemIn.getName() + " did you use!");
@@ -29,7 +30,7 @@ public class UseDialog extends AbstractUpdateDialog {
                     Object[] options = {"Yes", "no"};
 
                     int n = JOptionPane.showOptionDialog(this,
-                            "Are you sure you used " + getAmtTF().getValue() + getItem().getMeasurementUnit()+ " of " + getItem().getName(),
+                            "Are you sure you used " + getAmtTF().getValue() + " " + getItem().getMeasurementUnit()+ " of " + getItem().getName(),
 
                             "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                     if (n == 0) {

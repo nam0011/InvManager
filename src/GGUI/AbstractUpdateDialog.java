@@ -108,7 +108,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
         itemNameTF.setSize(30, 12);
         itemNameTF.setEditable(false);
         itemNameTF.setFont(new Font("New Times Roman", Font.BOLD, 12));
-        amtTF = new SelfClearingNumbField("Amount Purchased", 10);
+        amtTF = new SelfClearingNumbField("Amount", 10);
 
 
 
@@ -202,12 +202,10 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
 
     /**
      * Finds the insertion point.
-     * <p>
-     * //@param name
+     * //@param name - name of item for comparison to find index
      *
-     * @return
+     * @return index at which to insert item
      */
-//TODO rewrite to overwrite item instead of insert
     public int findInsertionPoint(String name) {
         DTM = ingredientPanel.getDTM();
         int index = DTM.getRowCount();
@@ -220,14 +218,6 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
         }
         return index;
     }
-
-//THIS ACTION IS NOT PERFECT BUT SERVES FOR OUR ALPHA PURPOSES IRL WILL HAVE SEPERATE FUNCTIONS TO ADD FOR A WEEK AND REMOVE UPDATE AN AVERAGE PRICE AND
-//THEN REMOVE THE AMOUNT OF INVENTORY USED OVER THE TIME PERIOD; SINCE OUT ALPHA ONLY UPDATES FOR ONE USE AT A TIME IT IS EASIER TO IMPLEMENT THIS
-//VERSION AND THEN UPDATE AT A LATER TIME TO A MORE REALISTIC UPDATE SERIES OF FUNCTIONALITY
-//TODO JAVADOC COMMENTATION FOR UPDATE DIALOG PANEL
-
-
-
 
 }
 

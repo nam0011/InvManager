@@ -178,8 +178,6 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
         ingreRemoveB.addActionListener(this);
         ingreUseB.addActionListener(this);
 
-
-
     }
 
 
