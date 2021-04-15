@@ -17,7 +17,9 @@ public class Main {
       // DemoInventory demoinvent = new DemoInventory();
 
 //TEST PLANS AND EXCEPTION HANDLING
-
+       String last = "$1231";
+        String [] lastArray = last.split("$",1);
+        last = lastArray[0];
 
        new loginGUI();
 

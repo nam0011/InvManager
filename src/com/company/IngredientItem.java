@@ -245,10 +245,12 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
                 case "cost":
                     i++;
                     this.cost = Double.parseDouble(list.get(i));
+                    this.setOGPrice(this.cost);
                     break;
                 case "weight":
                     i++;
                     this.weight = Double.parseDouble(list.get(i));
+                    this.setOGQuant(this.weight);
                     break;
                 case "quantityOnHand":
                     i++;

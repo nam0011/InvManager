@@ -181,7 +181,7 @@ public class InventoryManager {
         //purchasedItem =this.ID.purchaseIngredientInList(purchasedItem);
         purchasedItem = ID.purchaseIngredientInList(purchasedItem);
         //Records the Item to be Purchased from the Ingredient Dictionary to the ChangeLog
-        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,purchasedItem,null);
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.PURCHASE,purchasedItem,null);
 
         return purchasedItem;
     }
@@ -191,7 +191,7 @@ public class InventoryManager {
         this.ID.useIngredientInList(usedItem);
         usedItem = ID.useIngredientInList(usedItem);
         //Records the Item to be Used from the Ingredient Dictionary to the ChangeLog
-        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,usedItem,null);
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.USE,usedItem,null);
 
         return usedItem;
     }

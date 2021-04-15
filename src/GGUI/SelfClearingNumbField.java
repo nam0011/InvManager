@@ -14,8 +14,8 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
         super.setTransferHandler(null);
     }
 
-    private String last;
-    private String defaultText;
+    protected String last;
+    protected String defaultText;
 
 
     public SelfClearingNumbField(String title, int width) {
@@ -25,6 +25,15 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
         countPoint = 0;
         addKeyListener(this);
 
+    }
+
+    public boolean hasBeenClickedAndFilled() {
+        boolean filled = true;
+        String x = getText();
+        if(x.equals("")){
+            filled = false;
+        }
+        return (beenClicked && filled);
     }
 
     //TODO catch exception to not allow any string to be input here

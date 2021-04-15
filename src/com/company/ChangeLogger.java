@@ -83,17 +83,14 @@ public class ChangeLogger {
                 row[3] = action.name();
 
                 break;
-            case UPDATE:
+
+            default:
                 row[1] =ogPriceWeight;
                 row[2] = newPriceWeight;
-                if(item.getWeight() <= item.getOGQuant()){
-                    row[3] = "USED";
-                }
-                else
-                    {
-                        row[3] = "PURCHASED";
-                    }
-                break;
+                row[3] = action.name();
+
+
+
 
 
         }
