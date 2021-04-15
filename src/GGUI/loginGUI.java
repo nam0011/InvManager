@@ -90,9 +90,9 @@ public class loginGUI extends JFrame implements ActionListener {
         }
         else{
             //error message
-            if(!inUN.equals(ac.actUN)) {
+            if(!inUN.equals(ac.getActUN())) {
                 invalidLabel.setText("incorrect username");
-            }else if (!inPW.equals(ac.actPW)){
+            }else if (!inPW.equals(ac.getActPW())){
                 invalidLabel.setText("incorrect password");
             }
         }

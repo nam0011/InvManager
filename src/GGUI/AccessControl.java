@@ -1,8 +1,8 @@
 package GGUI;
 
 public class AccessControl {
-String actUN;
-String actPW = "password123";
+private String actUN;
+private String actPW = "password123";
 private boolean loggedIn;
 private static AccessControl AccessInstance = null;
 public AccessControl(){
@@ -26,6 +26,13 @@ public static AccessControl getAccessInstance(){
     return AccessInstance;
 }
 
+public String getActUN(){
+    return this.actUN;
+}
 
+public String getActPW(){
+    return this.actPW;
+}
 
+//end of Access Control class
 }
