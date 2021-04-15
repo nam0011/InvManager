@@ -168,7 +168,7 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
      * @return
      */
     public String[] toQOHString() {
-        return new String[]{this.name , this.weight + " " + this.measurementUnit,this.currencyFormat()};
+        return new String[]{this.name , String.format("%.1f",this.weight) + " " + this.measurementUnit,String.format("$%1$,.2f",this.getCost())};
     }
 
     private String currencyFormat()
@@ -245,10 +245,12 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
                 case "cost":
                     i++;
                     this.cost = Double.parseDouble(list.get(i));
+                    this.setOGPrice(this.cost);
                     break;
                 case "weight":
                     i++;
                     this.weight = Double.parseDouble(list.get(i));
+                    this.setOGQuant(this.weight);
                     break;
                 case "quantityOnHand":
                     i++;

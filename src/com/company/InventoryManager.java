@@ -176,32 +176,22 @@ public class InventoryManager {
 
     }
 
-    /**
-     * Accessor method to update inventory change logger as well as backend array list when purchasing
-     * new amounts of existing items
-     * @param purchasedItem incoming amounts of items
-     * @return  purchaseItem - this method only needs this to display the updated item in the UI
-     */
     public IngredientItem purchaseIngredientInList(IngredientItem purchasedItem){
         //Updates for purchasing the Item from the Ingredient Dictionary
+        //purchasedItem =this.ID.purchaseIngredientInList(purchasedItem);
         purchasedItem = ID.purchaseIngredientInList(purchasedItem);
         //Records the Item to be Purchased from the Ingredient Dictionary to the ChangeLog
-        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,purchasedItem,null);
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.PURCHASE,purchasedItem,null);
 
         return purchasedItem;
     }
 
-    /**
-     * Accessor method to update inventory change logger as well as backend array list when using/decrementing
-     * amounts of existing items
-     * @param usedItem incoming amounts of items
-     * @return  usedItem - this method only needs this to display the updated item in the UI
-     */
     public IngredientItem useIngredientInList(IngredientItem usedItem){
         //Updates for Use Item from the Ingredient Dictionary
+        this.ID.useIngredientInList(usedItem);
         usedItem = ID.useIngredientInList(usedItem);
         //Records the Item to be Used from the Ingredient Dictionary to the ChangeLog
-        InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE,usedItem,null);
+        this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.USE,usedItem,null);
 
         return usedItem;
     }

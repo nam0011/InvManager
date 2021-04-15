@@ -39,7 +39,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
         return amtTF;
     }
 
-    private SelfClearingNumbField amtTF;
+    protected SelfClearingNumbField amtTF;
 
 
 

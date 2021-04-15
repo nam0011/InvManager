@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class PurchaseDialog extends AbstractUpdateDialog{
-    private SelfClearingNumbField priceTF;
+    private SelfClearingPrice priceTF;
     private ArrayList<SelfClearingTextField> listTextFields;
     private IngredientDictionary ID;
     private InventoryManager IM = InventoryManager.getInventoryManager();
@@ -28,7 +28,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
     public void buildDialog()
     {
         GridBagConstraints gc = new GridBagConstraints();
-        priceTF = new SelfClearingNumbField("Price", 30);
+        priceTF = new SelfClearingPrice("price", 30);
         gc.insets = new Insets(4, 4, 4, 4);
         gc.gridx = 0;
         gc.gridy = 2;
@@ -45,7 +45,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
                     Object[] options = {"Yes", "no"};
 
                 int n = JOptionPane.showOptionDialog(this,
-                        "Are you sure you want to purchase "+getAmtTF().getText() +" "+getItem().getMeasurementUnit()+" of " + getItem().getName() + " for $" + priceTF.getValue() ,
+                        "Are you sure you want to purchase "+getAmtTF().getText() +" "+getItem().getMeasurementUnit()+" of " + getItem().getName() + " for $" + String.format("%1$,.2f",priceTF.getValue()) ,
 
                         "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

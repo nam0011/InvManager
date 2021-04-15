@@ -14,17 +14,26 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
         super.setTransferHandler(null);
     }
 
-    private String last;
-    private String defaultText;
+    protected String last;
+    protected String defaultText;
 
 
     public SelfClearingNumbField(String title, int width) {
         super(title, width);
         defaultText = title;
-        last = "";
-        countPoint = 0;
+        last = start;
+
         addKeyListener(this);
 
+    }
+
+    public boolean hasBeenClickedAndFilled() {
+        boolean filled = true;
+        String x = getText();
+        if(x.equals(start)){
+            filled = false;
+        }
+        return (beenClicked && filled);
     }
 
     //TODO catch exception to not allow any string to be input here
@@ -39,7 +48,7 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
     public void keyTyped(KeyEvent e) {
 
         if(getText().equals(defaultText)){
-            setText("");
+            setText(start);
 
             setFont(new Font("New Times Roman", Font.PLAIN, 12));
         }
@@ -68,7 +77,7 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyChar() == InputEvent.CTRL_DOWN_MASK){
-            setEditable(false);
+
         }
     }
 

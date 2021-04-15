@@ -8,9 +8,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class SelfClearingTextField extends JTextField implements MouseListener, KeyListener {
-    private boolean beenClicked;
-
+    protected boolean beenClicked;
+    protected String start;
     public void setDefaultText(String defaultText) {
+
+        setText(defaultText);
+        setFont(new Font("New Times Roman" , Font.ITALIC, 12));
         this.defaultText = defaultText;
     }
 
@@ -18,7 +21,7 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
     public SelfClearingTextField(String title, int width){
         setText(title);
         addKeyListener(this);
-
+        start="";
         setMinimumSize(new Dimension(width,30));
 
         defaultText = title;
@@ -36,10 +39,11 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
 
     }
 
+
     public boolean hasBeenClickedAndFilled() {
         boolean filled = true;
         String x = getText();
-        if(x.equals("")){
+        if(x.equals(start)){
             filled = false;
         }
         return (beenClicked && filled);
@@ -48,10 +52,10 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
     @Override
     public void mouseClicked(MouseEvent e) {
         String text = getText();
-        if(!beenClicked && !text.equals("") && this.isEditable()) {
+        if(!beenClicked && !text.equals(start) && this.isEditable()) {
             beenClicked = true;
             setFont(new Font("New Times Roman", Font.PLAIN, 12));
-            setText("");
+            setText(start);
         }
     }
 
@@ -78,7 +82,7 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
     @Override
     public void keyTyped(KeyEvent e) {
         if(getText().equals(defaultText)){
-            setText("");
+            setText(start);
             beenClicked = true;
             setFont(new Font("New Times Roman", Font.PLAIN, 12));
         }

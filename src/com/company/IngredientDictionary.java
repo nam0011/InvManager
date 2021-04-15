@@ -178,19 +178,18 @@ public class IngredientDictionary {
      */
 
     public boolean addIngredientToList(IngredientItem ingredientItem) {
-        boolean alreadyExists = ingredientCheck(ingredientItem);
 
-//TODO fix the nonsense. - Jay
-        if (alreadyExists == false) {
+
+
+
             System.out.println("Safe to Add to List");
+            ingredientItem.setOGPrice(ingredientItem.getCost());
+            ingredientItem.setOGQuant(ingredientItem.getWeight());
             this.ingredientItemArrayList.add(ingredientItem);
-            System.out.println(ingredientItem.getName() + ":: Has Been Added To the List");
-            ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.ADD, ingredientItem, ingredientItem);
+
+
             return true;
-        } else {
-            System.out.println("Error, Ingredient" + ingredientItem.getName() + "Already Exists");
-            return false;
-        }
+
     }
 
     /**
