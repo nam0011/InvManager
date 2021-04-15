@@ -9,13 +9,12 @@ import java.awt.event.ActionEvent;
 
 public class UseDialog extends AbstractUpdateDialog {
 
-    private IngredientDictionary ID;
     private InventoryManager IM = InventoryManager.getInventoryManager();
 
 
     public UseDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel, itemIn);
-        amtTF.setDefaultText("Used Amount");
+        amtTF.setDefaultText("Amount Used");
         setTitle("How much " + itemIn.getName() + " did you use!");
         IM = InventoryManager.getInventoryManager();
     }

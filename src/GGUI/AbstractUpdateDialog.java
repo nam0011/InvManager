@@ -108,7 +108,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
         itemNameTF.setSize(30, 12);
         itemNameTF.setEditable(false);
         itemNameTF.setFont(new Font("New Times Roman", Font.BOLD, 12));
-        amtTF = new SelfClearingNumbField("Amount", 10);
+        amtTF = new SelfClearingNumbField("Amount Purchased", 10);
 
 
 

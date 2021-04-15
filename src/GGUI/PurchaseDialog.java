@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class PurchaseDialog extends AbstractUpdateDialog{
     private SelfClearingPrice priceTF;
     private ArrayList<SelfClearingTextField> listTextFields;
-    private IngredientDictionary ID;
     private InventoryManager IM = InventoryManager.getInventoryManager();
 
     PurchaseDialog(IngredientPanel panel, IngredientItem itemIn){
@@ -28,7 +27,7 @@ public class PurchaseDialog extends AbstractUpdateDialog{
     public void buildDialog()
     {
         GridBagConstraints gc = new GridBagConstraints();
-        priceTF = new SelfClearingPrice("price", 30);
+        priceTF = new SelfClearingPrice("Price", 30);
         gc.insets = new Insets(4, 4, 4, 4);
         gc.gridx = 0;
         gc.gridy = 2;
