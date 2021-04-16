@@ -1,5 +1,7 @@
 package com.company;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +18,10 @@ public class InventoryManager {
     public static ChangeLogger getInventoryChangeLogger() {
         return InventoryChangeLogger;
     }
+    public void emptyChangeDTM(){
+
+        InventoryChangeLogger.emptyChangeDTM();
+    }
 
     private static ChangeLogger InventoryChangeLogger = new ChangeLogger();
     IngredientFactory testFactory = new IngredientFactory();
@@ -25,6 +31,7 @@ public class InventoryManager {
     private int RecipeSize; //Size of Recipe Dictionary
     private int CurIndexIngredient = 0; //Index of current Ingredient Item
     double initialInventorycost;
+    private DefaultTableModel ingDTM;
 
     public static InventoryManager getInventoryManager() {
         if (instance == null) {
@@ -36,7 +43,7 @@ public class InventoryManager {
     /**
      * This class initializes the Inventory Manager. It sets the default files for loading and populating the various dictionaries, future updates of the inventory and gets required information.
      * */
-    public InventoryManager(){
+    private InventoryManager(){
         setDefaultFile("DataSource/ingredients.json"); //IF IT EVER BREAKS CHECK HERE FIRST
         FileUpdate.setFileName("DataSource/ingredientsBACKUP.json");
         try {
@@ -47,9 +54,13 @@ public class InventoryManager {
         FileManager.createObjectArray();
         //createIngredientDictionary();
         //This should replace method in DemoSetup that initially populates the array
-        testFactory.startFactory(FileManager.getObjectArrayList());
 
-        ID.setIngredientItemArrayList(testFactory.getList());
+        ID.startFactory(FileManager.getObjectArrayList());//This cuts out the middleman of IngredientFactory.
+        //BuildTheDefaultTableModel.
+
+
+
+
 
         try {
             FileManager.close();
@@ -195,18 +206,6 @@ public class InventoryManager {
         return usedItem;
     }
 
-    /**
-     * Method to Search for an Ingredient in the Inventory
-     * @param searchInput The string corresponding to the IngredientItem to be searched
-     * @return The result of the search
-     */
-
-    public IngredientItem searchIngredient(String searchInput){
-
-        IngredientItem SearchResult = ID.getIngredientItem(searchInput);
-
-        return SearchResult;
-    }
 
 
 
@@ -246,6 +245,8 @@ public class InventoryManager {
 
 
     public void UpdateBackups() throws IOException {
+
+        //TODO the following line of code is causing problems
         Collections.sort(ID.getIngredientItemArrayList());
 
         FileUpdate.setFileName("DataSource/ingredientsBACKUP.json");
@@ -283,4 +284,43 @@ public class InventoryManager {
     public String[] printDictionary(int i){
         return ID.printDictionary(i);
     }
+
+    public DefaultTableModel getIngDTM() {
+        return ID.getIngDTM();
+    }
+
+    /**
+     * This method reverts back the Default Table Model for the ingredient table and the
+     * arraylist and the dictionary.
+     */
+
+    public void revertDTMandIDAL(){
+        FileManager backup = new FileManager("DataSource/ingredients.json");
+
+        try {
+            backup.generateStringArrayList();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        backup.createObjectArray();
+        //createIngredientDictionary();
+        //This should replace method in DemoSetup that initially populates the array
+
+        ID.revertDatabases(backup.getObjectArrayList());
+        //BuildTheDefaultTableModel.
+
+
+
+        try {
+            FileManager.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        InventoryChangeLogger.emptyChangeDTM();
+    }
+
+public boolean anyChanges(){
+
+        return InventoryChangeLogger.anyChanges();
+}
 }

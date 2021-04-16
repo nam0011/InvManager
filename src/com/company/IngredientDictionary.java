@@ -2,6 +2,7 @@ package com.company;
 
 import GGUI.IngredientPanel;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class IngredientDictionary {
     private static IngredientDictionary instance = null;
     private static ChangeLogger ingredientChangeLogger = new ChangeLogger();
     private static FileManager FileUpdate = new FileManager();
+    private DefaultTableModel ingDTM;
+
 
     /**
      * Gets instance the single instance of IngredientFact
@@ -30,11 +33,12 @@ public class IngredientDictionary {
 
     private IngredientDictionary() {
         this.ingredientItemArrayList = new ArrayList<>();
-        for (int i = 0; i < ingredientItemArrayList.size(); i++) {
+        this.ingDTM = new DefaultTableModel();
+        String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
+        ingDTM.addColumn(header[0]);
+        ingDTM.addColumn(header[1]);
+        ingDTM.addColumn(header[2]);
 
-            this.ingredientItemArrayList.add(ingredientItemArrayList.get(i));
-
-        }
 
     }
 
@@ -186,6 +190,7 @@ public class IngredientDictionary {
             ingredientItem.setOGPrice(ingredientItem.getCost());
             ingredientItem.setOGQuant(ingredientItem.getWeight());
             this.ingredientItemArrayList.add(ingredientItem);
+            //TODO This means the DTM and the arrayList doesn't match.
 
 
             return true;
@@ -208,7 +213,7 @@ public class IngredientDictionary {
                     String temp = this.ingredientItemArrayList.get(i).getName();
                     this.ingredientItemArrayList.remove(i);
                     System.out.println(temp + ":: Removed From Ingredient Dictionary List");
-                    ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.DELETE, ingredientItem, ingredientItem);
+
                 }
             }
 
@@ -353,6 +358,41 @@ public class IngredientDictionary {
             FileUpdate.generateJSONFile(FileType.INGREDIENTS);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void startFactory(ArrayList<ArrayList<String>> ingredientStrings){
+
+
+        for(int i = 0; i<ingredientStrings.size(); i++){
+            IngredientItem temp = new IngredientItem(ingredientStrings.get(i));
+            this.ingredientItemArrayList.add(temp);
+            ingDTM.addRow(temp.toQOHString());
+        }
+    }
+
+    public void revertDatabases(ArrayList<ArrayList<String>> ingredientStrings){
+
+        ingredientItemArrayList.removeAll(ingredientItemArrayList);
+
+        removeAllRows();
+        for(int i = 0; i<ingredientStrings.size(); i++){
+            IngredientItem temp = new IngredientItem(ingredientStrings.get(i));
+            this.ingredientItemArrayList.add(temp);
+            this.ingDTM.addRow(temp.toQOHString());
+
+        }
+    }
+
+    public DefaultTableModel getIngDTM() {
+        return ingDTM;
+    }
+    private void removeAllRows(){
+        int n = ingDTM.getRowCount();
+        for(int r = n-1; r >= 0; r--){
+
+                ingDTM.removeRow(r);
+
         }
     }
 

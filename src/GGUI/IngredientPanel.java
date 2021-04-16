@@ -67,18 +67,17 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
         int n = IL.size();
 
-        String[] header = new String[] {"Ingredient Name", "Quantity on hand", "Cost"};
+
 
 
         ingredientTable = new JTable();
 
         ingredientTable.getTableHeader().setReorderingAllowed(false);
 
-        DTM = (DefaultTableModel) ingredientTable.getModel();
+        DTM = IM.getIngDTM();
+        ingredientTable.setModel(DTM);
 
-        DTM.addColumn(header[0]);
-        DTM.addColumn(header[1]);
-        DTM.addColumn(header[2]);
+
 
         ingredientTable.setRowSelectionAllowed(true);
 
@@ -86,11 +85,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
 
-        for(int r = 0; r < n; r++) {
 
-            DTM.addRow(IM.printDictionary(r));
-
-        }
 
         ingredientTable.setPreferredScrollableViewportSize(new Dimension(500, 50));
         ingredientTable.setDragEnabled(false);

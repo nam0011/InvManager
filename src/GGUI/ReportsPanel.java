@@ -78,22 +78,29 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+            IM.getInventoryChangeLogger().emptyChangeDTM();
         }
         else if (e.getSource() == discardAll)
         {
             Object[] options = {"Yes", "no"};
             int n =JOptionPane.showOptionDialog(this, "Are you sure you want to discard all changes?", "Discard all", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
-            if(n == 1){
+            if(n == 0){
                 /*TODO we need to the following
                     1. revert JSON file to the backup.
                     2. revert Ingredient Dictionary to the reflect all the back up
+
                     3.revert the Default table model back to    
 
                  */
 
+                //#2
+                IM.revertDTMandIDAL();
+
             }
-            else if (n == 0)
+            else if (n == 1){
+
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ public class ChangeLogger {
         changeTable = new JTable();
 
 
-        String[] header = new String[] {"Ingredient Name", "Original Price & Original Cost", "New Price & cost", "Change Type" };
+        String[] header = new String[] {"Ingredient Name", "Old Price & Cost", "New Price & cost", "Change Type" };
         changeDTM = new DefaultTableModel(header, 0);
 
     }
@@ -95,6 +95,26 @@ public class ChangeLogger {
 
         }
         return row;
+    }
+
+    public void emptyChangeDTM(){
+
+        int n = changeDTM.getRowCount();
+        for(int r = n-1; r >= 0; r--){
+
+            changeDTM.removeRow(r);
+
+        }
+    }
+
+    /**
+     * If they're are any changes it will return true.
+     * @return
+     */
+
+    public boolean anyChanges(){
+
+        return (changeDTM.getRowCount() != 0);
     }
 
 

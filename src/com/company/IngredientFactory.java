@@ -15,10 +15,5 @@ public class IngredientFactory {
         return list;
     }
 
-    public void startFactory(ArrayList<ArrayList<String>> ingredientStrings){
-        for(int i = 0; i<ingredientStrings.size(); i++){
-            IngredientItem temp = new IngredientItem(ingredientStrings.get(i));
-            this.list.add(temp);
-        }
-    }
+
 }

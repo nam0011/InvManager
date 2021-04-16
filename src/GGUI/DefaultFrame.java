@@ -63,14 +63,29 @@ public class DefaultFrame extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 // call terminate
-                try {
-                    IM.UpdateJSONFile();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                if (IM.anyChanges()) {
+                    Object[] options = {"Yes", "no", "Cancel"};
+                    int n = JOptionPane.showOptionDialog(getItself(), "Do you want to save before closing?", "WARNING", JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+
+                    if (n == 0) {
+                        try {
+                            IM.UpdateJSONFile();
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        System.exit(1);
+                    }
+                    else if(n==1){System.exit(1);}
+
                 }
-                dispose();
-                System.exit(0);
-            }
+                else{
+
+                    System.exit(1);
+                }
+
+                }
+
         });
 
         setSize(500, 600);
@@ -89,6 +104,10 @@ public class DefaultFrame extends JFrame implements ActionListener {
         mainPanel.add(logoutButton, gc);
         add(mainPanel);
 
+    }
+    public DefaultFrame getItself(){
+
+        return this;
     }
 
 
