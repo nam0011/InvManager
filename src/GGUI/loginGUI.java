@@ -93,11 +93,8 @@ public class loginGUI extends JFrame implements ActionListener {
             if(inUN.equals("") || inPW.equals("")) {
                 invalidLabel.setText("both fields must be filled");
             }
-            else if(!inUN.equals(ac.getActUN())) {
-                invalidLabel.setText("incorrect username");
-            }
-            else if (!inPW.equals(ac.getActPW())){
-                invalidLabel.setText("incorrect password");
+            else if(!inUN.equals(ac.getActUN()) || !inPW.equals(ac.getActPW())) {
+                invalidLabel.setText("incorrect username or password");
             }
         }
     }
