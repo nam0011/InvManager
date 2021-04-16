@@ -16,10 +16,13 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
     private JTable changeTable;
     private JScrollPane scrollPane;
     private JButton saveAll;
+    private JButton discardAll;
     ReportsPanel(DefaultFrame inFrame) {
         super(inFrame);
         saveAll = new JButton("Save All");
         saveAll.addActionListener(this);
+        discardAll = new JButton("Discard all");
+        discardAll.addActionListener(this);
 
         changeTable = new JTable();
         DefaultTableModel intial = IM.getInventoryChangeLogger().getChangeDTM();
@@ -28,8 +31,30 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
 
         buildChangeTable();
 
+        buildLayout();
         setSize(new Dimension(450,450));
-        add(scrollPane);
+
+
+    }
+
+    private void buildLayout(){
+        setLayout(new GridBagLayout());
+        //build toolbar
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
+        toolBar.add(saveAll);
+        toolBar.add(discardAll);
+
+        GridBagConstraints gc = new GridBagConstraints();
+        //placing the layout
+        gc.gridy = 0;
+        gc.gridx = 0;
+        add(scrollPane, gc);
+
+        gc.gridy = 1;
+        gc.insets = new Insets(5, 0, 0, 0);
+        gc.anchor = GridBagConstraints.SOUTHEAST;
+        add(toolBar, gc);
 
     }
 
@@ -53,6 +78,22 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+        }
+        else if (e.getSource() == discardAll)
+        {
+            Object[] options = {"Yes", "no"};
+            int n =JOptionPane.showOptionDialog(this, "Are you sure you want to discard all changes?", "Discard all", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+
+            if(n == 1){
+                /*TODO we need to the following
+                    1. revert JSON file to the backup.
+                    2. revert Ingredient Dictionary to the reflect all the back up
+                    3.revert the Default table model back to    
+
+                 */
+
+            }
+            else if (n == 0)
         }
     }
 }

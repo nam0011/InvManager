@@ -49,7 +49,10 @@ public class SelfClearingPrice extends SelfClearingNumbField {
 
             last = getText().substring(0, pos) + c + getText().substring(pos);
 
+            if(last.charAt(1) == '.'){
 
+                last = last.substring(0, 1) +"0"+ last.substring(1);
+            }
 
 
 
