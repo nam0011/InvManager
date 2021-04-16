@@ -1,4 +1,5 @@
 package GGUI;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -18,6 +19,8 @@ public class loginGUI extends JFrame implements ActionListener {
     private String inPW, inUN;
     private AccessControl ac = new AccessControl();
 
+
+
     public loginGUI() {
 
         loginPanel = new JPanel();
@@ -30,10 +33,10 @@ public class loginGUI extends JFrame implements ActionListener {
 
         this.setIconImage(img.getImage());
         userLabel = new JLabel("User Name");
-        userTextField = new SelfClearingTextField("jlew92",50);
+        userTextField = new SelfClearingTextField("",50);
         userTextField.setColumns(10);
         pwLabel = new JLabel("Password");
-        passwordTextField = new JPasswordField("password123");
+        passwordTextField = new JPasswordField("");
         invalidLabel = new JLabel("");
         loginButton = new JButton("Login");
         loginButton.addActionListener(this);
@@ -72,10 +75,22 @@ public class loginGUI extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         inPW = passwordTextField.getText();
         inUN = userTextField.getText();
+
+        AccessControl user1 = new AccessControl();
+        AccessControl user2 = new AccessControl();
+        AccessControl user3 = new AccessControl();
+
+        user1.buildUser("jonathan", "123");
+        user2.buildUser("nathan", "456");
+        user3.buildUser("jay", "789");
+
         if (ac.giveAccess(inUN, inPW)) {
 
             loginButton.removeActionListener(this);
@@ -93,7 +108,13 @@ public class loginGUI extends JFrame implements ActionListener {
             if(inUN.equals("") || inPW.equals("")) {
                 invalidLabel.setText("both fields must be filled");
             }
-            else if(!inUN.equals(ac.getActUN()) || !inPW.equals(ac.getActPW())) {
+            else if(!inUN.equals(user1.getActUN()) || !inPW.equals(user1.getActPW())){
+                invalidLabel.setText("incorrect username or password");
+            }
+            else if(!inUN.equals(user2.getActUN()) || !inPW.equals(user2.getActPW())){
+                invalidLabel.setText("incorrect username or password");
+            }
+            else if(!inUN.equals(user3.getActUN()) || !inPW.equals(user3.getActPW())){
                 invalidLabel.setText("incorrect username or password");
             }
         }

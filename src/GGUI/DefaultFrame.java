@@ -2,6 +2,7 @@ package GGUI;
 
 import com.company.IngredientDictionary;
 import com.company.InventoryManager;
+import GGUI.loginGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
         private JPanel mainPanel;
         private JTabbedPane tabbedPane;
         private InventoryManager IM;
+        private loginGUI login;
         private ImageIcon img;
         private JButton logoutButton;
 
@@ -60,11 +62,12 @@ public class DefaultFrame extends JFrame implements ActionListener {
 
         IM = InventoryManager.getInventoryManager();
         IM.UpdateBackups();
+
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 // call terminate
                 if (IM.anyChanges()) {
-                    Object[] options = {"Yes", "no", "Cancel"};
+                    Object[] options = {"Yes", "No", "Cancel"};
                     int n = JOptionPane.showOptionDialog(getItself(), "Do you want to save before closing?", "WARNING", JOptionPane.YES_NO_CANCEL_OPTION,
                             JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 

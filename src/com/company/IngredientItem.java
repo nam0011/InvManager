@@ -3,11 +3,6 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * @author Cody Bracewell
- * CS321-03
- * Ingredient Item Object Class
- */
 
 public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
     //TODO weight vs quantityOnHand may be lead to some confusion.

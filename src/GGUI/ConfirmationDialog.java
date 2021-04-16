@@ -40,18 +40,7 @@ public class ConfirmationDialog extends JDialog implements ActionListener {
         setVisible(true);
 
     }
-    public boolean GetokBool()
-    {
-        buildDialog();
-        return okBool;
-    }
 
-    private void buildDialog(){
-
-
-
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
