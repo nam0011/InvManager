@@ -11,14 +11,13 @@ public class ChangeLogger {
 
 
     private JTable changeTable;
-
-
-
     private DefaultTableModel changeDTM;
     private static final String changeLogFilePath = "DataSource/ChangeLog.json";
 
 
-
+    /**
+     * Building the changelogger table
+     */
     public ChangeLogger() {
         changeTable = new JTable();
 
@@ -27,8 +26,6 @@ public class ChangeLogger {
         changeDTM = new DefaultTableModel(header, 0);
 
     }
-
-
 
     /**
      * Method to Record the Change Being Made* @param action    The Enumerated Type ChangeLoggerAction to be recorded
@@ -40,19 +37,20 @@ public class ChangeLogger {
     {
         String[] newRow = this.createRow(original, action);
         changeDTM.addRow(newRow);
-
     }
 
-
-
-    public void generateDTM(){
-
-    }
-
+    /**
+     * Getter for changeTable
+     * @return the changeTable
+     */
     public JTable getChangeTable() {
         return changeTable;
     }
 
+    /**
+     * Default table module for change table getter
+     * @return default table module for change table
+     */
     public DefaultTableModel getChangeDTM() {
         return changeDTM;
     }
@@ -97,6 +95,9 @@ public class ChangeLogger {
         return row;
     }
 
+    /**
+     * Method to empty all of the change table
+     */
     public void emptyChangeDTM(){
 
         int n = changeDTM.getRowCount();
@@ -109,19 +110,12 @@ public class ChangeLogger {
 
     /**
      * If they're are any changes it will return true.
-     * @return
+     * @return boolean if there are changes - false not changes - true
      */
-
     public boolean anyChanges(){
 
         return (changeDTM.getRowCount() != 0);
     }
 
-
-
-
-
-
-
-
+    //end of ChangeLogger classs
 }
