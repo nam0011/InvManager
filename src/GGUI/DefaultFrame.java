@@ -118,7 +118,11 @@ public class DefaultFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() ==  logoutButton) {
             dispose();
-            //TODO add a "are you sure dialog"
+            Object[] options = {"Yes", "No"};
+            int n = JOptionPane.showOptionDialog(this,
+                    "Are you sure you want to log out? Your current progress will be saved",
+                    "Confirm", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             new loginGUI();
         }
     }

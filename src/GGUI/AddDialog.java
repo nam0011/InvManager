@@ -198,7 +198,7 @@ public class AddDialog extends JDialog implements ActionListener {
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == oKB) {
 
-                Object[] options = {"Yes", "no"};
+                Object[] options = {"Yes", "No"};
                 String itemStr = itemNameTF.getText();
 
                 if (allFilled()) {

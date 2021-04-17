@@ -14,14 +14,27 @@ public AccessControl(){
     actPW = "";
 }
 
-public AccessControl buildUser(String username, String password){
-   this.setActUN(username);
-   this.setActPW(password);
+
+    /**
+     * allows the end user to build a new user as well as the backend to do some checks (this was needed due to previous implementation)
+     * @param username  incoming username to set a new users name
+     * @param password  incoming password to set a new users password
+     * @return  the user
+     */
+    public AccessControl buildUser(String username, String password){
+        this.setActUN(username);
+        this.setActPW(password);
    return this;
     }
 
 
-public boolean giveAccess(String inUN, String inPW) {
+    /**
+     *  check to give the user access
+     * @param inUN  text field from GUI for user input
+     * @param inPW  text field from GUI for pw input
+     * @return  bool value of yes or no to get into appplication
+     */
+    public boolean giveAccess(String inUN, String inPW) {
 
     AccessControl user1 = new AccessControl();
     AccessControl user2 = new AccessControl();
@@ -47,7 +60,11 @@ public boolean giveAccess(String inUN, String inPW) {
 
 }
 
-public static AccessControl getAccessInstance(){
+    /**
+     *
+     * @return
+     */
+    public static AccessControl getAccessInstance(){
     if(AccessInstance == null)
     {
         AccessInstance = new AccessControl();
@@ -55,13 +72,31 @@ public static AccessControl getAccessInstance(){
     return AccessInstance;
 }
 
-
-public String getActUN(){
+    /**
+     * getter for userName
+     * @return userName
+     */
+    public String getActUN(){
     return this.actUN;
 }
-public void setActUN(String username){ this.actUN = username; }
-public String getActPW(){ return this.actPW; }
-public void setActPW(String password){ this.actPW = password; }
+
+    /**
+     * setter for username
+     * @param username incoming username
+     */
+    public void setActUN(String username){ this.actUN = username; }
+
+    /**
+     * getter for password
+     * @return password
+     */
+    public String getActPW(){ return this.actPW; }
+
+    /**
+     * setter for password
+     * @param password incoming password
+     */
+    public void setActPW(String password){ this.actPW = password; }
 
 //end of Access Control class
 }
