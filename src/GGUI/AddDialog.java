@@ -135,8 +135,6 @@ public class AddDialog extends JDialog implements ActionListener {
         listTextFields.add(itemNameTF);
         listTextFields.add(amtPurchaseTF);
         listTextFields.add(priceTF);
-
-
     }
 
     /**
@@ -177,8 +175,8 @@ public class AddDialog extends JDialog implements ActionListener {
     /**
      * Finds the insertion point.
      *
-     * @param name
-     * @return
+     * @param name the incoming item name
+     * @return  the index of the point to insert the item in sorted order
      */
     private int findInsertionPoint(String name) {
 
@@ -193,7 +191,11 @@ public class AddDialog extends JDialog implements ActionListener {
         return index;
     }
 
-
+    /**
+     * Method that checks for the actions performed by the user that affect this
+     * class and allow all backend functionality to begin
+     * @param e the incoming action from the user (clicking of the Add Button)
+     */
         @Override
         public void actionPerformed (ActionEvent e){
             if (e.getSource() == oKB) {

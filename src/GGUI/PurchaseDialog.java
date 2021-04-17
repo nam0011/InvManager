@@ -23,7 +23,9 @@ public class PurchaseDialog extends AbstractUpdateDialog{
         IM = InventoryManager.getInventoryManager();
     }
 
-
+    /**
+     * Builds to Purchase Dialog Window
+     */
     public void buildDialog()
     {
         GridBagConstraints gc = new GridBagConstraints();
@@ -36,7 +38,10 @@ public class PurchaseDialog extends AbstractUpdateDialog{
         pack();
     }
 
-
+    /**
+     * Checks for user input and calls backend methods for requested action
+     * @param e using clicking purchase
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == getoKB()) {

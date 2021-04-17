@@ -12,6 +12,13 @@ public class ConfirmationDialog extends JDialog implements ActionListener {
     private JButton okBtn, cancelBtn;
     //TODO REMOVE this class doesn't do shit.
 
+
+    /**
+     *This method does not seem to be currently implemented in final build
+     * However it is designed to be used to build a confirmation panel output using
+     * @param P_verbStr an incoming verb
+     * @param P_itemStr an incoming item name
+     */
     public ConfirmationDialog(String P_verbStr, String P_itemStr)
     {
 
@@ -41,13 +48,10 @@ public class ConfirmationDialog extends JDialog implements ActionListener {
 
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == okBtn){
             okBool = true;
-
-
         }
 
     }

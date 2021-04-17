@@ -95,6 +95,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+
     private void buildLayout()
     {
         GridBagConstraints gc = new  GridBagConstraints();
@@ -109,11 +110,14 @@ public class DefaultFrame extends JFrame implements ActionListener {
 
     }
     public DefaultFrame getItself(){
-
         return this;
     }
 
 
+    /**
+     * Checks for user action and allows for backend work to begin
+     * @param e user button push action
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() ==  logoutButton) {

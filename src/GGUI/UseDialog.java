@@ -11,7 +11,11 @@ public class UseDialog extends AbstractUpdateDialog {
 
     private InventoryManager IM = InventoryManager.getInventoryManager();
 
-
+    /**
+     * builds the use dialog window
+     * @param panel the panel layout we want
+     * @param itemIn the item we want to edit
+     */
     public UseDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel, itemIn);
         amtTF.setDefaultText("Amount Used");
@@ -19,6 +23,10 @@ public class UseDialog extends AbstractUpdateDialog {
         IM = InventoryManager.getInventoryManager();
     }
 
+    /**
+     * action listener to perform UX methods based on user choice of button
+     * @param e users choice of button of use dialog window
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == getoKB()) {

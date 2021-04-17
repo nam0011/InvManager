@@ -24,6 +24,11 @@ public class RemoveDialog extends abstractDialog implements ActionListener {
     private DefaultTableModel DTM;
     private InventoryManager IM = InventoryManager.getInventoryManager();
 
+    /**
+     * Builds the remove dialog window
+     * @param panel the panel outline we want
+     * @param array the array of selected items
+     */
     public RemoveDialog(IngredientPanel panel, ArrayList<String> array)
     {
         super(panel);
@@ -106,6 +111,9 @@ public class RemoveDialog extends abstractDialog implements ActionListener {
 
     }
 
+    /**
+     * Building of the list of items that are selected to be removed
+     */
     public void buildList()
     {
         removeModel = new DefaultListModel();
@@ -133,6 +141,10 @@ public class RemoveDialog extends abstractDialog implements ActionListener {
         return index;
     }
 
+    /**
+     * checking for specific user button action calls UX methods based on user decision
+     * @param e user pressing a choice of button
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == okB){

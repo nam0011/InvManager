@@ -17,6 +17,7 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
     private JScrollPane scrollPane;
     private JButton saveAll;
     private JButton discardAll;
+
     ReportsPanel(DefaultFrame inFrame) {
         super(inFrame);
         saveAll = new JButton("Save All");
@@ -69,6 +70,11 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
 
          scrollPane = new JScrollPane(changeTable,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
     }
+
+    /**
+     * action check to decide whether we want to save all progress or not
+     * @param e user button choice on reports panel
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == saveAll)

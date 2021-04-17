@@ -20,7 +20,9 @@ public class loginGUI extends JFrame implements ActionListener {
     private AccessControl ac = new AccessControl();
 
 
-
+    /**
+     * This is the method set to be used as first point of build and user contact
+     */
     public loginGUI() {
 
         loginPanel = new JPanel();
@@ -76,8 +78,10 @@ public class loginGUI extends JFrame implements ActionListener {
     }
 
 
-
-
+    /**
+     * Method determines if user can actually log in by calling on some UX functions
+     * @param e the user clicking the login button
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         inPW = passwordTextField.getText();

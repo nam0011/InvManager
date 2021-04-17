@@ -67,9 +67,6 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
         int n = IL.size();
 
-
-
-
         ingredientTable = new JTable();
 
         ingredientTable.getTableHeader().setReorderingAllowed(false);
@@ -77,15 +74,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
         DTM = IM.getIngDTM();
         ingredientTable.setModel(DTM);
 
-
-
         ingredientTable.setRowSelectionAllowed(true);
-
-
-
-
-
-
 
         ingredientTable.setPreferredScrollableViewportSize(new Dimension(500, 50));
         ingredientTable.setDragEnabled(false);
@@ -96,16 +85,15 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
         columnModel.getColumn(1).setWidth(500);
 
         scrollPane = new JScrollPane(ingredientTable,ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-
         scrollPane.setPreferredSize(new Dimension(450, 450));
 
-
-
-
     }
-    public DefaultTableModel getDTM(){
 
+    /**
+     * getter for default table module
+     * return DTM the default table module
+     */
+    public DefaultTableModel getDTM(){
         return DTM;
     }
 
@@ -115,13 +103,10 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
      */
     private void buildIngrePanel(){
 
-
     ingreToolBar = new JToolBar();
     ingreToolBar.setFloatable(false);
 
     ingreSearchTF = new SelfClearingTextField("Search", 60);
-
-
 
     ingreSearchTF.addKeyListener(new KeyListener() {
         @Override
@@ -182,9 +167,8 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
 }
-/**
- * Set the layout
- */
+
+
 private void setLayout(){
     GridBagConstraints gc = new GridBagConstraints();
 
@@ -207,7 +191,7 @@ private void setLayout(){
 
     /**
      * The actionPerformed method determines what button you pressed and performs a certain action via a series of if-else statements
-     * @param e
+     * @param e user button press
      */
 
     @Override

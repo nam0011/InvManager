@@ -61,8 +61,8 @@ public AccessControl(){
 }
 
     /**
-     *
-     * @return
+     *Singleton of AccessControl - this is not currently implemented
+     * @return  AccessInstance
      */
     public static AccessControl getAccessInstance(){
     if(AccessInstance == null)
