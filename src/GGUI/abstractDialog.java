@@ -10,6 +10,7 @@ import java.io.IOException;
 abstract class abstractDialog extends JDialog {
     protected InventoryManager IM = InventoryManager.getInventoryManager();
     private IngredientPanel ingredientPanel;
+
     abstractDialog(IngredientPanel panel){
         super();
 

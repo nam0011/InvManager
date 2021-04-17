@@ -17,13 +17,9 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
         item = itemIn;
         listTextFields = new ArrayList<>();
 
-
         ingredientPanel = panel;
 
-
-
         setLayout(new GridBagLayout());
-
 
         buildDialog();
         setSize(400, 400);
@@ -82,22 +78,12 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
     private JButton oKB;
     private JButton cancel;
 
-
-
-
-
     private String[] unitArray = new String[4];
     private DefaultTableModel DTM;
     private IngredientPanel ingredientPanel;
     private IngredientItem item;
 
-    //TODO JAVADOC
 
-//TODO JAVADOC
-
-    /**
-     *
-     */
     private void buildDialog() {
 
         GridBagConstraints gc = new GridBagConstraints();

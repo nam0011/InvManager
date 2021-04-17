@@ -35,6 +35,8 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     private DefaultFrame defaultFrame;
     InventoryManager IM = InventoryManager.getInventoryManager();
     ArrayList<IngredientItem> IL;
+
+
     public IngredientPanel(DefaultFrame inframe){
         super(inframe);
         setLayout(new GridBagLayout());
@@ -90,8 +92,8 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
     }
 
     /**
-     * getter for default table module
-     * return DTM the default table module
+     * getter for DTM
+     * @return default table module
      */
     public DefaultTableModel getDTM(){
         return DTM;
