@@ -13,7 +13,6 @@ public class InventoryManager {
     IngredientDictionary ID = IngredientDictionary.getIngredientDictionary(); //Copy instance of IngredientDictionary here to load inventory
     FileManager FileManager;
     private static InventoryManager instance = null;
-    IngredientFactory IngredientFactory;
 
     public static ChangeLogger getInventoryChangeLogger() {
         return InventoryChangeLogger;
@@ -24,11 +23,9 @@ public class InventoryManager {
     }
 
     private static ChangeLogger InventoryChangeLogger = new ChangeLogger();
-    IngredientFactory testFactory = new IngredientFactory();
     private static FileManager FileUpdate = new FileManager();
     private IngredientItem CurrentItem; //This is the currentitem for the iterator section of Inventory Manager
     private int IngredientSize; //Size of Ingredient Dictionary
-    private int RecipeSize; //Size of Recipe Dictionary
     private int CurIndexIngredient = 0; //Index of current Ingredient Item
     double initialInventorycost;
     private DefaultTableModel ingDTM;
