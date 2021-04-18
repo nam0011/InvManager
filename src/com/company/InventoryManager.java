@@ -322,7 +322,13 @@ public class InventoryManager {
         InventoryChangeLogger.emptyChangeDTM();
     }
 
-public boolean anyChanges(){
+
+    /**
+     * method to check if there is anything waiting to push from
+     * changelogger table to backend files
+     * @return true or false if any objects exist here
+     */
+    public boolean anyChanges(){
 
         return InventoryChangeLogger.anyChanges();
 }

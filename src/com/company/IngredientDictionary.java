@@ -371,6 +371,10 @@ public class IngredientDictionary {
         }
     }
 
+    /**
+     * method to be used to revert to original database when changes are opted to not be saved
+     * @param ingredientStrings the arraylist in question
+     */
     public void revertDatabases(ArrayList<ArrayList<String>> ingredientStrings){
 
         ingredientItemArrayList.removeAll(ingredientItemArrayList);
@@ -380,13 +384,18 @@ public class IngredientDictionary {
             IngredientItem temp = new IngredientItem(ingredientStrings.get(i));
             this.ingredientItemArrayList.add(temp);
             this.ingDTM.addRow(temp.toQOHString());
-
         }
     }
 
+    /**
+     * get a default table module to but UI tables
+     * @return the ingredient DFT
+     */
     public DefaultTableModel getIngDTM() {
         return ingDTM;
     }
+
+
     private void removeAllRows(){
         int n = ingDTM.getRowCount();
         for(int r = n-1; r >= 0; r--){
@@ -398,5 +407,3 @@ public class IngredientDictionary {
 
 
 }
-
-//hello
