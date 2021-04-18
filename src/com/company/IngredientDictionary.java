@@ -183,9 +183,6 @@ public class IngredientDictionary {
 
     public boolean addIngredientToList(IngredientItem ingredientItem) {
 
-
-
-
             System.out.println("Safe to Add to List");
             ingredientItem.setOGPrice(ingredientItem.getCost());
             ingredientItem.setOGQuant(ingredientItem.getWeight());
@@ -360,7 +357,10 @@ public class IngredientDictionary {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Method for generating the initial array list of the IngredientDictionary.
+     * @param ingredientStrings  An arraylist of string that contains information to construct IngredientItems
+     */
     public void startFactory(ArrayList<ArrayList<String>> ingredientStrings){
 
 

@@ -22,6 +22,7 @@
 {"name" : "GARLIC CLOVES", "type" : "DRY", "measurementUnit" : "LB", "cost" : "11.98", "weight" : "48.0", "onHand" : "575.04"},
 {"name" : "GROUND BEEF", "type" : "DRY", "measurementUnit" : "LB", "cost" : "5.24", "weight" : "16.0", "onHand" : "83.84"},
 {"name" : "GROUND PORK", "type" : "DRY", "measurementUnit" : "LB", "cost" : "4.64", "weight" : "32.0", "onHand" : "148.48"},
+{"name" : "H", "type" : "DRY", "measurementUnit" : "LB", "cost" : "0.0", "weight" : "7.0", "onHand" : "0.0"},
 {"name" : "HAMBURGER BUNS", "type" : "DRY", "measurementUnit" : "LB", "cost" : "2.98", "weight" : "20.0", "onHand" : "59.6"},
 {"name" : "KETCHUP", "type" : "DRY", "measurementUnit" : "LB", "cost" : "2.99", "weight" : "32.0", "onHand" : "95.68"},
 {"name" : "MARGARINE", "type" : "WET", "measurementUnit" : "LB", "cost" : "1.57", "weight" : "16.0", "onHand" : "25.12"},

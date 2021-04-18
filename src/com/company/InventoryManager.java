@@ -240,6 +240,9 @@ public class InventoryManager {
         return ID.ingredientCheck(ingredient);
     }
 
+    /**
+     * This method updates the backup ingredient dictionary files.
+     */
 
     public void UpdateBackups() throws IOException {
 
@@ -263,6 +266,9 @@ public class InventoryManager {
             e.printStackTrace();
         }
     }
+    /**
+     * This method updates the default ingredient dictionary file.
+     */
 
     public void UpdateJSONFile() throws IOException {
         Collections.sort(ID.getIngredientItemArrayList());
