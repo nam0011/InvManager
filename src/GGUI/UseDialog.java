@@ -67,8 +67,7 @@ public class UseDialog extends AbstractUpdateDialog {
             }
             else
                 {
-                    JOptionPane.showMessageDialog(this, "All textfields must be filled!");
-                    resetList();
+                    DisplayNotFillError();
                 }
             } else if (e.getSource() == getCancel()) {
                 getIngredientPanel().setDefaultFrameEnable(true);

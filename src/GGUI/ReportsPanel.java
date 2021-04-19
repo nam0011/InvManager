@@ -104,9 +104,7 @@ public class ReportsPanel  extends abstractPanel implements ActionListener {
                 IM.revertDTMandIDAL();
 
             }
-            else if (n == 1){
 
-            }
         }
     }
 }

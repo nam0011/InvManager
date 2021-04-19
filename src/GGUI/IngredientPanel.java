@@ -170,6 +170,10 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 }
 
+public Icon getIcon(){
+        return defaultFrame.getImg();
+}
+
 
 private void setLayout(){
     GridBagConstraints gc = new GridBagConstraints();

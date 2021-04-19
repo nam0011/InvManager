@@ -18,6 +18,8 @@ abstract class abstractDialog extends JDialog {
         ingredientPanel.setDefaultFrameEnable(false);
         this.isAlwaysOnTop();
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        ImageIcon img = (ImageIcon) ingredientPanel.getIcon();
+        this.setIconImage(img.getImage());
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {

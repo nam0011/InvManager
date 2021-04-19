@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 abstract class AbstractUpdateDialog extends abstractDialog  implements ActionListener{
+    private JTextField unitTF;
+    protected ArrayList<SelfClearingTextField> listTextFields;
+
     public AbstractUpdateDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel);
         item = itemIn;
@@ -40,8 +43,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
 
 
 
-    private JTextField unitTF;
-    private ArrayList<SelfClearingTextField> listTextFields;
+
 
     public JTextField getUnitTF() {
         return unitTF;
@@ -151,6 +153,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
 
 
 
+
     }
 
     /**
@@ -192,7 +195,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
      *
      * @return index at which to insert item
      */
-    public int findInsertionPoint(String name) {
+    protected int findInsertionPoint(String name) {
         DTM = ingredientPanel.getDTM();
         int index = DTM.getRowCount();
         for (int i = 0; i < DTM.getRowCount(); i++) {
@@ -202,8 +205,17 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
             }
 
         }
+
+
         return index;
     }
+
+    protected void DisplayNotFillError(){
+        JOptionPane.showMessageDialog(this, "All boxes must be filled", "Warning", JOptionPane.ERROR_MESSAGE);
+        resetList();
+
+    }
+
 
 }
 

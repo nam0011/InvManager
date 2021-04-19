@@ -113,6 +113,9 @@ public class DefaultFrame extends JFrame implements ActionListener {
         return this;
     }
 
+    public ImageIcon getImg() {
+        return img;
+    }
 
     /**
      * Checks for user action and allows for backend work to begin

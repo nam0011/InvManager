@@ -19,8 +19,11 @@ public class PurchaseDialog extends AbstractUpdateDialog{
         super(panel, itemIn);
         setTitle("PURCHASE MORE " + itemIn.getName() + "?");
         buildDialog();
-        getListTextFields().add(priceTF);
+        listTextFields = getListTextFields();
+        listTextFields.add(priceTF);
+
         IM = InventoryManager.getInventoryManager();
+
     }
 
     /**
@@ -80,11 +83,16 @@ public class PurchaseDialog extends AbstractUpdateDialog{
 
                 }
             }
+            else {
+                DisplayNotFillError();
+
+            }
 
             } else if (e.getSource() == getCancel()) {
-                getIngredientPanel().setDefaultFrameEnable(true);
-                dispose();
-            }
+            getIngredientPanel().setDefaultFrameEnable(true);
+            dispose();
+        }
+
         }
 
     }

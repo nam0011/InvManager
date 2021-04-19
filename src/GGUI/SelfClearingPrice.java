@@ -30,6 +30,11 @@ public class SelfClearingPrice extends SelfClearingNumbField {
 
 
         char c = e.getKeyChar();
+        if(c == '-'){
+            e.consume();
+            getToolkit().beep();
+            return;
+        }
         int pos = this.getCaretPosition();
         if(pos == 0)
         {
