@@ -209,7 +209,7 @@ public class IngredientDictionary {
      * @return  purchaseItem - the same object is pushed back after being updated
      */
     public IngredientItem purchaseIngredientInList(IngredientItem purchaseItem){
-        // for further explanation
+
         IngredientItem ingredientItem = ingredientItemArrayList.get(purchaseItem.getIndex());                         //start iterating through the list
               //if found we need to do some math and push to a list
                 double ogPrice = purchaseItem.getOGPrice();  //set the original price and quantity of the found item before changes
@@ -255,8 +255,6 @@ public class IngredientDictionary {
      */
     public IngredientItem useIngredientInList(IngredientItem usedItem) {
 
-        //The index is set when IngredientItem is found in useDialog. The index acts as bookmarker and should work
-        //even when we add and remove items because it is the current index when the user clicks the button.
         IngredientItem ingredientItem = ingredientItemArrayList.get(usedItem.getIndex());
 
             double ogPrice = usedItem.getOGPrice();  //set the original price and quantity of the found item before changes
