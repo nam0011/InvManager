@@ -1,12 +1,9 @@
 package com.company;
 
-import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
 
 
 public class InventoryManager {
@@ -134,31 +131,6 @@ public class InventoryManager {
         return CurrentItem;
     }
 
-//    private void createIngredientDictionary(){
-////        try {
-////            FileManager.generateStringArrayList();
-////            InventoryChangeLogger = new ChangeLogger();
-////            //This will set the Original Ingredient File in Change Logger. This is the Raw read in String.
-////            InventoryChangeLogger.setOriginalIngredientFile(FileManager.getStringArrayList());
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-////        FileManager.createObjectArray();
-////        IngredientFactory.startFactory(FileManager.getObjectArrayList());
-//      //  IngredientDictionary = IngredientDictionary.getIngredientDictionary();
-//
-////        try {
-////            FileManager.close();
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-////
-////        try {
-////            FileManager.close();
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-//    }
 
     /**
      * Method to Add an Ingredient to the Inventory
@@ -306,7 +278,7 @@ public class InventoryManager {
             e.printStackTrace();
         }
         backup.createObjectArray();
-        //createIngredientDictionary();
+
         //This should replace method in DemoSetup that initially populates the array
 
         ID.revertDatabases(backup.getObjectArrayList());

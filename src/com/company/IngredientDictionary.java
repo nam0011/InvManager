@@ -1,12 +1,8 @@
 package com.company;
 
-import GGUI.IngredientPanel;
-
 import javax.swing.table.DefaultTableModel;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.ListIterator;
 
@@ -109,17 +105,7 @@ public class IngredientDictionary {
                break;
             }
         }
-        //Exception Handling for ingredient not in array list.
-        /*
-        try {
-            for (int i = 0; i > -1; i++) {
-                if (ingredientItemArrayList.get(i).getName().equals(ingredientName)) {
-                    i = -2;
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(ingredientName + ":: Ingredient Not Found");
-        }*/
+
         return tempIngredientItem;
     }
 
@@ -223,8 +209,6 @@ public class IngredientDictionary {
      * @return  purchaseItem - the same object is pushed back after being updated
      */
     public IngredientItem purchaseIngredientInList(IngredientItem purchaseItem){
-
-        //Don't worry this will work even if we add or remove items from the arrayList. Trust me! See useItem
         // for further explanation
         IngredientItem ingredientItem = ingredientItemArrayList.get(purchaseItem.getIndex());                         //start iterating through the list
               //if found we need to do some math and push to a list
