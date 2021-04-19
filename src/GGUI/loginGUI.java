@@ -15,7 +15,6 @@ public class loginGUI extends JFrame implements ActionListener {
     private SelfClearingTextField userTextField;
     private JPasswordField passwordTextField;
     private JButton loginButton;
-    private JLabel invalidLabel;
     private String inPW, inUN;
     private AccessControl ac = new AccessControl();
 
@@ -39,7 +38,7 @@ public class loginGUI extends JFrame implements ActionListener {
         userTextField.setColumns(10);
         pwLabel = new JLabel("Password");
         passwordTextField = new JPasswordField("");
-        invalidLabel = new JLabel("");
+
         loginButton = new JButton("Login");
         loginButton.addActionListener(this);
 
@@ -60,9 +59,7 @@ public class loginGUI extends JFrame implements ActionListener {
         passwordTextField.setColumns(10);
         loginPanel.add(passwordTextField,gc);
 
-        gc.gridy = 2;
-        gc.gridx = 0;
-        loginPanel.add(invalidLabel,gc);
+
 
         gc.gridy = 2;
         gc.gridx = 1;
@@ -75,6 +72,7 @@ public class loginGUI extends JFrame implements ActionListener {
 
         add(loginPanel);
         setVisible(true);
+        pack();
     }
 
 
@@ -109,18 +107,8 @@ public class loginGUI extends JFrame implements ActionListener {
         }
         else{
             //error message
-            if(inUN.equals("") || inPW.equals("")) {
-                invalidLabel.setText("both fields must be filled");
-            }
-            else if(!inUN.equals(user1.getActUN()) || !inPW.equals(user1.getActPW())){
-                invalidLabel.setText("incorrect username or password");
-            }
-            else if(!inUN.equals(user2.getActUN()) || !inPW.equals(user2.getActPW())){
-                invalidLabel.setText("incorrect username or password");
-            }
-            else if(!inUN.equals(user3.getActUN()) || !inPW.equals(user3.getActPW())){
-                invalidLabel.setText("incorrect username or password");
-            }
+            JOptionPane.showMessageDialog(this, "Incorrect UserName/Password", "Error", 0);
+
         }
     }
 

@@ -246,7 +246,12 @@ private void setLayout(){
                 removeNames.add(curr);
             }
 
-            new RemoveDialog(this, removeNames);
+            if(removeIndex.length > 0) {
+                new RemoveDialog(this, removeNames);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Please select at least one item in the table below.");
+            }
 
 
         }

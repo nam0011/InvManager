@@ -12,8 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 abstract class AbstractUpdateDialog extends abstractDialog  implements ActionListener{
-    private JTextField unitTF;
+    protected JTextField unitTF;
     protected ArrayList<SelfClearingTextField> listTextFields;
+    protected SelfClearingNumbField amtTF;
 
     public AbstractUpdateDialog(IngredientPanel panel, IngredientItem itemIn) {
         super(panel);
@@ -38,7 +39,7 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
         return amtTF;
     }
 
-    protected SelfClearingNumbField amtTF;
+
 
 
 

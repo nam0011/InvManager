@@ -14,7 +14,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class AddDialog extends JDialog implements ActionListener {
+public class AddDialog extends abstractDialog implements ActionListener {
     private SelfClearingTextField itemNameTF;
     private SelfClearingNumbField amtPurchaseTF;
     private SelfClearingPrice priceTF;
@@ -29,7 +29,8 @@ public class AddDialog extends JDialog implements ActionListener {
     private IngredientPanel ingredientPanel;
 
     public AddDialog(IngredientPanel panel) {
-       
+        super(panel);
+
 
         setTitle("Add Item");
 
@@ -191,6 +192,12 @@ public class AddDialog extends JDialog implements ActionListener {
         return index;
     }
 
+    protected void DisplayNotFillError(){
+        JOptionPane.showMessageDialog(this, "All boxes must be filled", "Warning", JOptionPane.ERROR_MESSAGE);
+        resetList();
+
+    }
+
     /**
      * Method that checks for the actions performed by the user that affect this
      * class and allow all backend functionality to begin
@@ -247,9 +254,7 @@ public class AddDialog extends JDialog implements ActionListener {
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "All textfields must be filled!");
-
-                    resetList();
+                    DisplayNotFillError();
 
                 }
             } else if (e.getSource() == unitDropDownBox) {

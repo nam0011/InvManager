@@ -28,6 +28,7 @@ abstract class abstractDialog extends JDialog {
 
             }
         });
+
     }
 
 }
