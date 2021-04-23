@@ -145,9 +145,9 @@ abstract class AbstractUpdateDialog extends abstractDialog  implements ActionLis
     }
 
     /**
-     * I'm sure why I put all the textfields seems unnecessary, but too lazy to change it something else.
+     * I made this
      */
-    public void setListTextFields() {
+    protected void setListTextFields() {
 
 
         listTextFields.add(amtTF);

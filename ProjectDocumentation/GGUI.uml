@@ -7,7 +7,7 @@
     <node x="234.5" y="304.0">GGUI.IngredientPanel</node>
     <node x="56.75" y="868.0">GGUI.loginGUI</node>
     <node x="253.0" y="652.5">GGUI.DefaultFrame</node>
-    <node x="0.0" y="630.0">GGUI.AccessControl</node>
+    <node x="0.0" y="630.0">com.company.AccessControl</node>
     <node x="234.5" y="0.0">GGUI.AddDialog</node>
   </nodes>
   <notes />

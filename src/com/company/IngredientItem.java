@@ -166,41 +166,7 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
         return new String[]{this.name , String.format("%.1f",this.weight) + " " + this.measurementUnit,String.format("$%1$,.2f",this.getCost())};
     }
 
-    private String currencyFormat()
-    {
-        String output= new String();
 
-        String format = String.valueOf(cost);
-        String arr[] = format.split("\\.");
-        String dec = arr[1];
-        String whole = arr[0];
-        if(dec.length() == 1)
-        {
-
-            output = "$" + format + "0";
-        }
-        else if(dec.length()== 2)
-        {
-            output = "$" + format;
-        }
-        else {
-            int thirdDec = Character.getNumericValue(dec.charAt(2));
-            if(thirdDec < 5)
-            {
-                output = "$"+whole + "." + dec.substring(0,2);
-            }
-            else
-            {
-                int i = Integer.parseInt(dec.substring(0,2)) + 1;
-
-                output = "$" + whole + "." + String.valueOf(i);
-
-            }
-        }
-
-
-        return output;
-    }
 
 
     /**
@@ -513,6 +479,37 @@ public class IngredientItem implements Cloneable, Comparable<IngredientItem>{
      */
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    /**
+     *
+     * @param amtUsed
+     */
+    public void useItem(Double amtUsed){
+
+        this.setOGQuant(weight);
+        this.setOGPrice(cost);
+
+        this.setCost(cost - (OGPrice/OGQuant) * amtUsed);
+        this.setWeight(this.getOGQuant() - amtUsed); //decrement the weight of the item in the list
+
+
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void purchaseItem(Double purchAmt, Double newPrice)
+    {
+        OGQuant = weight;
+        OGPrice = cost;
+
+
+        cost = cost + newPrice;
+
+        weight = weight + purchAmt;
     }
 
 

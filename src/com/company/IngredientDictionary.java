@@ -208,53 +208,33 @@ public class IngredientDictionary {
      * @param purchaseItem - the incoming object with pertinent information for use in calculations
      * @return  purchaseItem - the same object is pushed back after being updated
      */
-    public IngredientItem purchaseIngredientInList(IngredientItem purchaseItem){
+    public IngredientItem purchaseIngredientInList(Double amtPurch,Double newPrice, int index){
 
+<<<<<<< Updated upstream
         IngredientItem ingredientItem = ingredientItemArrayList.get(purchaseItem.getIndex());                         //start iterating through the list
               //if found we need to do some math and push to a list
                 double ogPrice = purchaseItem.getOGPrice();  //set the original price and quantity of the found item before changes
                 double ogQuant = purchaseItem.getOGQuant();
                 ingredientItem.setOGQuant(ogQuant);
                 ingredientItem.setOGPrice(ogPrice);
+=======
+        //Don't worry this will work even if we add or remove items from the arrayList. Trust me! See useItem
+        // for further explanation
+        IngredientItem ingredientItem = ingredientItemArrayList.get(index);                         //start iterating through the list
+              ingredientItem.purchaseItem(amtPurch, newPrice);
+              return ingredientItem;
+>>>>>>> Stashed changes
 
-                double priceDif;   //find the difference between the prices and store in a temp value name price difference
-
-                if (purchaseItem.getCost() != 0) {//if there is a difference in price we want a percentage value of that difference
-                    ingredientItem.setPriceDiff(purchaseItem.getCost() - ogPrice);  //store it
-                    if( ingredientItem.getPriceDiff() < 0){
-                        ingredientItem.setPriceDiff(-1*ingredientItem.getPriceDiff());  //make sure its always a positive difference
-                    }
-
-                    ingredientItem.setPriceChangeRatio(purchaseItem.getCost() / ogPrice); // store that value
-
-                    double meanPrice = (((purchaseItem.getCost()*purchaseItem.getWeight())+(ogPrice*ogQuant))/(purchaseItem.getWeight()+ogQuant));    //not universal enough but works for current build testing means 4-2-21
-
-                    ingredientItem.setCost(meanPrice);
-                } else {
-                    ingredientItem.setCost((ogPrice*ogQuant)/(ogQuant+purchaseItem.getWeight()));
-                }
-
-                double quantDif = purchaseItem.getWeight() - ogQuant;   //Update Dialog handles our decrementing values therefore we only need to use simple addition and will always update properly
-                ingredientItem.setQuantDiff(quantDif);
-                double quantChangeRatio;
-
-                        quantChangeRatio = purchaseItem.getWeight() / ogQuant;    //find the change ratio
-                        ingredientItem.setQuantChangeRatio(quantChangeRatio);
-                        ingredientItem.setWeight(ogQuant + purchaseItem.getWeight()); //increment the weight of the item in the list
-
-                purchaseItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
-                ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, purchaseItem, purchaseItem);   //feed it to the changelogger
-
-        return purchaseItem;    //return the updated item
     }
 
     /**
      * Method to do calculations for using an amount of an item currently in the inventory list
-     * @param usedItem - the incoming object with pertinent information for use in calculations
+     * @param  - the incoming object with pertinent information for use in calculations
      * @return  usedItem - the same object is pushed back after being updated
      */
-    public IngredientItem useIngredientInList(IngredientItem usedItem) {
+    public IngredientItem useIngredientInList(Double amtUsed, int index) {
 
+<<<<<<< Updated upstream
         IngredientItem ingredientItem = ingredientItemArrayList.get(usedItem.getIndex());
 
             double ogPrice = usedItem.getOGPrice();  //set the original price and quantity of the found item before changes
@@ -285,12 +265,16 @@ public class IngredientDictionary {
             quantChangeRatio = -1 * (usedItem.getWeight() / ogQuant);    //use the negative reciprocal we always want a positive ratio
             ingredientItem.setQuantChangeRatio(quantChangeRatio);
             ingredientItem.setWeight(usedItem.getOGQuant() - usedItem.getWeight()); //decrement the weight of the item in the list
+=======
+        //The index is set when IngredientItem is found in useDialog. The index acts as bookmarker and should work
+        //even when we add and remove items because it is the current index when the user clicks the button.
+        IngredientItem ingredientItem = ingredientItemArrayList.get(index);
+        ingredientItem.useItem(amtUsed);
+>>>>>>> Stashed changes
 
-            usedItem = ingredientItem;    //make sure that all updates are pushed back to the object pushed into function
-            ingredientChangeLogger.recordIngredientChange(ChangeLoggerAction.UPDATE, usedItem, usedItem);   //feed it to the changelogger
 
 
-            return usedItem;    //return the updated item
+            return ingredientItem;    //return the updated item
 
     }
 

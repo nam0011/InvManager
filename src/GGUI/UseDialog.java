@@ -31,7 +31,8 @@ public class UseDialog extends AbstractUpdateDialog {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == getoKB()) {
             if (allFilled()) {
-                if (getItem().getWeight() < getAmtTF().getValue()) {
+                Double amtUsed = getAmtTF().getValue();
+                if (getItem().getWeight() < amtUsed) {
                     JOptionPane.showMessageDialog(this, "You do not have enough in stock.");
                 } else {
                     Object[] options = {"Yes", "no"};
@@ -44,12 +45,9 @@ public class UseDialog extends AbstractUpdateDialog {
 
                         IngredientItem item = getItem();
 
-                        item.setOGQuant(item.getWeight());
-                        item.setOGPrice(item.getCost());
-                        item.setCost(0);
-                        item.setWeight(getAmtTF().getValue());
 
-                        item = IM.useIngredientInList(item);
+
+                        item = IM.useIngredientInList(amtUsed, item.getIndex());
 
                         //******************************************************************************************
                         int row = findInsertionPoint(item.getName());

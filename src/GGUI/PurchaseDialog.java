@@ -62,11 +62,8 @@ public class PurchaseDialog extends AbstractUpdateDialog{
                     IngredientItem item = getItem();    //this is the item we are wanting to update
 
                     //********************************************************************
-                       item.setOGQuant(item.getWeight());
-                       item.setOGPrice(item.getCost());
-                       item.setCost(priceTF.getValue());
-                       item.setWeight(getAmtTF().getValue());
-                       item = IM.purchaseIngredientInList(item);
+
+                       item = IM.purchaseIngredientInList(getAmtTF().getValue(),priceTF.getValue(),item.getIndex());
 
                     //******************************************************************************************
                     int row = findInsertionPoint(item.getName());

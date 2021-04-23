@@ -1,8 +1,7 @@
 package GGUI;
 
-import com.company.IngredientDictionary;
+import com.company.Account;
 import com.company.InventoryManager;
-import GGUI.loginGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class DefaultFrame extends JFrame implements ActionListener {
 
@@ -20,17 +20,21 @@ public class DefaultFrame extends JFrame implements ActionListener {
         private loginGUI login;
         private ImageIcon img;
         private JButton logoutButton;
+        private Account loginAccount;
 
-   private JTabbedPane ingredientsTab;
+
+   
 
     /**
      *  Builds the frame adds the tabs. At the moment IngredientPanel is the only operational frame.
+     * @param
      */
-    public DefaultFrame() throws IOException {
-
+    public DefaultFrame(Account accountIN) throws IOException {
+        loginAccount = accountIN;
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(0,50,100));
-
+        IM = InventoryManager.getInventoryManager();
+        IM.setAccount(loginAccount);
 
         mainPanel.setSize(500, 600);
         setTitle("Inventory Manager");
@@ -46,6 +50,10 @@ public class DefaultFrame extends JFrame implements ActionListener {
 
         tabbedPane.add("Reports", new ReportsPanel(this));
 
+        if(loginAccount.isAdminPriv()){
+            tabbedPane.add("Admin",new AdminPanel(this));
+        }
+
         //Builds the logout button
         {
             logoutButton = new JButton("Logout");
@@ -60,7 +68,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
 
         buildLayout();
 
-        IM = InventoryManager.getInventoryManager();
+
         IM.UpdateBackups();
 
         addWindowListener(new WindowAdapter() {
@@ -90,6 +98,11 @@ public class DefaultFrame extends JFrame implements ActionListener {
                 }
 
         });
+
+
+
+
+
 
         setSize(500, 600);
         setVisible(true);
@@ -132,7 +145,11 @@ public class DefaultFrame extends JFrame implements ActionListener {
                     JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             if(n == 0) {
                 dispose();
-                new loginGUI();
+                try {
+                    new loginGUI();
+                } catch (IOException | ParseException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         }
 

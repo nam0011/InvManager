@@ -3,7 +3,7 @@
 
 [
 {"name" : "ALL PURPOSE FLOUR", "type" : "DRY", "measurementUnit" : "LB", "cost" : "3.30834961657314", "weight" : "191.0", "onHand" : "631.895"},
-{"name" : "ALMONDS", "type" : "DRY", "measurementUnit" : "LB", "cost" : "0.45", "weight" : "11.0", "onHand" : "4.95"},
+{"name" : "ALMONDS", "type" : "DRY", "measurementUnit" : "LB", "cost" : "0.45", "weight" : "6.0", "onHand" : "2.7"},
 {"name" : "BELL PEPPERS", "type" : "WET", "measurementUnit" : "LB", "cost" : "3.2023529411764704", "weight" : "17.0", "onHand" : "54.44"},
 {"name" : "BLACK PEPPER", "type" : "DRY", "measurementUnit" : "LB", "cost" : "5.98", "weight" : "8.75", "onHand" : "52.325"},
 {"name" : "BROWN RICE", "type" : "DRY", "measurementUnit" : "LB", "cost" : "2.32", "weight" : "50.0", "onHand" : "116.0"},

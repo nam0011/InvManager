@@ -7,10 +7,10 @@ import java.util.Collections;
 
 
 public class InventoryManager {
-    IngredientDictionary ID = IngredientDictionary.getIngredientDictionary(); //Copy instance of IngredientDictionary here to load inventory
+    IngredientDictionary ID = IngredientDictionary.getIngredientDictionary();
     FileManager FileManager;
     private static InventoryManager instance = null;
-
+    private Account account;// This is the account logged in.
     public static ChangeLogger getInventoryChangeLogger() {
         return InventoryChangeLogger;
     }
@@ -75,6 +75,10 @@ public class InventoryManager {
 
     public void setDefaultFile(String name){
         FileManager = new FileManager(name);
+    }
+    public void setAccount(Account accountIn){
+        account = accountIn;
+
     }
     /**
      * Method to Get the Ingredient Item Linked List to be managed else where.
@@ -155,22 +159,23 @@ public class InventoryManager {
 
     }
 
-    public IngredientItem purchaseIngredientInList(IngredientItem purchasedItem){
+    public IngredientItem purchaseIngredientInList(Double amtPurch, Double newPrice, int index){
         //Updates for purchasing the Item from the Ingredient Dictionary
         //purchasedItem =this.ID.purchaseIngredientInList(purchasedItem);
-        purchasedItem = ID.purchaseIngredientInList(purchasedItem);
+        IngredientItem purchasedItem = ID.purchaseIngredientInList(amtPurch,newPrice,index);
         //Records the Item to be Purchased from the Ingredient Dictionary to the ChangeLog
         this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.PURCHASE,purchasedItem,null);
 
         return purchasedItem;
     }
 
-    public IngredientItem useIngredientInList(IngredientItem usedItem){
+    public IngredientItem useIngredientInList(Double amtUsed, int index){
         //Updates for Use Item from the Ingredient Dictionary
-        this.ID.useIngredientInList(usedItem);
-        usedItem = ID.useIngredientInList(usedItem);
+        IngredientItem usedItem = this.ID.useIngredientInList(amtUsed, index);
+        //usedItem = ID.useIngredientInList(usedItem);
         //Records the Item to be Used from the Ingredient Dictionary to the ChangeLog
         this.InventoryChangeLogger.recordIngredientChange(ChangeLoggerAction.USE,usedItem,null);
+
 
         return usedItem;
     }

@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 public class SelfClearingTextField extends JTextField implements MouseListener, KeyListener {
     protected boolean beenClicked;
     protected String start;
+    protected String defaultText;
     public void setDefaultText(String defaultText) {
 
         setText(defaultText);
@@ -17,7 +18,7 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
         this.defaultText = defaultText;
     }
 
-    private String defaultText;
+
     public SelfClearingTextField(String title, int width){
         setText(title);
         addKeyListener(this);

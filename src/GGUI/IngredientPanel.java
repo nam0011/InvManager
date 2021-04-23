@@ -65,9 +65,9 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
      */
     private void buildIngredientTable(){
 
-        IL=IM.getIngredientItemArrayList();
+        //IL=IM.getIngredientItemArrayList();
 
-        int n = IL.size();
+
 
         ingredientTable = new JTable();
 

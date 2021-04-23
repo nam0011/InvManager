@@ -1,28 +1,32 @@
 package GGUI;
-import java.util.ArrayList;
+import com.company.AccessControl;
+import com.company.Account;
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class loginGUI extends JFrame implements ActionListener {
     private JPanel loginPanel;
     private JLabel userLabel;
     private JLabel pwLabel;//for now on pw == password.
     private SelfClearingTextField userTextField;
-    private JPasswordField passwordTextField;
+    private SelfClearingPasswordTextfield passwordTextField;
     private JButton loginButton;
-    private String inPW, inUN;
-    private AccessControl ac = new AccessControl();
+    private String inUN;
+    private int inPW;
+    private AccessControl ac = AccessControl.getAccessInstance();
 
 
     /**
      * This is the method set to be used as first point of build and user contact
      */
-    public loginGUI() {
+    public loginGUI() throws IOException, ParseException {
 
         loginPanel = new JPanel();
 
@@ -34,10 +38,10 @@ public class loginGUI extends JFrame implements ActionListener {
 
         this.setIconImage(img.getImage());
         userLabel = new JLabel("User Name");
-        userTextField = new SelfClearingTextField("",50);
+        userTextField = new SelfClearingTextField("Username",50);
         userTextField.setColumns(10);
         pwLabel = new JLabel("Password");
-        passwordTextField = new JPasswordField("");
+        passwordTextField = new SelfClearingPasswordTextfield("password", 10, this);
 
         loginButton = new JButton("Login");
         loginButton.addActionListener(this);
@@ -74,35 +78,24 @@ public class loginGUI extends JFrame implements ActionListener {
         setVisible(true);
         pack();
     }
-
-
-    /**
-     * Method determines if user can actually log in by calling on some UX functions
-     * @param e the user clicking the login button
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        inPW = passwordTextField.getText();
+    public void login(){
+        inPW = passwordTextField.getHashPasscode();
         inUN = userTextField.getText();
 
-        AccessControl user1 = new AccessControl();
-        AccessControl user2 = new AccessControl();
-        AccessControl user3 = new AccessControl();
 
-        user1.buildUser("jonathan", "123");
-        user2.buildUser("nathan", "456");
-        user3.buildUser("jay", "789");
+        Account account = ac.giveAccess(inUN, inPW);
+        if (account !=null) {
 
-        if (ac.giveAccess(inUN, inPW)) {
+            //loginButton.removeActionListener(this);
 
-            loginButton.removeActionListener(this);
 
-            dispose();
             try {
-                new DefaultFrame();
+                new DefaultFrame(account);
+
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
+            dispose();
 
         }
         else{
@@ -110,7 +103,21 @@ public class loginGUI extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Incorrect UserName/Password", "Error", 0);
 
         }
+
     }
+
+    /**
+     * Method determines if user can actually log in by calling on some UX functions
+     * @param e the user clicking the login button
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        login();
+
+
+    }
+
+
 
     //end of loginGUI class
 }
