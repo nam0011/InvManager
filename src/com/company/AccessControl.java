@@ -1,19 +1,23 @@
 package com.company;
 
+import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AccessControl {
 private boolean loggedIn;
 private static AccessControl AccessInstance = null;
 private ArrayList<Account> list;
+private DefaultTableModel accountDTM;
+private FileManager file;
 
 
 private AccessControl() throws IOException, ParseException {
 list = new ArrayList<>();
-FileManager file = new FileManager("DataSource/Accounts.json");
+file = new FileManager("DataSource/Accounts.json");
     file.generateStringArrayList();
     file.createObjectArray();
     ArrayList<ArrayList<String>> object = file.getObjectArrayList();
@@ -23,8 +27,13 @@ FileManager file = new FileManager("DataSource/Accounts.json");
     }
 
 
-
-//TODO build arraylist from JSON file here;
+}
+public void generateDTM(){
+    accountDTM = new DefaultTableModel();
+    accountDTM.addColumn("Username");
+    accountDTM.addColumn("Last Login");
+    accountDTM.addColumn("Birthday");
+    accountDTM.addColumn("Account type");
 }
 
 
@@ -72,18 +81,23 @@ FileManager file = new FileManager("DataSource/Accounts.json");
     return AccessInstance;
 }
 
-    /**
-     * getter for userName
-     * @return userName
-     */
+    public void addAccount(Account newAccount ) throws IOException {
+        file.appendToFile(newAccount.toJSONString());
+        this.UpdateJSONFile();
+    }
+
+    public void UpdateJSONFile() throws IOException {
 
 
+        try {
+            file.generateJSONFile(FileType.ACCOUNT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
-    /**
-     * setter for password
-     * @param password incoming password
-     */
 
 
 //end of Access Control class

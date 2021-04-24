@@ -84,4 +84,5 @@ public class SelfClearingNumbField extends SelfClearingTextField implements KeyL
     @Override
     public void keyReleased(KeyEvent e) {
     }
+
 }

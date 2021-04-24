@@ -3,5 +3,6 @@ package com.company;
 public enum FileType {
     INGREDIENTS,
     RECIPES,
-    CHANGELOG;
+    CHANGELOG,
+    ACCOUNT;
 }

@@ -9,6 +9,7 @@ abstract class abstractPanel extends JPanel implements ActionListener {
     abstractPanel(DefaultFrame inFrame){
         frame = inFrame;
 
+
     }
     /**
      * Turns on or off the main frame so the user cannot do more than one thing

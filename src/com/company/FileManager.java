@@ -22,6 +22,11 @@ public class FileManager extends Reader {
             "\n" +
             "]\n" +
             "}";
+    private static String EMPTYENDFILE = "\n" +
+            "\n" +
+            "]\n" +
+            "}";
+
 
 
 
@@ -66,12 +71,17 @@ public class FileManager extends Reader {
                         "\"" + CHANGELOG + "\":\n" +
                         "\n" +
                         "[\n");
+            case ACCOUNT:
+                this.writer.write("{\n" +
+                        "\"" + ACCOUNT + "\":\n" +
+                        "\n" +
+                        "[\n");
+
         }
 
         if(this.stringArrayList.isEmpty()){
             //TODO INCOMPLETE METHOD
-            this.writer.write("\n\n\n");
-            this.writer.write(ENDOFFILE);
+            this.writer.write(EMPTYENDFILE);
         }else {
             for (int i = 0; i < this.stringArrayList.size(); i++) {
                 //System.out.println("Adding to JSON File Next Element");
@@ -91,35 +101,11 @@ public class FileManager extends Reader {
     /**
      * Method to allow to append to the end of a file
      * @param appendages
-     * @param fileType
+     *
      * @throws IOException
      */
-    public void appendToFile(ArrayList<String> appendages, FileType fileType){
-        //TODO INCOMPLETE METHOD
-        //Creates the File as an Array List
-        try {
-            this.generateStringArrayList();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //Removes the last for lines of the file string.
-        for(int i = 0; i < 4; i++){
-            int index = this.stringArrayList.size();
-            this.stringArrayList.remove(this.stringArrayList.get(index - 1));
-        }
-
-        //Adds the Elements of Appendages to the End of the Main String ArrayList
-        for(int i = 0; i < appendages.size(); i++){
-            this.stringArrayList.add(appendages.get(i));
-        }
-
-        //Clears the File and ReWrites it with the appendages
-        try {
-            this.generateJSONFile(fileType);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void appendToFile(String appendages){
+        stringArrayList.add(appendages);
     }
 
 
@@ -177,7 +163,7 @@ public class FileManager extends Reader {
         if(this.fileName == null){
             System.out.println("Please Enter the File Name or File Path");
             //this.fileName = this.getUserInput();//////CODY WANTED TO BE ABLE TO OPEN WHATEVER FILE USER WANTED
-           fileName = "DataSource/ingredientsBACKUP.json";
+           fileName = "DataSource/ingredients.json";
         }
         this.writer = new BufferedWriter(new FileWriter(this.fileName));
     }
@@ -314,11 +300,7 @@ public class FileManager extends Reader {
      * @param stringArrayList
      */
     public void setStringArrayList(ArrayList<String> stringArrayList) {
-        this.stringArrayList.clear();
-        IngredientDictionary id = IngredientDictionary.getIngredientDictionary();
-        for(int i = 0; i < id.getIngredientItemArrayList().size(); i++){
-            this.stringArrayList.add(stringArrayList.get(i));
-        }
+        this.stringArrayList = stringArrayList;
     }
 
 

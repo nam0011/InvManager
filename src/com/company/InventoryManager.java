@@ -39,7 +39,7 @@ public class InventoryManager {
      * */
     private InventoryManager(){
         setDefaultFile("DataSource/ingredients.json"); //IF IT EVER BREAKS CHECK HERE FIRST
-        FileUpdate.setFileName("DataSource/ingredientsBACKUP.json");
+
         try {
             FileManager.generateStringArrayList();
         } catch (IOException e) {
@@ -61,9 +61,7 @@ public class InventoryManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        initialInventorycost = ID.inventoryCost();
-        CurrentItem = ID.getIngredientItemArrayList().get(0);
-        IngredientSize = ID.getIngredientItemArrayList().size();
+
 
     }
     /**
@@ -250,11 +248,11 @@ public class InventoryManager {
     public void UpdateJSONFile() throws IOException {
         Collections.sort(ID.getIngredientItemArrayList());
 
-        FileUpdate.setFileName("DataSource/ingredients.json");
-        FileUpdate.setStringArrayList(ID.convertToStringArrayList());
+
+        FileManager.setStringArrayList(ID.convertToStringArrayList());
 
         try {
-            FileUpdate.generateJSONFile(FileType.INGREDIENTS);
+            FileManager.generateJSONFile(FileType.INGREDIENTS);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -33,6 +33,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
         loginAccount = accountIN;
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(0,50,100));
+
         IM = InventoryManager.getInventoryManager();
         IM.setAccount(loginAccount);
 
@@ -44,9 +45,9 @@ public class DefaultFrame extends JFrame implements ActionListener {
         tabbedPane = new JTabbedPane();
         tabbedPane.setSize(500,600);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        IngredientPanel ingredientPanel = new IngredientPanel(this);
-        ingredientPanel.setSize(500, 600);
-        tabbedPane.add("Ingredients", ingredientPanel);
+
+
+        tabbedPane.add("Ingredients", new IngredientPanel(this));
 
         tabbedPane.add("Reports", new ReportsPanel(this));
 
@@ -63,13 +64,13 @@ public class DefaultFrame extends JFrame implements ActionListener {
         }
 
 
-        setResizable(false);
+        setResizable(true);
 
 
         buildLayout();
 
 
-        IM.UpdateBackups();
+        //IM.UpdateBackups();
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -96,6 +97,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
                 }
 
                 }
+
 
         });
 

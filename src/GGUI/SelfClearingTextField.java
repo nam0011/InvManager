@@ -87,6 +87,10 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
             beenClicked = true;
             setFont(new Font("New Times Roman", Font.PLAIN, 12));
         }
+        if(e.getKeyChar() == '"'){
+            e.consume();
+            getToolkit().beep();
+        }
     }
 
     @Override

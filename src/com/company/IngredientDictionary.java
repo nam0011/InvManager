@@ -243,7 +243,7 @@ public class IngredientDictionary {
      */
     public ArrayList<String> convertToStringArrayList(){
         ArrayList<String> stringArrayList = new ArrayList<>();
-        stringArrayList.clear();
+
         for(int i = 0; i < this.ingredientItemArrayList.size(); i++){
             stringArrayList.add(this.ingredientItemArrayList.get(i).toJSONString());
         }

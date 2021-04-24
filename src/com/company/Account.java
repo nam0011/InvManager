@@ -1,5 +1,7 @@
 package com.company;
 
+import java.awt.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,8 +17,10 @@ public class Account {
     protected Date birthday;
     protected boolean adminPriv;
     protected  int noLogins;
+    protected  String account;
 
     public Account(){
+        adminPriv = false;
 
     }
     public Account(ArrayList<String> list) throws ParseException {
@@ -26,6 +30,7 @@ public class Account {
 
                     i++;
                     setPriv(list.get(i));
+                    account = list.get(i);
 
                     break;
                 case "USERNAME":
@@ -50,11 +55,33 @@ public class Account {
                     lastName = list.get(i);
 
                     break;
+                case "first":
+                    i++;
+                    firstName = list.get(i);
+
+                    break;
+                case "birthday":
+                    i++;
+                    birthday = new SimpleDateFormat("dd/MM/yyyy").parse(list.get(i));
 
 
             }
         }
 
+    }
+    public String toJSONString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String strLastLogin = dateFormat.format(lastLogin);
+        String strBirthday = dateFormat.format(birthday);
+
+        return "{\"" +
+                "account\" : \"" + account  + "\", \"" +
+                "USERNAME\" : \"" + userName + "\", \"" +
+                "PASSWORD\" : \"" + hashPassword + "\", \"" +
+                "lastLogin\" : \"" + strLastLogin + "\", \"" +
+                "birthday\" : \"" + strBirthday + "\", \"" +
+                "first\" : \"" + firstName + "\", \"" +
+                "last\" : \"" + lastName + "\"}";
     }
 
     public boolean isAdminPriv() {

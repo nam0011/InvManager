@@ -70,6 +70,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
         ingredientTable = new JTable();
+        ingredientTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         ingredientTable.getTableHeader().setReorderingAllowed(false);
 
