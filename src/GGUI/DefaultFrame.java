@@ -29,7 +29,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
      *  Builds the frame adds the tabs. At the moment IngredientPanel is the only operational frame.
      * @param
      */
-    public DefaultFrame(Account accountIN) throws IOException {
+    public DefaultFrame(Account accountIN) throws IOException, ParseException {
         loginAccount = accountIN;
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(0,50,100));
@@ -51,7 +51,7 @@ public class DefaultFrame extends JFrame implements ActionListener {
 
         tabbedPane.add("Reports", new ReportsPanel(this));
 
-        if(loginAccount.isAdminPriv()){
+        if(loginAccount != null && loginAccount.isAdminPriv()){
             tabbedPane.add("Admin",new AdminPanel(this));
         }
 
@@ -108,6 +108,8 @@ public class DefaultFrame extends JFrame implements ActionListener {
 
         setSize(500, 600);
         setVisible(true);
+
+
     }
 
 

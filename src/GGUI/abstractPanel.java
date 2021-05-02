@@ -20,6 +20,10 @@ abstract class abstractPanel extends JPanel implements ActionListener {
         frame.setEnabled(enable);
     }
 
+    public Icon getIcon(){
+        return frame.getImg();
+    }
+
 
 
 }

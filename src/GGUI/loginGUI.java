@@ -92,7 +92,7 @@ public class loginGUI extends JFrame implements ActionListener {
             try {
                 new DefaultFrame(account);
 
-            } catch (IOException ioException) {
+            } catch (IOException | ParseException ioException) {
                 ioException.printStackTrace();
             }
             dispose();

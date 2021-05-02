@@ -111,6 +111,15 @@ public class RemoveDialog extends abstractDialog implements ActionListener {
 
     }
 
+    public void matching(boolean x){
+        return;
+    }
+
+    @Override
+    public void filleUN(boolean x) {
+
+    }
+
     /**
      * Building of the list of items that are selected to be removed
      */

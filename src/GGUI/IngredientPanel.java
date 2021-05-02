@@ -19,15 +19,12 @@ import java.util.ArrayList;
 
 public class IngredientPanel extends abstractPanel implements ActionListener {
 
-    private JTabbedPane tabbedPane;
     private JToolBar ingreToolBar;
     private SelfClearingTextField ingreSearchTF;
-    private JButton ingreSearchB;
     private JButton ingreAddB;
     private JButton ingrePurchaseB;
     private JButton ingreUseB;
     private JButton ingreRemoveB;
-    private JButton ingreListAllB;
     private JTable ingredientTable;
     private JScrollPane tablePane;
     private JScrollPane scrollPane;
@@ -145,10 +142,14 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 
         ingreToolBar.add(ingreSearchTF);
-        ingreToolBar.add(ingreAddB);
-        ingreToolBar.add(ingrePurchaseB);
         ingreToolBar.add(ingreUseB);
-        ingreToolBar.add(ingreRemoveB);
+
+        if(IM.getAccount().isManPriv() || IM.getAccount().isAdminPriv()) {
+            ingreToolBar.add(ingreAddB);
+            ingreToolBar.add(ingrePurchaseB);
+
+            ingreToolBar.add(ingreRemoveB);
+        }
 
          }
 
@@ -171,9 +172,7 @@ public class IngredientPanel extends abstractPanel implements ActionListener {
 
 }
 
-public Icon getIcon(){
-        return defaultFrame.getImg();
-}
+
 
 
 private void setLayout(){

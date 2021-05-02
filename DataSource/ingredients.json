@@ -2,9 +2,10 @@
 "INGREDIENTS":
 
 [
-{"name" : "'FONON'", "type" : "DRY", "measurementUnit" : "LB", "cost" : "234.0", "weight" : "234.0", "onHand" : "54756.0"},
+{"name" : "'FONON'", "type" : "DRY", "measurementUnit" : "LB", "cost" : "232.0", "weight" : "232.0", "onHand" : "53824.0"},
 {"name" : "AA", "type" : "DRY", "measurementUnit" : "LB", "cost" : "123.0", "weight" : "123.0", "onHand" : "15129.0"},
-{"name" : "JTRON", "type" : "DRY", "measurementUnit" : "LB", "cost" : "234.0", "weight" : "234.0", "onHand" : "54756.0"}
+{"name" : "JTRON", "type" : "DRY", "measurementUnit" : "LB", "cost" : "234.0", "weight" : "234.0", "onHand" : "54756.0"},
+{"name" : "\\\\\\", "type" : "DRY", "measurementUnit" : "LB", "cost" : "123.0", "weight" : "123.0", "onHand" : "15129.0"}
 
 
 ]

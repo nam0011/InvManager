@@ -26,6 +26,15 @@ public class PurchaseDialog extends AbstractUpdateDialog{
 
     }
 
+    public void matching(boolean x){
+        return;
+    }
+
+    @Override
+    public void filleUN(boolean x) {
+
+    }
+
     /**
      * Builds to Purchase Dialog Window
      */

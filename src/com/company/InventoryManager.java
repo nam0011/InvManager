@@ -259,6 +259,10 @@ public class InventoryManager {
 
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
     public String[] printDictionary(int i){
         return ID.printDictionary(i);
     }

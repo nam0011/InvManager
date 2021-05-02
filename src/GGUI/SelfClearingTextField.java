@@ -46,6 +46,7 @@ public class SelfClearingTextField extends JTextField implements MouseListener, 
         String x = getText();
         if(x.equals(start)){
             filled = false;
+
         }
         return (beenClicked && filled);
     }

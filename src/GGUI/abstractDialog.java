@@ -7,28 +7,41 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
-abstract class abstractDialog extends JDialog {
+abstract class abstractDialog extends JDialog{
     protected InventoryManager IM = InventoryManager.getInventoryManager();
-    private IngredientPanel ingredientPanel;
+    private abstractPanel Panel;
 
-    abstractDialog(IngredientPanel panel){
+    abstractDialog(abstractPanel panel){
         super();
-
-        ingredientPanel = panel;
-        ingredientPanel.setDefaultFrameEnable(false);
+        setSize(300, 300);
+        setVisible(true);
+        Panel = panel;
+        Panel.setDefaultFrameEnable(false);
         this.isAlwaysOnTop();
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        ImageIcon img = (ImageIcon) ingredientPanel.getIcon();
+        ImageIcon img = (ImageIcon) Panel.getIcon();
         this.setIconImage(img.getImage());
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                ingredientPanel.setDefaultFrameEnable(true);
+                Panel.setDefaultFrameEnable(true);
                 dispose();
+
+
 
             }
         });
 
     }
 
+
+
+    public void close()
+    {
+        Panel.setDefaultFrameEnable(true);
+        dispose();
+    }
+
+    public abstract void matching(boolean b);
+    public abstract void filleUN(boolean x);
 }

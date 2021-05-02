@@ -72,8 +72,15 @@ public class UseDialog extends AbstractUpdateDialog {
                 dispose();
             }
         }
+public void matching(boolean x){
+        return;
+}
 
-
-
+    @Override
+    public void filleUN(boolean x) {
+        return;
     }
+
+
+}
 

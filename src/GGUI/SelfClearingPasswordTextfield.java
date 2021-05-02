@@ -1,56 +1,92 @@
 package GGUI;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.security.KeyStore;
+import java.security.KeyStore.PasswordProtection;
 
-public class SelfClearingPasswordTextfield extends SelfClearingTextField {
-    private String inputPW;
-    private  String maskPW;
-    private loginGUI gui;
+public class SelfClearingPasswordTextfield extends JPasswordField implements MouseListener, KeyListener {
+    protected boolean beenClicked;
+    protected String start;
+    protected String defaultText;
 
-    public SelfClearingPasswordTextfield(String title, int width , loginGUI inGui) {
-        super(title, width);
-        gui = inGui;
-        inputPW = "";
-        maskPW = "";
+    public SelfClearingPasswordTextfield(String title, int size, JFrame frame){
+
+       unmask();
+       defaultText = title;
+       setText(defaultText);
+       this.setColumns(size);
+       addMouseListener(this);
+       addKeyListener(this);
 
     }
+
+    public SelfClearingPasswordTextfield(String password, int size, AddUserDialog addUserDialog, Object o) {
+    }
+
     public int getHashPasscode(){
 
-        return inputPW.hashCode();
-    }
+    return this.getText().hashCode();
+}
+
+public void unmask(){
+    this.setEchoChar('\u0000');
+    this.setFont(new Font("New Times Roman" , Font.ITALIC, 12));
+    beenClicked = false;
+
+
+
+}
+public void mask(){
+    setEchoChar('•');
+    beenClicked = true;
+}
+
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if(e.getKeyChar() == KeyEvent.VK_ENTER){
-            gui.login();
+        if(!beenClicked) {
+            setText("");
+            mask();
         }
-        if(e.isActionKey()){}
-
-        if (getText().equals(defaultText)) {
-            setText(start);
-            beenClicked = true;
-            setFont(new Font("New Times Roman", Font.PLAIN, 12));
-        }
-        int pos = this.getCaretPosition();
-        char c = e.getKeyChar();
-
-
-
-    if(c != KeyEvent.VK_BACK_SPACE) {
-      inputPW = inputPW.substring(0, pos) + c + inputPW.substring(pos);
-        maskPW = maskPW + '*';
-
-    }else {
-        inputPW = inputPW.substring(0,pos);
-        maskPW = maskPW.substring(0, inputPW.length());
     }
 
-       inputPW = inputPW.trim();
-       e.consume();
+    @Override
+    public void keyPressed(KeyEvent e) {
 
+    }
 
-       setText(maskPW);
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(!beenClicked) {
+            setText("");
+            mask();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

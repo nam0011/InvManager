@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class AccessControl {
 private boolean loggedIn;
@@ -57,6 +58,15 @@ public void generateDTM(){
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).accessGranted(inUN, inPW)){
                 output = list.get(i);
+                output.login();
+                output.lastLogin = new Date();
+                file.updateData(i, output.toJSONString());
+                try {
+                    UpdateJSONFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 break;
 
             }
@@ -83,6 +93,7 @@ public void generateDTM(){
 
     public void addAccount(Account newAccount ) throws IOException {
         file.appendToFile(newAccount.toJSONString());
+        list.add(newAccount);
         this.UpdateJSONFile();
     }
 
@@ -90,11 +101,22 @@ public void generateDTM(){
 
 
         try {
-            file.generateJSONFile(FileType.ACCOUNT);
+            file.updateJSONFile(FileType.ACCOUNT);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+    public boolean checkUNexist(String user){
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).userName.equals(user)){
+
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
 

@@ -42,17 +42,17 @@ public class AddDialog extends abstractDialog implements ActionListener {
         ingredientPanel = panel;
 
         //Sets the dialogbox on top frame and disables the DefaultFrame
-        setAlwaysOnTop(true);
+
         setLocation(150,150);
-        ingredientPanel.setDefaultFrameEnable(false);
+
 
         DTM = ingredientPanel.getDTM();
         IM = InventoryManager.getInventoryManager();
         setLayout(new GridBagLayout());
-        JDialog j = new JDialog();
+
 
         buildDialog();
-        setSize(300, 300);
+
         pack();
         //setResizable(true);
         setVisible(true);
@@ -67,6 +67,14 @@ public class AddDialog extends abstractDialog implements ActionListener {
             }
         });
 
+    }
+    public void matching(boolean x){
+        return;
+    }
+
+    @Override
+    public void filleUN(boolean x) {
+        return;
     }
 
     private void buildDialog() {

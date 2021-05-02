@@ -39,6 +39,7 @@ public class FileManager extends Reader {
         this.openFileReader();
 
         while((this.line = this.buffer.readLine()) != null){
+
             this.stringArrayList.add(this.line);
             //System.out.println("Added String: " + this.line);
         }
@@ -97,6 +98,60 @@ public class FileManager extends Reader {
         }
         this.closeFileWriter();
     }
+
+    /**
+     * Updates the json file
+     * @param fileType
+     * @throws IOException
+     */
+    public void updateJSONFile(FileType fileType) throws IOException {
+        this.openFileWriter();
+        //TODO we must clear the JSON file.
+        switch (fileType){
+            case INGREDIENTS:
+                this.writer.write("{\n" +
+                        "\"" + INGREDIENTS + "\":\n" +
+                        "\n" +
+                        "[\n");
+                break;
+            case RECIPES:
+                this.writer.write("{\n" +
+                        "\"" + RECIPES + "\":\n" +
+                        "\n" +
+                        "[\n");
+                break;
+            case CHANGELOG:
+                this.writer.write("{\n" +
+                        "\"" + CHANGELOG + "\":\n" +
+                        "\n" +
+                        "[\n");
+            case ACCOUNT:
+                this.writer.write("{\n" +
+                        "\"" + ACCOUNT + "\":\n" +
+                        "\n" +
+                        "[\n");
+
+        }
+
+        if(this.stringArrayList.isEmpty()){
+            //TODO INCOMPLETE METHOD
+            this.writer.write(EMPTYENDFILE);
+        }else {
+            for (int i = 0; i < this.stringArrayList.size(); i++) {
+                //System.out.println("Adding to JSON File Next Element");
+                this.writer.write(this.stringArrayList.get(i));
+
+                if (i != this.stringArrayList.size() - 1) {
+                    this.writer.write("\n");
+                } else {
+                    this.writer.write(ENDOFFILE);
+                }
+                //System.out.println("Just added " + this.stringArrayList.get(i).toString());
+            }
+        }
+        this.closeFileWriter();
+    }
+
 
     /**
      * Method to allow to append to the end of a file
@@ -310,6 +365,19 @@ public class FileManager extends Reader {
      */
     public ArrayList<ArrayList<String>> getObjectArrayList() {
         return objectArrayList;
+    }
+
+    public void updateData(int index, String jsonInput){
+
+        if (index != this.stringArrayList.size() - 1){
+            jsonInput = jsonInput + ",";
+
+        }
+
+            stringArrayList.set(index, jsonInput);
+
+
+
     }
 
     /**
